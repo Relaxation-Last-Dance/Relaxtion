@@ -120,6 +120,39 @@ public class AuthorizController {
 		}
 	}
 	
+	@GetMapping("/refresh_token")
+	public ResponseEntity<String> refreshToken(HttpServletRequest request, HttpSession session) {
+	    String refreshToken = (String) session.getAttribute("refreshToken");
+	    String creds = Base64.getEncoder().encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+	    headers.set("Authorization", "Basic " + creds);
+
+	    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+	    map.add("grant_type", "refresh_token");
+	    map.add("refresh_token", refreshToken);
+
+	    HttpEntity<MultiValueMap<String, String>> request2 = new HttpEntity<>(map, headers);
+
+	    RestTemplate restTemplate = new RestTemplate();
+	    ResponseEntity<String> response = restTemplate.postForEntity("https://accounts.spotify.com/api/token", request2, String.class);
+
+	    if (response.getStatusCode() == HttpStatus.OK) {
+	        // Parse JSON response
+	        JsonParser parser = new JsonParser();
+	        JsonObject json = parser.parse(response.getBody()).getAsJsonObject();
+	        String newAccessToken = json.get("access_token").getAsString();
+
+	        // Add to session
+	        session.setAttribute("accessToken", newAccessToken);
+
+	        return ResponseEntity.ok(newAccessToken);
+	    } else {
+	        return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+	    }
+	}
+	
 //	@GetMapping("/refresh_token")
 //    public String refreshToken(@RequestParam("refreshToken") String refreshToken, HttpSession session) {
 //        String creds = Base64.getEncoder().encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
