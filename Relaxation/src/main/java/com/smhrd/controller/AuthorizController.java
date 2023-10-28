@@ -107,52 +107,77 @@ public class AuthorizController {
 			String accessToken = json.get("access_token").getAsString();
 			String tokenType = json.get("token_type").getAsString();
 			String scope = json.get("scope").getAsString();
+			int expiresIn = json.get("expires_in").getAsInt();
 			String refreshToken = json.get("refresh_token").getAsString();
 
 			// Add to model
 			session.setAttribute("accessToken", accessToken);
 			session.setAttribute("tokenType", tokenType);
 			session.setAttribute("scope", scope);
+			session.setAttribute("expiresIn", expiresIn);
 			session.setAttribute("refreshToken", refreshToken);
 
+			long issuedAt = System.currentTimeMillis() / 1000L;
+			long expiresAt = issuedAt + expiresIn;
+			session.setAttribute("issuedAt", issuedAt);
+			session.setAttribute("expiresAt", expiresAt);
 
 			return "redirect:/goMain";
 		}
 	}
-	
-	@GetMapping("/refresh_token")
-	public ResponseEntity<String> refreshToken(HttpServletRequest request, HttpSession session) {
-	    String refreshToken = (String) session.getAttribute("refreshToken");
-	    String creds = Base64.getEncoder().encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
 
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-	    headers.set("Authorization", "Basic " + creds);
+	public String refreshToken(String refreshToken) {
+		String creds = Base64.getEncoder()
+				.encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
 
-	    MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-	    map.add("grant_type", "refresh_token");
-	    map.add("refresh_token", refreshToken);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		headers.set("Authorization", "Basic " + creds);
 
-	    HttpEntity<MultiValueMap<String, String>> request2 = new HttpEntity<>(map, headers);
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+		map.add("grant_type", "refresh_token");
+		map.add("refresh_token", refreshToken);
 
-	    RestTemplate restTemplate = new RestTemplate();
-	    ResponseEntity<String> response = restTemplate.postForEntity("https://accounts.spotify.com/api/token", request2, String.class);
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
-	    if (response.getStatusCode() == HttpStatus.OK) {
-	        // Parse JSON response
-	        JsonParser parser = new JsonParser();
-	        JsonObject json = parser.parse(response.getBody()).getAsJsonObject();
-	        String newAccessToken = json.get("access_token").getAsString();
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = restTemplate.postForEntity("https://accounts.spotify.com/api/token", request,
+				String.class);
 
-	        // Add to session
-	        session.setAttribute("accessToken", newAccessToken);
+		// Parse JSON response
+		JsonParser parser = new JsonParser();
+		JsonObject json = parser.parse(response.getBody()).getAsJsonObject();
+		String newAccessToken = json.get("access_token").getAsString();
 
-	        return ResponseEntity.ok(newAccessToken);
-	    } else {
-	        return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
-	    }
+		return newAccessToken;
 	}
-	
+
+	public String getAccessToken(HttpSession session) {
+		// 현재 시간을 가져옵니다.
+        long now = System.currentTimeMillis() / 1000L;
+
+        // 토큰의 만료 시간을 가져옵니다.
+        long expiresAt = (long) session.getAttribute("expiresAt");
+        
+
+		// access token의 만료 시간이 1분 미만이라면 access token을 refresh합니다.
+        if (now > expiresAt - 60) {
+            String refreshToken = (String) session.getAttribute("refreshToken");
+            String newAccessToken = refreshToken(refreshToken);
+            session.setAttribute("accessToken", newAccessToken);
+            
+            // 새로운 토큰의 만료 시간을 계산하고 저장합니다.
+            int expiresIn = (int) session.getAttribute("expiresIn");
+            long issuedAt = now;
+            expiresAt = issuedAt + expiresIn;
+            session.setAttribute("issuedAt", issuedAt);
+            session.setAttribute("expiresAt", expiresAt);
+        }
+
+		// access token을 반환합니다.
+		return (String) session.getAttribute("accessToken");
+	}
+
 //	@GetMapping("/refresh_token")
 //    public String refreshToken(@RequestParam("refreshToken") String refreshToken, HttpSession session) {
 //        String creds = Base64.getEncoder().encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
