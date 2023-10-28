@@ -107,54 +107,48 @@ public class AuthorizController {
 			String accessToken = json.get("access_token").getAsString();
 			String tokenType = json.get("token_type").getAsString();
 			String scope = json.get("scope").getAsString();
-			int expiresIn = json.get("expires_in").getAsInt();
 			String refreshToken = json.get("refresh_token").getAsString();
 
 			// Add to model
 			session.setAttribute("accessToken", accessToken);
 			session.setAttribute("tokenType", tokenType);
 			session.setAttribute("scope", scope);
-			session.setAttribute("expiresIn", expiresIn);
 			session.setAttribute("refreshToken", refreshToken);
 
-			long issuedAt = System.currentTimeMillis() / 1000L;
-			long expiresAt = issuedAt + expiresIn;
-			session.setAttribute("issuedAt", issuedAt);
-			session.setAttribute("expiresAt", expiresAt);
 
 			return "redirect:/goMain";
 		}
 	}
 	
-	@GetMapping("/refresh_token")
-    public String refreshToken(@RequestParam("refreshToken") String refreshToken, HttpSession session) {
-        String creds = Base64.getEncoder().encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.set("Authorization", "Basic " + creds);
-
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("grant_type", "refresh_token");
-        map.add("refreshToken", refreshToken);
-
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
-
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Map> response = restTemplate.postForEntity("https://accounts.spotify.com/api/token", request, Map.class);
-
-        if (response.getStatusCode() == HttpStatus.OK) {
-            Map<String, Object> body = response.getBody();
-            String accessToken = (String) body.get("accessToken");
-            String refreshTokenResponse = (String) body.get("refreshToken");
-
-            session.setAttribute("accessToken", accessToken);
-            session.setAttribute("refreshToken", refreshTokenResponse);
-
-            return "redirect:/goMain";
-        } else {
-            throw new RuntimeException("Failed to refresh token, status: " + response.getStatusCode());
-        }
-    }
+//	@GetMapping("/refresh_token")
+//    public String refreshToken(@RequestParam("refreshToken") String refreshToken, HttpSession session) {
+//        String creds = Base64.getEncoder().encodeToString((clientId + ":" + clientSecret).getBytes(StandardCharsets.UTF_8));
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+//        headers.set("Authorization", "Basic " + creds);
+//
+//        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+//        map.add("grant_type", "refresh_token");
+//        map.add("refreshToken", refreshToken);
+//
+//        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<Map> response = restTemplate.postForEntity("https://accounts.spotify.com/api/token", request, Map.class);
+//
+//        if (response.getStatusCode() == HttpStatus.OK) {
+//            Map<String, Object> body = response.getBody();
+//            String accessToken = (String) body.get("accessToken");
+//            String refreshTokenResponse = (String) body.get("refreshToken");
+//
+//            session.setAttribute("accessToken", accessToken);
+//            session.setAttribute("refreshToken", refreshTokenResponse);
+//
+//            return "redirect:/goMain";
+//        } else {
+//            throw new RuntimeException("Failed to refresh token, status: " + response.getStatusCode());
+//        }
+//    }
 
 }
