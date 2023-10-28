@@ -73,6 +73,8 @@ public class AuthorizController {
 		return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
 	}
 
+	
+	
 	@GetMapping("/callback")
 	public String callback(HttpServletRequest request, HttpSession session) {
 		String code = request.getParameter("code");
