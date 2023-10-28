@@ -54,8 +54,10 @@
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
-	<h1>Welcome to the Main Page</h1>
+	<h1>Welcome to the Main Page_</h1>
 
+
+	<h1>안녕하세요 수정입니다</h1>
 
 	<c:if test="${empty user}">
 		<form action="goLogin" method="post">
