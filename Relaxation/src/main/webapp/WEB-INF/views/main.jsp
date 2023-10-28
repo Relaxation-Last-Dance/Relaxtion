@@ -103,6 +103,12 @@
 			console.log('The Web Playback SDK is ready to play music!');
 			console.log('Device ID', device_id);
 			device_id = id;
+			fetch(url + device_id, {
+                method: 'PUT',
+                headers: headers,
+                body: JSON.stringify({
+                    "uris": ["spotify:track:5mdl3TlXrImNPrIo3aO70q?si=6f41bac7bf16401c", "spotify:track:1q3axbxKGkwHdLLQtxmyl2?si=863452f5a7524f97"]})
+            }).then(data => console.log(data)).catch(error => console.error('Error:', error));
 			
 		});
 		
@@ -123,7 +129,7 @@
         player.addListener('account_error', ({ message }) => {
             console.error(message);
         });
-
+		
         document.getElementById('togglePlay').onclick = function() {
         	player.togglePlay().then(() => {
             	// 재생 상태를 확인하여 아이콘을 변경합니다.
@@ -132,14 +138,6 @@
         			if (state.paused) {
                         // 음악이 일시정지 상태이면 재생 아이콘을 표시합니다.
                         playButton.className = 'fas fa-pause';
-                        
-                        // 음악 재생 요청
-                        fetch(url + device_id, {
-                            method: 'PUT',
-                            headers: headers,
-                            body: JSON.stringify({
-                                "uris": ["spotify:track:5mdl3TlXrImNPrIo3aO70q?si=6f41bac7bf16401c", "spotify:track:1q3axbxKGkwHdLLQtxmyl2?si=863452f5a7524f97"]})
-                        }).then(data => console.log(data)).catch(error => console.error('Error:', error));
                     } else {
                         // 음악이 재생 중이면 일시정지 아이콘을 표시합니다.
                         playButton.className = 'fas fa-play';
