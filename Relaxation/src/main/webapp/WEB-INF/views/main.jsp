@@ -110,90 +110,87 @@
 	
 	<%-- 스포티파이 API =========================================================--%>
 		<script type="text/javascript">
-	console.log('Access Token: ${sessionScope.accessToken}')
-	console.log('Token Type: ${sessionScope.tokenType}')
-	console.log('Scope: ${sessionScope.scope}')
-	console.log('Expires In: ${sessionScope.expiresIn}')
-	console.log('Refresh Token: ${sessionScope.refreshToken}')
-	
-	const url = 'https://api.spotify.com/v1/me/player/play?device_id=';
-	const token = '${sessionScope.accessToken}';
-	const headers = {
-		    'Authorization': `Bearer ${sessionScope.accessToken}`,
-		    'Content-Type': 'application/json'
-	};
-	window.onSpotifyWebPlaybackSDKReady = () => {
-		const player = new Spotify.Player({
-		    name: 'Web Playback SDK Quick Start Player',
-		    getOAuthToken: cb => { cb(token); },
-		    volume: 0.5
-		});
-		
-		var device_id;
-		
-		player.addListener('ready', ({ device_id : id }) => {
-			console.log('The Web Playback SDK is ready to play music!');
-			console.log('Device ID', device_id);
-			device_id = id;
-			fetch(url + device_id, {
-                method: 'PUT',
-                headers: headers,
-                body: JSON.stringify({
-                    "uris": ["spotify:track:5mdl3TlXrImNPrIo3aO70q?si=6f41bac7bf16401c", "spotify:track:1q3axbxKGkwHdLLQtxmyl2?si=863452f5a7524f97"]})
-            }).then(data => console.log(data)).catch(error => console.error('Error:', error));
-			
-		});
-		
-	
-        // Not Ready
-        player.addListener('not_ready', ({ device_id }) => {
-            console.log('Device ID has gone offline', device_id);
-        });
-
-        player.addListener('initialization_error', ({ message }) => {
-            console.error(message);
-        });
-
-        player.addListener('authentication_error', ({ message }) => {
-            console.error(message);
-        });
-
-        player.addListener('account_error', ({ message }) => {
-            console.error(message);
-        });
-		
-        document.getElementById('togglePlay').onclick = function() {
-        	player.togglePlay().then(() => {
-            	// 재생 상태를 확인하여 아이콘을 변경합니다.
-        		player.getCurrentState().then(state => {
-        			const playButton = document.getElementById('togglePlay');
-        			if (state.paused) {
-                        // 음악이 일시정지 상태이면 재생 아이콘을 표시합니다.
-                        playButton.className = 'fas fa-pause';
-                    } else {
-                        // 음악이 재생 중이면 일시정지 아이콘을 표시합니다.
-                        playButton.className = 'fas fa-play';
-                    }
-        		});
-        	});
-        };
-        document.getElementById('prevTrack').onclick = function() {
-        	player.previousTrack()
-        };
-        document.getElementById('nextTrack').onclick = function() {
-        	
-        	player.nextTrack()
-        };
-		player.connect().then(success => {
-			  if (success) {
-			    console.log('The Web Playback SDK successfully connected to Spotify!');
-			  }
-		
-		});
-
-	
-	};
-
+		console.log('Access Token: ${sessionScope.accessToken}')
+		   console.log('Token Type: ${sessionScope.tokenType}')
+		   console.log('Scope: ${sessionScope.scope}')
+		   console.log('Expires In: ${sessionScope.expiresIn}')
+		   console.log('Refresh Token: ${sessionScope.refreshToken}')
+		   
+		   const url = 'https://api.spotify.com/v1/me/player/play?device_id=';
+		   const token = '${sessionScope.accessToken}';
+		   const headers = {
+		          'Authorization': `Bearer ${sessionScope.accessToken}`,
+		          'Content-Type': 'application/json'
+		   };
+		   const body = {
+		          "context_uri": "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr",
+		          "offset": {
+		              "position": 5
+		          },
+		          "position_ms": 0
+		   };
+		   
+		    window.onSpotifyWebPlaybackSDKReady = () => {
+		      const token = '${sessionScope.accessToken}'; // Replace with your accessToken from the session
+		      const player = new Spotify.Player({
+		        name: 'Web Playback SDK Template',
+		        getOAuthToken: cb => { cb(token); },
+		        volume: 0.5
+		      });
+		      
+		      // Error handling
+		      player.addListener('initialization_error', ({ message }) => { console.error(message); });
+		      player.addListener('authentication_error', ({ message }) => { console.error(message); });
+		      player.addListener('account_error', ({ message }) => { console.error(message); });
+		      player.addListener('playback_error', ({ message }) => { console.error(message); });
+		      // Playback status updates
+		      player.addListener('player_state_changed', state => { console.log(state); });
+		      
+		      
+		      // Ready
+		      player.addListener('ready', ({ device_id }) => {
+		        
+		         console.log('Ready with Device ID', device_id);
+		         fetch(url + device_id, {
+		             method: 'PUT',
+		             headers: headers,
+		             body: JSON.stringify(body)
+		         })
+		         .then(data => console.log(data))
+		         .catch(error => console.error('Error:', error));
+		      });
+		      
+		      
+		      // Not Ready
+		      player.addListener('not_ready', ({ device_id }) => {
+		        console.log('Device ID has gone offline', device_id);
+		      });
+		      
+		      // Connect to the player!
+		      player.connect().then(success => {
+		        if (success) {
+		          console.log('The Web Playback SDK successfully connected to Spotify!');
+		        }
+		      })
+		    };
+		    document.getElementById('play-pauseButton').addEventListener('click', function() {
+		       var icon = this.firstChild;
+		       if (icon.classList.contains('fa-play')) {
+		         icon.classList.remove('fa-play');
+		         icon.classList.add('fa-pause');
+		         // 음악 재생 코드를 여기에 추가하세요.
+		         player.togglePlay().then(() => {
+		             console.log('재생이 시작되었습니다.');
+		           });
+		       } else {
+		         icon.classList.remove('fa-pause');
+		         icon.classList.add('fa-play');
+		         // 음악 일시정지 코드를 여기에 추가하세요.
+		         player.togglePlay().then(() => {
+		             console.log('재생이 일시정지 되었습니다.');
+		           });
+		       }
+		     });
 
         $(document).ready(function(){
         	var accessToken = '${sessionScope.accessToken}';
@@ -214,11 +211,6 @@
 	            });
             }
         });
-<<<<<<< HEAD
-
-</script>
-=======
->>>>>>> branch 'master' of https://github.com/Relaxation-Last-Dance/Relaxtion.git
 
         
         <%-- 로그인 실패시 alert ajax코드 --%>
@@ -261,8 +253,7 @@
 			});
 		}
 
-        
-        
+
         </script>
 
 
