@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.smhrd.entity.R_Member;
 
 @Repository
-public interface R_MemberRepository extends JpaRepository <R_Member, String > {
+
+public interface R_MemberRepository extends JpaRepository<R_Member, String>{
 
 	
 	// 카카오 회원가입할때 가입이 되어있는지 조회하는 sql문

@@ -15,13 +15,20 @@ import com.smhrd.repository.R_MemberRepository;
 @Controller
 public class R_MemberController {
 
+
 	@Autowired
 	private R_MemberRepository repo;
+
 
 	// 메인 이동
 	@RequestMapping("/goUserMain")
 	public String goMain() {
 		return "userMain";
+	}
+	@RequestMapping("/goSpoMain")
+	public String goSpoMain() {
+		return "adminMain";
+
 	}
 
 	// 회원가입 페이지로 이동
@@ -180,4 +187,6 @@ public class R_MemberController {
 	
 	
 	
+
+
 }
