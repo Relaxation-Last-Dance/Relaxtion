@@ -14,24 +14,24 @@ import com.smhrd.repository.R_MemberRepository;
 
 @Controller
 public class R_MemberController {
-	
+
 	@Autowired
 	private R_MemberRepository repo;
-	
+
 	// 메인 이동
-	@RequestMapping("/goMain")
+	@RequestMapping("/goUserMain")
 	public String goMain() {
-		return "main";
+		return "userMain";
 	}
-	
+
 	// 회원가입 페이지로 이동
-	@RequestMapping("/goJoin")
+	@RequestMapping("/goUserJoin")
 	public String goJoin() {
-		return "Join";
+		return "userJoin";
 	}
-	
+
 	// 회원가입 완료시 요청받는 컨트롤러
-	@RequestMapping("/join")
+	@RequestMapping("/userJoin")
 	public String Join(R_Member member) {
 
 		String Email = member.getRmEmail();
@@ -50,121 +50,123 @@ public class R_MemberController {
 
 		repo.save(member);
 
-		return "redirect:/goMain";
+		return "redirect:/goUserMain";
 	}
 
-	// 로그인 컨트롤러
-	@RequestMapping("/goLogin")
+	@RequestMapping("/userLogin")
 	public ResponseEntity<?> Login(HttpSession session, String rmEmail, String rmPw) {
 
 		R_Member member = repo.findByRmEmailAndRmPw(rmEmail, rmPw);
 
 		if (member != null) {
 			session.setAttribute("user", member);
+			System.out.println("============================================================");
 			System.out.println("로그인 유저 정보 : " + session.getAttribute("user"));
+			System.out.println("============================================================");
 			return new ResponseEntity<>("OK", HttpStatus.OK); // 로그인 성공
 		} else {
-			System.out.println("회원조회 실패!");
+			System.out.println("============================================================");
+			System.out.println("회원조회 실패! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("============================================================");
 			return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED); // 로그인 실패
 		}
 	}
-	
-	// 로그아웃컨트롤러 
-		@RequestMapping("/logout")
-		public ModelAndView Logout(HttpSession session) {
-			ModelAndView mav = new ModelAndView();
-			ApiController kakaoApi = new ApiController();
-			kakaoApi.kakaoLogout((String) session.getAttribute("accessToken"));
 
-			System.out.println("카카오엑세스토큰(기본유저는 null) : " + session.getAttribute("accessToken"));
+	// 로그아웃
+	@RequestMapping("/userLogout")
+	public ModelAndView Logout(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		ApiController kakaoApi = new ApiController();
+		kakaoApi.kakaoLogout((String) session.getAttribute("k_accessToken"));
+		System.out.println("===============================================================");
+		System.out.println("카카오엑세스토큰(기본유저는 null) : " + session.getAttribute("k_accessToken"));
+		System.out.println("===============================================================");
 
-			if (session.getAttribute("accessToken") != null) {
+		if (session.getAttribute("k_accessToken") != null) {
 
-				session.removeAttribute("accessToken");
-				session.removeAttribute("user");
-				mav.setViewName(
-						"redirect:https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goMain");
-				return mav;
-			} else {
+			session.removeAttribute("k_accessToken");
+			session.removeAttribute("user");
+			mav.setViewName(
+					"redirect:https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goUserMain");
+			return mav;
+		} else {
 
-				mav.setViewName("redirect:/goMain");
-				session.removeAttribute("user");
-				return mav;
-			}
-
-		}
-	
-		// 마이페이지로 이동
-		@RequestMapping("/goMypage")
-		public String goMypage() {
-			return "Mypage";
+			mav.setViewName("redirect:/goUserMain");
+			session.removeAttribute("user");
+			return mav;
 		}
 
-		// 메인으로
-		@RequestMapping("/goMainFromMP")
-		public String goMainFromMP() {
-			return "redirect:/goMain";
+	}
+
+	// 마이페이지로 이동
+	@RequestMapping("/goUserMypage")
+	public String goMypage() {
+		return "userMypage";
+	}
+
+	// 메인으로
+	@RequestMapping("/goUserMainFromMP")
+	public String goMainFromMP() {
+		return "redirect:/goUserMain";
+	}
+
+	// 정보수정으로 이동
+	@RequestMapping("/goUserChangeInfo")
+	public String goChangeInfo() {
+		return "userChangeInfo";
+	}
+
+	// 정보수정 뒤로가기버튼
+	@RequestMapping("/gotoUserMypage")
+	public String goBackBtn() {
+		return "redirect:/goUserMypage";
+	}
+
+	// 정보업데이트 메소드
+	@RequestMapping("/userUpdate")
+	public String UpdateUserInfo(R_Member member, HttpSession session) {
+
+		R_Member user = (R_Member) session.getAttribute("user");
+
+		// 카카오톡 유저는 선호하는 닉네임,장르만 변경 가능
+		if (session.getAttribute("k_accessToken") != null) {
+			String rmEmail = user.getRmEmail();
+			String rmGender = user.getRmGender();
+			String rmPhone = user.getRmPhone();
+			member.setRmEmail(rmEmail);
+			member.setRmGender(rmGender);
+			member.setRmPhone(rmPhone);
+			repo.save(member);
+			return "redirect:/userLogout";
+
+		} else {
+			// 일반 유저는 비밀번호 변경 O
+
+			String rmEmail = user.getRmEmail();
+			String rmName = user.getRmName();
+			String rmGender = user.getRmGender();
+
+			member.setRmEmail(rmEmail);
+			member.setRmName(rmName);
+			member.setRmGender(rmGender);
+
+			repo.save(member);
+			System.out.println("=================");
+			System.out.println("일반유저 정보 수정 성공");
+			System.out.println("=================");
+
+			session.removeAttribute("user");
+
+			return "redirect:/goUserMain";
+
 		}
 
-		// 정보수정으로 이동
-		@RequestMapping("/goChangeInfo")
-		public String goChangeInfo() {
-			return "ChangeInfo";
-		}
+	}
 
-		// 정보수정 뒤로가기버튼
-		@RequestMapping("/gotoMypage")
-		public String goBackBtn() {
-			return "redirect:/goMypage";
-		}
-
-		// 정보업데이트 메소드
-		@RequestMapping("/Update")
-		public String UpdateUserInfo(R_Member member, HttpSession session) {
-
-			R_Member user = (R_Member) session.getAttribute("user");
-
-			// 카카오톡 유저는 선호하는 닉네임,장르만 변경 가능
-			if (session.getAttribute("accessToken") != null) {
-				String rmEmail = user.getRmEmail();
-				String rmGender = user.getRmGender();
-				String rmPhone = user.getRmPhone();
-				member.setRmEmail(rmEmail);
-				member.setRmGender(rmGender);
-				member.setRmPhone(rmPhone);
-				repo.save(member);
-				return "redirect:/logout";
-
-			} else {
-				// 일반 유저는 비밀번호 변경 O
-
-				String rmEmail = user.getRmEmail();
-				String rmName = user.getRmName();
-				String rmGender = user.getRmGender();
-
-				member.setRmEmail(rmEmail);
-				member.setRmName(rmName);
-				member.setRmGender(rmGender);
-
-				repo.save(member);
-
-				System.out.println("일반유저 정보 수정 성공");
-
-				session.removeAttribute("user");
-
-				return "redirect:/goMain";
-
-			}
-
-		}
-
-		// 사진업로드 페이지로 가는 컨트롤러
-		@RequestMapping("/goFaceMusic")
-		public String goFaceMusic() {
-			return"FaceMusic";
-		}
-	
-	
+	@RequestMapping("/goUserFaceMusic")
+	public String goFaceMusic() {
+		return"userFaceMusic";
+	}
 	
 	
 	

@@ -11,7 +11,7 @@
 
 
 
-	<form action="Update" method="post">
+	<form action="userUpdate" method="post">
 		<table width="auto">
 
 			<tr>
@@ -104,7 +104,7 @@
 			<tr height="35" bgcolor="whitesmoke">
 				<td colspan="2" align="center">
 					<input type="submit" value="정보 수정하기"> 
-					<button type="button" onclick="location.href='gotoMypage'">뒤로가기</button>
+					<button type="button" onclick="location.href='gotoUserMypage'">뒤로가기</button>
 				</td>
 			</tr>
 		</table>

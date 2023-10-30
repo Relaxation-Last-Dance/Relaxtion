@@ -17,7 +17,7 @@
 </head>
 <body>
 
-	<form action="imgUplode" enctype="multipart/form-data" method="post">
+	<form action="imgUpload" enctype="multipart/form-data" method="post">
 		<section id="ex9">
 			<h1>Music : 나의 감정을 분석하여 음악을 추천받아보자!!!</h1>
 
@@ -30,7 +30,7 @@
 		</section>
 	</form>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		var sec9 = document.querySelector('#ex9');
 		var inputFile = sec9.querySelector('input[type="file"]');
@@ -123,8 +123,37 @@
 		  });
 		
 		
-	</script>
+		  $(document).ready(function(){
+		        $("form").on("submit", function(event){
+		            event.preventDefault();
 
+		            var formData = new FormData(this);
+
+		            $.ajax({
+		            	 url: $(this).attr('action'),
+		                type: 'POST',
+		                data: formData,
+		                processData: false,  
+		                contentType: false,
+		                success: function(result){
+
+		                    console.log(result);
+
+		                    // 여기서 result는 서버에서 보내온 응답입니다.
+		                    // 필요한 작업을 여기에 추가하세요.
+		                },
+		                error: function(xhr, status, error){
+		                    console.log("===========오류============")
+		                    console.error(xhr.responseText);
+		                    console.log("==========================")
+		                }
+		            });
+		        });
+		    });
+		 
+
+		 
+	</script>
 
 
 </body>

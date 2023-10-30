@@ -9,7 +9,7 @@
 <body>
 		<!-- 이메일, 비밀번호, 닉네임, 이름, 성별, 전화번호, 선호 아티스트, 선호 장르 -->
 
-	<form action="join" method="post" onsubmit="return validateForm()">
+	<form action="userJoin" method="post" onsubmit="return validateForm()">
 		<table width="auto">
 
 			<tr>

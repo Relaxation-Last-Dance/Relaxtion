@@ -1,5 +1,7 @@
 package com.smhrd.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,7 +35,7 @@ public class ApiController {
 	
 	
 	//카카오 api로그인 기능
-		@GetMapping("/kakaocallback")
+		@GetMapping("/kakaoCallback")
 		public String kakaoCallback(String code , HttpSession session) { //Data를 리턴해주는 컨트롤러 함수
 			//Retrofit2 안드로이드에서 많이씀
 			//OKHttp
@@ -51,7 +54,7 @@ public class ApiController {
 			// 안에 들어가는 값들은 변수에 담아서 쓰는게 더 좋지만 공부해야하니 날것 그대로 일단 사용함
 			params.add("grant_type", "authorization_code");
 			params.add("client_id", "5f4adf5f781d4507aaf15fdd092cf73b");
-			params.add("redirect_uri", "http://localhost:8087/relax/callback");
+			params.add("redirect_uri", "http://localhost:8087/relax/kakaoCallback");
 			params.add("code", code);
 			
 			
@@ -82,8 +85,7 @@ public class ApiController {
 			System.out.println("카카오 엑세스 토큰 : " + oauthToken.getAccess_token());
 			
 			// 로그아웃할때 필요한 엑세스토큰 세션에 저장
-			session.setAttribute("accessToken", oauthToken.getAccess_token());
-			System.out.println(session.getAttribute("accessToken"));
+			session.setAttribute("k_accessToken", oauthToken.getAccess_token());
 			
 			
 			// rt2
@@ -108,6 +110,7 @@ public class ApiController {
 			
 			// 지금까지 하나의 메소드에 한 : 코드받고 엑세스 토큰 요청받고 엑세스토큰으로 회원 정보까지 조회해서
 			// 						   그 결과가 response2.getBody() 여기 담겨서 조회
+			
 			
 			
 			
@@ -179,8 +182,11 @@ public class ApiController {
 				
 				repo.save(member);
 				session.setAttribute("user", member);
+				System.out.println("==============================================================");
 				System.out.println("신규 카카오회원 정보 세션 저장 성공!");
-				return"redirect:/goMain";
+				System.out.println("★★★ 유저 세션 : " + session.getAttribute("user"));
+				System.out.println("==============================================================");
+				return"redirect:/goUserMain";
 			}else {
 				// else라면 가입자이기 때문에 바로 로그인 처리를 해야함  여기 나중에 다시 수정해야함
 				String rmEmail = rm.getRmEmail();
@@ -193,29 +199,30 @@ public class ApiController {
 				member.setRmName(rmName);
 				
 				session.setAttribute("user", member);
-
+				System.out.println("================================================================");
 				System.out.println("★★★카카오 유저 세션" + session.getAttribute("user"));
-				
 				System.out.println("기존 카카오회원 로그인 성공!");
+				System.out.println("================================================================");
 				
-				return"redirect:/goMain";
+				return"redirect:/goUserMain";
 			}
 			// jason view라는 크롬 확장크로그램 설치하면 json타입이 크롬에서 보기 편하게 뜸
+			
 			
 			
 		}//카카오로그인 메소드 끝
 
 		public void kakaoLogout(String accessToken) {
-            String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goMain";
-
+            String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goUserMain";
+		    //String reqURL = "https://kapi.kakao.com/v1/user/unlink";
 		    try {
 		        URL url = new URL(reqURL);
 		        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		        conn.setRequestMethod("GET");
-
+		     
 		        int responseCode = conn.getResponseCode();
 		        System.out.println("responseCode = " + responseCode);
-		        
+		       
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }

@@ -10,12 +10,12 @@
 
 
 	<h2>${user.rmNick}님반갑습니다</h2>
-	<a href="goMainFromMP">메인으로</a>
+	<a href="goUserMainFromMP">메인으로</a>
 	<br>
 
 	<a href="#">MY PLAYLIST</a>
 	<br>
-	<a href="goChangeInfo">내 정보 수정</a>
+	<a href="goUserChangeInfo">내 정보 수정</a>
 	<br>
 
 
