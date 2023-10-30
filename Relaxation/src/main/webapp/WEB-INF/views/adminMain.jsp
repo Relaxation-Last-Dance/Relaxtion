@@ -55,16 +55,6 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 	<h1>Welcome to the Main Page</h1>
-
-
-	<c:if test="${empty user}">
-		<form action="goLogin" method="post">
-			<p>test@test // 123 </p>
-			<li><input name="rmEmail" type="text" placeholder="Email을 입력하세요"></li>
-			<li><input name="rmPw" type="password" placeholder="PW를 입력하세요"></li>
-			<li><input type="submit" value="LogIn"></li>
-		</form>
-	</c:if>
 		<div>
 			<div>플레이어</div>
 			<div>
@@ -101,7 +91,6 @@
 			console.log('The Web Playback SDK is ready to play music!');
 			console.log('Device ID', device_id);
 			device_id = id;
-			
 		});
 		
 	
@@ -121,36 +110,44 @@
         player.addListener('account_error', ({ message }) => {
             console.error(message);
         });
-
+        const playButton = document.getElementById('togglePlay');
         document.getElementById('togglePlay').onclick = function() {
-        	player.togglePlay().then(() => {
-            	// 재생 상태를 확인하여 아이콘을 변경합니다.
-        		player.getCurrentState().then(state => {
-        			const playButton = document.getElementById('togglePlay');
-        			if (state.paused) {
-                        // 음악이 일시정지 상태이면 재생 아이콘을 표시합니다.
-                        playButton.className = 'fas fa-pause';
-                        
-                        // 음악 재생 요청
-                        fetch(url + device_id, {
-                            method: 'PUT',
-                            headers: headers,
-                            body: JSON.stringify({
-                                "uris": ["spotify:track:5mdl3TlXrImNPrIo3aO70q?si=6f41bac7bf16401c", "spotify:track:1q3axbxKGkwHdLLQtxmyl2?si=863452f5a7524f97"]})
-                        }).then(data => console.log(data)).catch(error => console.error('Error:', error));
-                    } else {
-                        // 음악이 재생 중이면 일시정지 아이콘을 표시합니다.
-                        playButton.className = 'fas fa-play';
-                    }
-        		});
-        	});
+            player.togglePlay().then(() => {
+                // 재생 버튼 클릭 시 fetch를 호출하여 트랙을 로드하고 재생합니다.
+                player.getCurrentState().then(state => {
+	                
+	                if(state == null){
+		                fetch(url + device_id, {
+		                    method: 'PUT',
+		                    headers: headers,
+		                    body: JSON.stringify({
+		                        "uris": ["spotify:track:5mdl3TlXrImNPrIo3aO70q?si=6f41bac7bf16401c", "spotify:track:1q3axbxKGkwHdLLQtxmyl2?si=863452f5a7524f97"]})
+		                }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+		                
+		                playButton.className ='fas fa-pause';
+	                } else {
+	                	if(state.paused){
+	                		playButton.className ='fas fa-pause';
+	                		
+	                	}else{
+	                		playButton.className ='fas fa-play';
+	                	}
+	                }
+                });
+            });
         };
+        
         document.getElementById('prevTrack').onclick = function() {
         	player.previousTrack()
+        	if(playButton.className ='fas fa-play'){
+	         	playButton.className ='fas fa-pause';
+        	}
         };
         document.getElementById('nextTrack').onclick = function() {
-        	
         	player.nextTrack()
+        	if(playButton.className ='fas fa-play'){
+	         	playButton.className ='fas fa-pause';
+        	}
         };
 		player.connect().then(success => {
 			  if (success) {

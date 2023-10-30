@@ -36,7 +36,7 @@ import org.springframework.http.HttpStatus;
 
 @Controller
 @EnableScheduling
-public class AuthorizController {
+public class spoAuthorizController {
 
 	@Value("${spring.security.oauth2.client.registration.spotify.client-id}")
 	private String clientId;
@@ -50,7 +50,7 @@ public class AuthorizController {
 	@Value("${spring.security.oauth2.client.registration.spotify.scope}")
 	private String scope;
 
-	@GetMapping("/login")
+	@GetMapping("/spoLogin")
 	public RedirectView login(HttpSession session) {
 		String state = generateRandomString(16);
 
@@ -75,7 +75,7 @@ public class AuthorizController {
 
 	
 	
-	@GetMapping("/callback")
+	@GetMapping("/spoCallback")
 	public String callback(HttpServletRequest request, HttpSession session) {
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
@@ -124,7 +124,7 @@ public class AuthorizController {
 			session.setAttribute("issuedAt", issuedAt);
 			session.setAttribute("expiresAt", expiresAt);
 
-			return "redirect:/goMain";
+			return "redirect:/goSpoMain";
 		}
 	}
 

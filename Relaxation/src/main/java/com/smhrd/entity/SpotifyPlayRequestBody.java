@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SpotifyPlayRequestBody {
     private String context_uri;
-    private Offset offset;
+    private spo offset;
     private int position_ms;
 
 }
