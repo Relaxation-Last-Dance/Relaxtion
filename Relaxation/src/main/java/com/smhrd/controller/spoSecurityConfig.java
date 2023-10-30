@@ -13,10 +13,34 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // CSRF protection disable if not needed.
             .authorizeRequests()
-            .antMatchers("/spoLogin","/spoCallback","/goSpoMain","/refresh_token").permitAll() // permit all for login page
+            .antMatchers("/spoLogin","/spoCallback","/goSpoMain","/refresh_token",
+            		
+            		//apiController
+            		"/kakaoCallback",
+            		
+            		//faceImgController
+            		"/imgUpload",
+            		"/flask",
+            		
+            		//R_MemberController
+            		"/goUserMain",
+            		"/goUserJoin",
+            		"/userJoin",
+            		"/userLogin",
+            		"/userLogout",
+            		"/goUserMypage",
+            		"/goUserMainFromMP",
+            		"/goUserChangeInfo",
+            		"/gotoUserMypage",
+            		"/userUpdate",
+            		"/goUserFaceMusic"
+            		
+            		
+            		
+            		).permitAll() // permit all for login page
             .anyRequest().authenticated() // any other request needs authentication.
             .and()
             .oauth2Login()
-            .defaultSuccessUrl("/goMain", true);
+            .defaultSuccessUrl("/goUserMain", true);
     }
 }
