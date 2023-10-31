@@ -33,7 +33,9 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/goUserChangeInfo",
             		"/gotoUserMypage",
             		"/userUpdate",
-            		"/goUserFaceMusic"
+            		"/goUserFaceMusic",
+            		"/emailCheck",
+            		"/nickCheck"
             		
             		
             		
