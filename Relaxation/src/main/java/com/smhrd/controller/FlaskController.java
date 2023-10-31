@@ -81,41 +81,7 @@ public class FlaskController {
 		    System.out.println("★★★★★★★★★★★★★★★★★★★★★★★");
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

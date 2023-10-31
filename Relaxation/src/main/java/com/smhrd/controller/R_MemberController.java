@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.entity.R_Member;
@@ -176,6 +178,32 @@ public class R_MemberController {
 	}
 	
 	
+
+	// 회원가입시 이메일 사용여부 중복 확인
+	@RequestMapping(value="/emailCheck" , method= RequestMethod.POST)
+	public @ResponseBody String emailCheck(String email) {
+		
+		R_Member member = (R_Member)repo.findByRmEmail(email);
+		
+		if(member != null) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}
+	
+	@RequestMapping(value="/nickCheck" , method=RequestMethod.POST)
+	public @ResponseBody String nickCheck(String nick) {
+		
+		R_Member member = (R_Member)repo.findByRmNick(nick);
+		
+		if(member != null) { // member가 null이 아니면 이미 닉네임값이 존재함
+			return "false";
+		} else {
+			return "true";  // member가 null이면 닉네임 값이 없음
+		}
+		
+	}
 	
 	
 	
