@@ -12,6 +12,10 @@
 	border: 1px solid gray;
 	box-shadow: 2px 3px 9px hsl(0, 0%, 47%);
 	padding: 10px;
+	
+	#preview img {
+    max-width: 100%;
+    max-height: 100%;
 }
 </style>
 </head>

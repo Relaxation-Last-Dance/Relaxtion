@@ -17,7 +17,9 @@
 	<br>
 	<a href="goUserChangeInfo">내 정보 수정</a>
 	<br>
-
+	<a href="goUserDropInfo">회원 탈퇴</a>
+	<br>
+	<a href="dropKakaoUser">카카오 회원 탈퇴</a>
 
 </body>
 </html>

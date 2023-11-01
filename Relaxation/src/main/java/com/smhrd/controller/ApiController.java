@@ -204,11 +204,11 @@ public class ApiController {
 				return"redirect:/goUserMain";
 			}
 			// jason view라는 크롬 확장크로그램 설치하면 json타입이 크롬에서 보기 편하게 뜸
-			
-			
-			
-		}//카카오로그인 메소드 끝
 
+		}
+
+		
+		//카카오로그아웃
 		public void kakaoLogout(String accessToken) {
             String reqURL = "https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goUserMain";
 		    //String reqURL = "https://kapi.kakao.com/v1/user/unlink";
@@ -225,6 +225,23 @@ public class ApiController {
 		    }
 		}
 		
+		//카카오회원탈퇴
+		public void kakaoUserDrop(String accessToken) {
+		    String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+		    
+		    try {
+		        URL url = new URL(reqURL);
+		        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		        conn.setRequestMethod("POST");
+		        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+		        int responseCode = conn.getResponseCode();
+		        System.out.println("responseCode = " + responseCode);
+		       
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
 		
 		
 		

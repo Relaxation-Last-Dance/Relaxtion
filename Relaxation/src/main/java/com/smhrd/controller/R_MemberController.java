@@ -1,6 +1,7 @@
 package com.smhrd.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,8 @@ public class R_MemberController {
 
 		return "redirect:/goUserMain";
 	}
-
+	
+	// 로그인
 	@RequestMapping("/userLogin")
 	public ResponseEntity<?> Login(HttpSession session, String rmEmail, String rmPw) {
 
@@ -172,6 +174,7 @@ public class R_MemberController {
 
 	}
 
+	// 페이스뮤직 페이지로 이동
 	@RequestMapping("/goUserFaceMusic")
 	public String goFaceMusic() {
 		return"userFaceMusic";
@@ -192,6 +195,7 @@ public class R_MemberController {
 		}
 	}
 	
+	// 닉네임 중복확인
 	@RequestMapping(value="/nickCheck" , method=RequestMethod.POST)
 	public @ResponseBody String nickCheck(String nick) {
 		
@@ -205,13 +209,62 @@ public class R_MemberController {
 		
 	}
 	
+	// 회원탈퇴 페이지로 이동
+		@RequestMapping("/goUserDropInfo")
+		public String goUserDrop() {
+			return "userDrop";
+		}
 	
+		// 회원탈퇴페이지 뒤로가기 버튼
+		@RequestMapping("/userDropBackBtn")
+		public String goUserDropBackBtn() {
+			return "redirect:/goUserMypage";
+		}
 	
+		// 회원 탈퇴 기능
+		@Transactional
+		@RequestMapping("/dropUserInfo")
+		public String dropUserInfo(String rmPw, HttpSession session) {
+
+			// 정보 수집
+			R_Member member = (R_Member) session.getAttribute("user");
+			String rmEmail = member.getRmEmail();
+
+			// 기능 실행
+			// 뷰 선택
+			R_Member userInfo = (R_Member) repo.findByRmEmailAndRmPw(rmEmail, rmPw);
+
+			if (userInfo != null) {
+				// 회원정보가 존재 --> 탈퇴
+				repo.deleteByRmEmailAndRmPw(rmEmail, rmPw);
+				session.removeAttribute("user");
+
+				System.out.println("=================");
+				System.out.println("회원 탈퇴기능 실행 성공");
+				System.out.println("=================");
+
+				return "redirect:/goUserMain";
+
+			} else {
+				// 회원 정보가 없음 --> 비밀번호를 잘못 입력함
+				System.out.println("=================");
+				System.out.println("  회원 탈퇴기능 실패  ");
+				System.out.println("=================");
+				return "redirect:/goUserDropInfo";
+			}
+		}
 	
-	
-	
-	
-	
+		// 카카오 회원탈퇴기능
+		@RequestMapping("/dropKakaoUser")
+		public ModelAndView dropKakaoUser(HttpSession session) {
+			ModelAndView mav = new ModelAndView();
+			ApiController kakaoApi = new ApiController();
+			kakaoApi.kakaoUserDrop((String) session.getAttribute("k_accessToken"));
+			session.removeAttribute("user");
+			mav.setViewName("redirect:/goUserMain");
+
+			return mav;
+		}
 	
 	
 	
