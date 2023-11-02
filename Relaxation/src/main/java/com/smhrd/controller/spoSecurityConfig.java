@@ -39,12 +39,10 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/userDropBackBtn",
             		"/dropUserInfo",
             		"/dropKakaoUser",
-            		"/setsession"
-            		
-            		
-            		
-            		
-            		
+            		"/setUserFaceMusicSession",
+            		"/setUserChangeInfoSession",
+            		"/setUserDropSession",
+            		"/setUserMypageSession"
             		
             		).permitAll() // permit all for login page
             .anyRequest().authenticated() // any other request needs authentication.

@@ -277,14 +277,30 @@ public class R_MemberController {
 
 			return mav;
 		}
-	
-		// 이미지전송페이지에서 세션 종료시 메인으로 
-		@RequestMapping("/setsession")
-		public String setsession() {
+
+		// 이미지전송페이지 세션 종료시============================================
+		@RequestMapping("/setUserFaceMusicSession")
+		public String setsession1() {
 			return "redirect:/goUserMain";
 		}
-	
-	
+		// 정보수정페이지 세션 종료시
+		@RequestMapping("/setUserChangeInfoSession")
+		public String setsession2() {
+			return "redirect:/goUserMain";
+		}
+		// 회원탈퇴페이지 세션 종료시
+		@RequestMapping("/setUserDropSession")
+		public String setsession3() {
+			return "redirect:/goUserMain";
+		}
+
+		// 마이페이지 세션 종료시
+		@RequestMapping("/setUserMypageSession")
+		public String setsession5() {
+			return "redirect:/goUserMain";
+		}
+		//===========================================================================
+		
 
 
 }

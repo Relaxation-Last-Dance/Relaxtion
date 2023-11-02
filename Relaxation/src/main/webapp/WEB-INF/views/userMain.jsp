@@ -60,6 +60,7 @@
 	<script type="text/javascript"
 		src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
+	
 
 		$('#loginForm').submit(function(e){
 			e.preventDefault();
