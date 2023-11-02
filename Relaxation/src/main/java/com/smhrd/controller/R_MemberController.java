@@ -298,6 +298,12 @@ public class R_MemberController {
 			return mav;
 		}
 
+		// MyMusicPlayer로 이동
+		@RequestMapping("/goUserMusicPlayer")
+		public String goMyMusicPlayer() {
+			return"userMusicPlayer";
+		}
+		
 		// 이미지전송페이지 세션 종료시============================================
 		@RequestMapping("/setUserFaceMusicSession")
 		public String setsession1() {
