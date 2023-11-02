@@ -247,5 +247,12 @@
 		
 		
 	</script>
+	<script type="text/javascript">
+	console.log('Access Token: ${sessionScope.accessToken}')
+	console.log('Token Type: ${sessionScope.tokenType}')
+	console.log('Scope: ${sessionScope.scope}')
+	console.log('Expires In: ${sessionScope.expiresIn}')
+	console.log('Refresh Token: ${sessionScope.refreshToken}')
+	</script>
 </body>
 </html>
