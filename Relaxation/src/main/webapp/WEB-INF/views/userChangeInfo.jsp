@@ -80,28 +80,6 @@
 					</tr>	
 				</c:otherwise>
 			</c:choose>
-			<!-- step2 끝 -->
-			<tr>
-				<th height="45" colspan="2" bgcolor="gray" width="400"
-					align="center">좋아하는 장르(최대 선택 3개)</th>
-			</tr>
-
-
-			<tr height="35" bgcolor="whitesmoke">
-				<td colspan="2" align="center">
-				발라드<input type="checkbox" name="rmGenre" value="발라드" id="발라드"> 
-				댄스<input type="checkbox" name="rmGenre" value="댄스" id="댄스">
-				랩/힙합<input type="checkbox" name="rmGenre" value="랩/힙합" id="랩/힙합">
-				R&B/Soul<input type="checkbox" name="rmGenre" value="R&B/Soul" id="R&B/Soul">
-				인디음악<input type="checkbox" name="rmGenre" value="인디음악" id="인디음악">
-				록/메탈<input type="checkbox"name="rmGenre" value="록/메탈" id="록/메탈">
-				트로트<input type="checkbox" name="rmGenre" value="트로트" id="트로트">
-				포크/블루스<input type="checkbox" name="rmGenre" value="포크/블루스" id="포크/블루스">
-				</td>
-			</tr>
-
-			<!-- step3 끝 -->
-
 
 			<tr height="35" bgcolor="whitesmoke">
 				<td colspan="2" align="center">
@@ -117,14 +95,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	var isNickDuplicate = false; // 닉네임 중복 여부 저장하는 변수
-
-	// 저장된 장르 체크해주는 함수 -------------------------------------------------------------------------------
-    window.onload = function() {
-        var genres = '${user.rmGenre}'.split(','); // rmGenre의 값을 배열로
-        for(var i=0; i<genres.length; i++) {
-            var checkbox = document.getElementById(genres[i].trim()); // id로 체크박스 요소 가져오기
-            if(checkbox) checkbox.checked = true; // 해당하는 체크박스를 체크함
-        }
         
 
      // 폼 제출 이벤트 핸들러 추가
@@ -146,34 +116,6 @@
         
         
     }
-    
-   
-// 체크박스 3개이상 선택X   =========================================================
-
-	function check_count(obj){  // 장르 3개까지 선택할수 있게 만든 함수
-		var chkBox = document.getElementsByName("rmGenre"); // name값 불러옴
-		var chkCnt = 0; // 초기값 0 설정
-		
-		for(var i = 0 ; i < chkBox.length ; i++ ){
-			if(chkBox[i].checked){  // 조건문으로 chkBox가 checked됐을 경우
-				chkCnt++;           // 1씩 증가
-			}	
-		}
-		if(chkCnt > 3){ // 조건문으로 chkCnt가 3보다 클경우
-			alert("3개까지 체크할 수 있습니다.") // alert를 띄움
-			obj.checked = false; // false를 줘서 alert를 띄운 뒤에 check되지 않도록 설정
-			return false;
-			
-		}	
-	}
-	// 체크박스 변화 감지 및 함수 호출
-	var checkboxes = document.getElementsByName('rmGenre');
-	for(var i = 0; i<checkboxes.length; i++){
-		checkboxes[i].addEventListener('change',function(){
-			check_count(this);
-		});
-	}
-    
     
     		
 //전화번호 자동하이픈, 11글자넘지않게, 숫자만입력가능하게 코드작성==============================================

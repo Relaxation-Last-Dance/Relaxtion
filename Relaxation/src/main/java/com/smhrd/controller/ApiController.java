@@ -170,10 +170,6 @@ public class ApiController {
 			// 가입자 혹은 비가입자 체크해서 관리
 			R_Member rm = repo.findByRmEmail(r_email);
 			
-			// 로그인을 할때 기존 유저라면 세션에다가 member값 저장하는데 
-			// DB에 있는 값을 조회한 후 DB에 있는 닉네임과 Genre값을 
-			// member에 넣고 그 값을 세션에다가 다시 저장해야함
-			
 			
 			if(rm == null) {
 				
@@ -189,10 +185,8 @@ public class ApiController {
 				String rmEmail = rm.getRmEmail();
 				String rmNick = rm.getRmNick();
 				String rmName = rm.getRmName();
-				String rmGenre  = rm.getRmGenre();
 				member.setRmEmail(rmEmail);
 				member.setRmNick(rmNick);
-				member.setRmGenre(rmGenre);
 				member.setRmName(rmName);
 				
 				session.setAttribute("user", member);

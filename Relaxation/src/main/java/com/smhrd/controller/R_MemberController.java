@@ -68,7 +68,7 @@ public class R_MemberController {
 	public ResponseEntity<?> Login(HttpSession session, String rmEmail, String rmPw) {
 
 		R_Member member = repo.findByRmEmailAndRmPw(rmEmail, rmPw);
-
+		
 		if (member != null) {
 			session.setAttribute("user", member);
 			System.out.println("============================================================");
@@ -255,17 +255,34 @@ public class R_MemberController {
 		}
 	
 		// 카카오 회원탈퇴기능
+		@Transactional
 		@RequestMapping("/dropKakaoUser")
 		public ModelAndView dropKakaoUser(HttpSession session) {
 			ModelAndView mav = new ModelAndView();
 			ApiController kakaoApi = new ApiController();
 			kakaoApi.kakaoUserDrop((String) session.getAttribute("k_accessToken"));
+			
+			R_Member user = (R_Member)session.getAttribute("user");
+			
+			String rmEmail = user.getRmEmail();
+			String rmPw = user.getRmPw();
+			
+			//DB에 저장된 정보 삭제
+			repo.deleteByRmEmailAndRmPw(rmEmail, rmPw);
+			
+			//세션 정보 삭제
 			session.removeAttribute("user");
+			
 			mav.setViewName("redirect:/goUserMain");
 
 			return mav;
 		}
 	
+		// 이미지전송페이지에서 세션 종료시 메인으로 
+		@RequestMapping("/setsession")
+		public String setsession() {
+			return "redirect:/goUserMain";
+		}
 	
 	
 

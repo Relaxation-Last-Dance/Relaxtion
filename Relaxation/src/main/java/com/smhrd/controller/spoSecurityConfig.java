@@ -20,7 +20,6 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		
             		//faceImgController
             		"/imgUpload",
-            		"/flask",
             		
             		//R_MemberController
             		"/goUserMain",
@@ -39,7 +38,8 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/goUserDropInfo",
             		"/userDropBackBtn",
             		"/dropUserInfo",
-            		"/dropKakaoUser"
+            		"/dropKakaoUser",
+            		"/setsession"
             		
             		
             		

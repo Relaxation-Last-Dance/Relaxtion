@@ -12,22 +12,18 @@ import lombok.Data;
 
 @Entity
 @Data
-public class R_Faceimg {
-
-    @Id
+public class R_FavMusic {
+   
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rfSeq; // 이미지 순번
+    @Column(nullable = false)
+    private Long rfSeq; // 좋아하는곡 순번 (PK)
 
     @ManyToOne
     @JoinColumn(name = "rmEmail")
     private R_Member rmEmail; // 이메일
 
-    @Column(length = 600, nullable = false)
-    private String rfImg; // 얼굴 이미지
-
-    @Column(length = 30)
-    private String rfImgEmo; // 분석 감정
-
-    @Column(columnDefinition = "TEXT")
-    private String rmContent; // 분석 내용
+    @ManyToOne
+    @JoinColumn(name = "rmuSeq")
+    private R_Music rmuSeq; // 노래순번
 }

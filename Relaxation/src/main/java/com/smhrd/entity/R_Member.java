@@ -3,20 +3,15 @@ package com.smhrd.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import java.util.List;
 
 import lombok.Data;
 
-@Entity // 이 DTO를 Table이라 지정하겠다.
+@Entity
 @Data
 public class R_Member {
-	// JPA : NO SQL
-	// ORM(Object Relational Mapping)
-	// JAVA객체 <--> DB Table
-	// DTO 생성 == DB에 Table 생성
-	// DTO 필드 --> 컬럼
-
-	// 이메일
-	// primary key를 지정하는 어노테이션
 
 	@Id
 	@Column(length = 50, nullable = false)
@@ -25,7 +20,7 @@ public class R_Member {
 	@Column(length = 40, nullable = false)
 	private String rmPw; // 비밀번호
 
-	@Column(length = 20, nullable = false)
+	@Column(length = 20, nullable = false, unique = true)
 	private String rmNick; // 닉네임
 
 	@Column(length = 20, nullable = false)
@@ -37,6 +32,15 @@ public class R_Member {
 	@Column(length = 20, nullable = false)
 	private String rmPhone; // 전화번호
 
-	@Column(length = 60)
-	private String rmGenre; // 선호 장르
+    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
+    private List<R_Faceimg> rFaceimgs;
+	
+    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
+    private List<R_FavMusic> rFavMusics;
+    
+    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
+    private List<R_Nowlist> rNowlists;
+	
+    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
+    private List<R_Playlist> rPlaylists;
 }

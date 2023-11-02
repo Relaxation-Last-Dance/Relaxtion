@@ -21,4 +21,9 @@ public interface R_MemberRepository extends JpaRepository<R_Member, String>{
 	
 	// 회원 탈퇴 기능
 	public long deleteByRmEmailAndRmPw(String rmEmail, String rmPw);
+	
+	// 카카오 회원 탈퇴시 DB에 저장된 정보 삭제
+	public long deleteByRmEmail(String rmEmail);
+	
+	
 }

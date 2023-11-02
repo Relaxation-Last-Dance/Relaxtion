@@ -9,6 +9,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.smhrd.entity.R_Faceimg;
 import com.smhrd.entity.R_Member;
 import com.smhrd.repository.R_FaceimgRepository;
+import com.smhrd.repository.R_MemberRepository;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
 				maxFileSize = 1024 * 1024 * 20, // 20메가
@@ -31,6 +33,10 @@ public class faceImgController {
 
 	@Autowired
 	private R_FaceimgRepository repo;
+	@Autowired
+	private R_MemberRepository memberRepository;
+	
+	
 
 	@RequestMapping(value="/imgUpload", method=RequestMethod.POST)
 	@ResponseBody
@@ -44,7 +50,7 @@ public class faceImgController {
 		
 		// 회원의 아이디만 불러오기
 		R_Member member = (R_Member)session.getAttribute("user");
-		
+
 		String email = member.getRmEmail();
 		String userEmail = "";
 		
@@ -97,10 +103,11 @@ public class faceImgController {
 		// 2. 기능 구현
 		
 		// 저장할 이메일
-		R_Member user = (R_Member) session.getAttribute("user");
-		String rmEmail = user.getRmEmail();
-		Faceimg.setRmEmail(rmEmail);
-
+		String rmEmail = email;
+		R_Member user = memberRepository.findByRmEmail(rmEmail);
+		
+		Faceimg.setRmEmail(user);
+		
 		repo.save(Faceimg);
 		// 여기까지 이미지 저장=========================================
 		
@@ -120,26 +127,5 @@ public class faceImgController {
 		return new ResponseEntity<>("Success Message", HttpStatus.OK);
 	}
 
-	
-	@RequestMapping("/flask") 
-	 public String flask() {
-		
-		return"flask";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
