@@ -293,11 +293,7 @@ public class R_MemberController {
 		public String setsession3() {
 			return "redirect:/goUserMain";
 		}
-		// 메인페이지 세션 종료시
-		@RequestMapping("/setUserMainSession")
-		public String setsession4() {
-			return "redirect:/goUserMain";
-		}
+
 		// 마이페이지 세션 종료시
 		@RequestMapping("/setUserMypageSession")
 		public String setsession5() {
