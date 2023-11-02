@@ -3,36 +3,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<style>
-.player-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 400px;
-    height: 20px;
-    margin-top: 20px;
-}
-
-.progress-bar {
-    flex-grow: 1;
-    height: 10px;
-    background-color: #eee;
-    margin: 0 10px;
-}
-
-.progress {
-    height: 100%;
-    background-color: #4caf50;
-    width: 0;
-}
-
-</style>
-
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://sdk.scdn.co/spotify-player.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+	
+	<style>
+	.player-bar {
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 400px;
+	    height: 20px;
+	    margin-top: 20px;
+	}
+	
+	.progress-bar {
+	    flex-grow: 1;
+	    height: 10px;
+	    background-color: #eee;
+	    margin: 0 10px;
+	}
+	
+	.progress {
+	    height: 100%;
+	    background-color: #4caf50;
+	    width: 0;
+	}
+	
+	</style>
 </head>
+
 <body>
 
 			<h2>${user.rmNick}의 Music</h2>
@@ -152,6 +154,7 @@
 	                		playButton.className ='fas fa-play';
 	                	}
 	                }
+	                console.log(state)
                 });
             });
         };
@@ -208,12 +211,33 @@
 			  if (success) {
 			    console.log('The Web Playback SDK successfully connected to Spotify!');
 			  }
-		
 		});
-
-	
 	};
     
  
 </script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+        $(document).ready(function(){
+        	var accessToken = '${sessionScope.accessToken}';
+            var refreshToken = '${sessionScope.refreshToken}';
+            
+            if (!accessToken) {
+
+	            $.ajax({
+	                url: 'refresh_token',
+	                method: 'GET',
+	                success: function(response) {
+	                    // accessToken과 refreshToken을 세션 스토리지에 저장합니다.
+	                    console.log(response)
+	                },
+	                error: function(xhr, status, error) {
+	                    console.error('Failed to refresh token: ', status, error);
+	                }
+	            });
+            }
+        });
+</script>
+
 </html>
