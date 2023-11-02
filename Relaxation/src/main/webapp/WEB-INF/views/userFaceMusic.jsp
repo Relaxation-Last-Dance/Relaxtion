@@ -6,17 +6,27 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 #ex9 .upload-box {
 	width: 400px;
 	height: 400px;
 	border: 1px solid gray;
 	box-shadow: 2px 3px 9px hsl(0, 0%, 47%);
 	padding: 10px;
-	
-	#preview img {
-    max-width: 100%;
-    max-height: 100%;
+	position: relative; 
+	overflow: hidden;  
 }
+
+#ex9 .upload-box #preview img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain; /* 추가 */
+	position: absolute; /* 추가 */
+	top: 50%; /* 추가 */
+	left: 50%; /* 추가 */
+	transform: translate(-50%, -50%); /* 추가 */
+}
+
 </style>
 </head>
 <body>
