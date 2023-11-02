@@ -13,7 +13,7 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // CSRF protection disable if not needed.
             .authorizeRequests()
-            .antMatchers("/spoLogin","/spoCallback","/goSpoMain","/refresh_token",
+            .antMatchers("/spoLogin","/spoCallback","/refresh_token",
             		
             		//apiController
             		"/kakaoCallback",
@@ -43,7 +43,8 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/setUserChangeInfoSession",
             		"/setUserDropSession",
             		"/setUserMypageSession",
-            		"/goUserMusicPlayer"
+            		"/goUserMusicPlayer",
+            		"/goSpoMain"
             		
             		).permitAll() // permit all for login page
             .anyRequest().authenticated() // any other request needs authentication.

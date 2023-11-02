@@ -111,6 +111,7 @@
 		<a href="goUserFaceMusic">FaceMusic</a>
 		<a href="goUserMypage">MyPage</a>
 		<a href="#">Albums</a>
+		<a href="goSpoMain">Spotify</a>
 		<a href="goUserMusicPlayer">MusicPlayer</a>
 		<a href="userLogout">LogOut</a>
 	</c:if>
