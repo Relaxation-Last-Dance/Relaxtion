@@ -6,44 +6,80 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <style>
-        table {
-            width: 50%; /* 테이블 너비 조절 */
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
+<style>
+    .table-container {
+        display: flex;
+        justify-content: space-between;
+    }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
+    .table-container > div {
+        flex: 1;
+        margin: 0 10px;
+    }
 
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
+    .table-wrapper {
+        width: 70%;
+        margin: 0 auto;
+    }
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+    table {
+        width: 100%;
+        height: 300px; /* 테이블 높이를 고정 값으로 설정 */
+        border-collapse: collapse;
+    }
 
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle; /* 텍스트를 수직 방향으로 가운데 정렬 */
+    }
+
+    th {
+        background-color: #d3d3d3;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #e9e9e9;
+    }
+
+    tr:hover {
+        background-color: #c0c0c0;
+    }
+    
+     .login-table {
+        width: 30%; /* 로그인 테이블의 너비를 조절 */
+        margin: 0 auto; /* 로그인 테이블을 가운데 정렬 */
+    }
+
+    .login-table th, .login-table td {
+        padding: 5px; /* 셀 안의 패딩을 조절 */
+        text-align: center;
+        vertical-align: middle;
+    }
+     .login-table-container {
+    text-align: left; /* 텍스트 정렬을 왼쪽으로 설정 */
+    margin: 0 auto; /* 가운데 정렬 취소 */
+}       
+    
+</style>
+
+<div class="login-table-container">
+    <!-- 테이블 코드 -->
+</div>
 </head>
 <body>
 
-
-	<h1>Hello </h1>
+<div>
+	<h1>Hello Relaxation </h1>
 	<c:if test="${!empty user}">
 		<h3>${user.rmNick}님 환영합니다!</h3>
 	</c:if>
 
 	<!-- 로그인하기전 user세션에 값이 없을 때 -->
 	<c:if test="${empty user}">
-		<table>
+		<table class="login-table">
 			<form action="userLogin" id="loginForm">
 			<tr height="35" bgcolor="whitesmoke">
 				<td align="right">Email :</td>
@@ -67,7 +103,7 @@
 			<a href="goUserJoin"><h3>Join</h3></a>
 		</div>
 	</c:if>
-
+</div>
 
 	<!-- 로그인하고 세션에 값이 저장이 되어 있을 때 -->
 	<c:if test="${!empty user}">
@@ -77,20 +113,58 @@
 		<a href="userLogout">LogOut</a>
 	</c:if>
 
-<h2>TOP 10 Artists</h2>
 
-<table>
-  <tr>
-    <th>Ranking</th>
-    <th>Artist</th>
-  </tr>
-  <c:forEach var="artist" items="${top10Artist}" varStatus="status">
-    <tr>
-        <td>${status.index + 1}</td>
-        <td>${artist}</td>
-    </tr>
-  </c:forEach>
-</table>
+<div class="table-container">
+    <div>
+        <h2>추천 TOP Relaxation</h2>
+        <table>
+            <tr>
+                <th>사진</th>
+                <th>Artist</th>
+                <th>Title</th>
+            </tr>
+            <c:forEach var="artist" items="${findRandom7}" varStatus="status">
+                <tr>
+                    <td>${status.index + 1}</td>
+                    <td>${artist.rmuSinger}</td>
+                    <td>${artist.rmuTitle}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
+    <div>
+        <h2>${findRandom7BySinger[0].rmuSinger}의 Best Title</h2>
+        <table>
+            <tr>
+                <th>사진</th>
+                <th>Title</th>
+            </tr>
+            <c:forEach var="music" items="${findRandom7BySinger}" varStatus="status">
+                <tr>
+                    <td>${status.index + 1}</td>
+                    <td>${music.rmuTitle}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
+    <div>
+        <h2>Popular Artists</h2>
+        <table>
+            <tr>
+                <th>사진</th>
+                <th>Artist</th>
+            </tr>
+            <c:forEach var="artist" items="${top7Artist}" varStatus="status">
+                <tr>
+                    <td>${status.index + 1}</td>
+                    <td>${artist}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+</div>
 	
 
 

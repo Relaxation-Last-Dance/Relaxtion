@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.entity.R_Member;
+import com.smhrd.entity.R_Music;
 import com.smhrd.repository.R_MemberRepository;
 import com.smhrd.repository.R_MusicRepository;
 
 @Controller
 public class R_MemberController {
-
 
 	@Autowired
 	private R_MemberRepository Member_repo;
@@ -32,17 +32,22 @@ public class R_MemberController {
 	@RequestMapping("/goUserMain")
 	public String goMain(Model model) {
 		
-	// main페이지 top10 아티스트 불러오기	
-	List<String> top10Artist = Music_repo.findTop10();	
+	// main페이지 top7 아티스트 불러오기	
+	List<String> top7Artist = Music_repo.findTop7();	
+	// main페이지 top relaxation 음악추천
+	List<R_Music> findRandom7 = Music_repo.findRandom7();
+	// main페이지 특정 가수의 노래 7곡 랜덤으로 불러오기
+	List<R_Music> findRandom7BySinger = Music_repo.findRandom7BySinger();
+	
+	
 	// model에 담아서 메인에 보내주기
-	model.addAttribute("top10Artist",top10Artist);	
-		
-		
-		
-		
-		
-		return "userMain";
+	model.addAttribute("top7Artist",top7Artist);	
+	model.addAttribute("findRandom7",findRandom7);	
+	model.addAttribute("findRandom7BySinger",findRandom7BySinger);
+	
+	return "userMain";
 	}
+	
 	@RequestMapping("/goSpoMain")
 	public String goSpoMain() {
 		return "adminMain";
