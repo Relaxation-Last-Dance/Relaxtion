@@ -152,7 +152,6 @@
 	                		playButton.className ='fas fa-play';
 	                	}
 	                }
-	                console.log(state)
                 });
             });
         };
