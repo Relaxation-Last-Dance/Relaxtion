@@ -62,6 +62,14 @@
 				<button id="togglePlay" class="fas fa-play"></button>
 				<button id="nextTrack" class="fas fa-step-forward"></button>
 			</div>
+			<div class="page_two__main__play_time">
+                <span>2:13</span>
+                <span>3:28</span>
+          	</div>
+          	<div class="page_two__main__time_bar">
+              <div class="time_bar__time_stamp"></div>
+              <i class="fas fa-circle"></i>
+         	</div>
 		</div>
 </body>
 
