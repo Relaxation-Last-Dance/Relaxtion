@@ -74,7 +74,6 @@ public class FlaskController {
 			                            String.class);
 
 			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★");
-			System.out.println(" 플라스크 서버 응답 : " + response.getBody());
 			System.out.println("응답 상태코드 : " + response.getStatusCode());
 			System.out.println("응답 헤더 : " + response.getHeaders());
 			System.out.println("응답 본문 : " + response.getBody()); // {"probability":0.85,"result":"Example Result"}
