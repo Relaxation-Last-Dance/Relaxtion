@@ -28,7 +28,13 @@ public class R_Music {
     private String rmuTitle; // 노래제목
 
     @Column(length = 500, nullable = false)
-    private String rmuAlbum; // 앨범이미지
+    private String rmuAlbum; // 앨범
+    
+    @Column(length = 500, nullable = false)
+    private String rmuAlbumImg; // 앨범 이미지
+    
+    @Column(length = 500, nullable = false)
+    private String rmuArtistImg; // 아티스트 이미지
 
     @OneToMany(mappedBy = "rmuSeq")
     private List<R_FavMusic> rFavMusics;
