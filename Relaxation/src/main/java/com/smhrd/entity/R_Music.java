@@ -21,10 +21,10 @@ public class R_Music {
     @Column(length = 500, nullable = false, unique = true)
     private String rmuUri; // 노래 uri 곡의 고유번호
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 100, nullable = false)
     private String rmuSinger; // 가수
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 500, nullable = false)
     private String rmuTitle; // 노래제목
 
     @Column(length = 500, nullable = false)
