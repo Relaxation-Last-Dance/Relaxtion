@@ -38,4 +38,6 @@ public class R_Music {
 
     @OneToMany(mappedBy = "rmuSeq")
     private List<R_Playlist> rPlaylists;
+   
+    
 }

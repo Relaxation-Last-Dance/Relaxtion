@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -20,7 +21,8 @@ public class R_Faceimg {
 
     @ManyToOne
     @JoinColumn(name = "rmEmail")
-    private R_Member rmEmail; // 이메일
+    @ToString.Exclude
+    private R_Member rmEmail;
 
     @Column(length = 600, nullable = false)
     private String rfImg; // 얼굴 이미지

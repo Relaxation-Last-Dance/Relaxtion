@@ -22,8 +22,8 @@
 	<c:choose>
 		<c:when test="${user.rmPhone eq '카카오회원'}">
 		<a href="dropKakaoUser">카카오 회원 탈퇴</a>
-		</c:when>
 		<br>
+		</c:when>
 		<c:otherwise>
 		<a href="goUserDropInfo">회원 탈퇴</a>
 		</c:otherwise>

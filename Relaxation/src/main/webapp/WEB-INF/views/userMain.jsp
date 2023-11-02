@@ -4,10 +4,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <style>
+        table {
+            width: 50%; /* 테이블 너비 조절 */
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
 
@@ -52,6 +76,43 @@
 		<a href="goUserMypage">MyPage</a>
 		<a href="userLogout">LogOut</a>
 	</c:if>
+
+<h2>TOP 10 Artists</h2>
+
+<table>
+  <tr>
+    <th>Ranking</th>
+    <th>Artist</th>
+  </tr>
+  <c:forEach var="artist" items="${top10Artist}" varStatus="status">
+    <tr>
+        <td>${status.index + 1}</td>
+        <td>${artist}</td>
+    </tr>
+  </c:forEach>
+</table>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

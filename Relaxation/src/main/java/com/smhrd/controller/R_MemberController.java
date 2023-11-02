@@ -1,5 +1,7 @@
 package com.smhrd.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,18 +17,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.entity.R_Member;
 import com.smhrd.repository.R_MemberRepository;
+import com.smhrd.repository.R_MusicRepository;
 
 @Controller
 public class R_MemberController {
 
 
 	@Autowired
-	private R_MemberRepository repo;
-
+	private R_MemberRepository Member_repo;
+	@Autowired
+	private R_MusicRepository Music_repo;
 
 	// 메인 이동
 	@RequestMapping("/goUserMain")
-	public String goMain() {
+	public String goMain(Model model) {
+		
+	// main페이지 top10 아티스트 불러오기	
+	List<String> top10Artist = Music_repo.findTop10();	
+	// model에 담아서 메인에 보내주기
+	model.addAttribute("top10Artist",top10Artist);	
+		
+		
+		
+		
+		
 		return "userMain";
 	}
 	@RequestMapping("/goSpoMain")
@@ -58,7 +73,7 @@ public class R_MemberController {
 
 		System.out.println(member.getRmEmail());
 
-		repo.save(member);
+		Member_repo.save(member);
 
 		return "redirect:/goUserMain";
 	}
@@ -67,12 +82,12 @@ public class R_MemberController {
 	@RequestMapping("/userLogin")
 	public ResponseEntity<?> Login(HttpSession session, String rmEmail, String rmPw) {
 
-		R_Member member = repo.findByRmEmailAndRmPw(rmEmail, rmPw);
+		R_Member member = Member_repo.findByRmEmailAndRmPw(rmEmail, rmPw);
 		
 		if (member != null) {
 			session.setAttribute("user", member);
 			System.out.println("============================================================");
-			System.out.println("로그인 유저 정보 : " + session.getAttribute("user"));
+			System.out.println("로그인 유저 정보 : " + "\n" + session.getAttribute("user"));
 			System.out.println("============================================================");
 			return new ResponseEntity<>("OK", HttpStatus.OK); // 로그인 성공
 		} else {
@@ -147,7 +162,7 @@ public class R_MemberController {
 			member.setRmEmail(rmEmail);
 			member.setRmGender(rmGender);
 			member.setRmPhone(rmPhone);
-			repo.save(member);
+			Member_repo.save(member);
 			return "redirect:/userLogout";
 
 		} else {
@@ -161,7 +176,7 @@ public class R_MemberController {
 			member.setRmName(rmName);
 			member.setRmGender(rmGender);
 
-			repo.save(member);
+			Member_repo.save(member);
 			System.out.println("=================");
 			System.out.println("일반유저 정보 수정 성공");
 			System.out.println("=================");
@@ -186,7 +201,7 @@ public class R_MemberController {
 	@RequestMapping(value="/emailCheck" , method= RequestMethod.POST)
 	public @ResponseBody String emailCheck(String email) {
 		
-		R_Member member = (R_Member)repo.findByRmEmail(email);
+		R_Member member = (R_Member)Member_repo.findByRmEmail(email);
 		
 		if(member != null) {
 			return "false";
@@ -199,7 +214,7 @@ public class R_MemberController {
 	@RequestMapping(value="/nickCheck" , method=RequestMethod.POST)
 	public @ResponseBody String nickCheck(String nick) {
 		
-		R_Member member = (R_Member)repo.findByRmNick(nick);
+		R_Member member = (R_Member)Member_repo.findByRmNick(nick);
 		
 		if(member != null) { // member가 null이 아니면 이미 닉네임값이 존재함
 			return "false";
@@ -232,11 +247,11 @@ public class R_MemberController {
 
 			// 기능 실행
 			// 뷰 선택
-			R_Member userInfo = (R_Member) repo.findByRmEmailAndRmPw(rmEmail, rmPw);
+			R_Member userInfo = (R_Member) Member_repo.findByRmEmailAndRmPw(rmEmail, rmPw);
 
 			if (userInfo != null) {
 				// 회원정보가 존재 --> 탈퇴
-				repo.deleteByRmEmailAndRmPw(rmEmail, rmPw);
+				Member_repo.deleteByRmEmailAndRmPw(rmEmail, rmPw);
 				session.removeAttribute("user");
 
 				System.out.println("=================");
@@ -268,7 +283,7 @@ public class R_MemberController {
 			String rmPw = user.getRmPw();
 			
 			//DB에 저장된 정보 삭제
-			repo.deleteByRmEmailAndRmPw(rmEmail, rmPw);
+			Member_repo.deleteByRmEmailAndRmPw(rmEmail, rmPw);
 			
 			//세션 정보 삭제
 			session.removeAttribute("user");

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.smhrd.entity.R_Member;
 
 @Repository
-
 public interface R_MemberRepository extends JpaRepository<R_Member, String>{
 
 	

@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import java.util.List;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -33,6 +34,7 @@ public class R_Member {
 	private String rmPhone; // 전화번호
 
     @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
     private List<R_Faceimg> rFaceimgs;
 	
     @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
