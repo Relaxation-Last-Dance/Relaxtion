@@ -43,9 +43,13 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/setUserChangeInfoSession",
             		"/setUserDropSession",
             		"/setUserMypageSession",
+            		"/setUserAlbumsSession",
             		"/goUserMusicPlayer",
-            		"/goSpoMain"
+            		"/goSpoMain",
+            		"/goUserAlbums",
             		
+            		//musicController
+            		"/searchAlbums"
             		).permitAll() // permit all for login page
             .anyRequest().authenticated() // any other request needs authentication.
             .and()

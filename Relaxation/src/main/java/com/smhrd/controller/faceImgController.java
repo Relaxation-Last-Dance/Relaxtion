@@ -117,7 +117,7 @@ public class faceImgController {
 		
 		flask.sendImgToFlask(savePath, imgname, email);
 
-		// 분석결과 보여줘야함 지금은 예시로 메인으로 가게함
+		// 분석결과 보여줘야함 지 금은 예시로 메인으로 가게함
 		
 		Map<String, String> result = new HashMap<>();
 		result.put("message", "※※※※※※성공입니다!※※※※※");

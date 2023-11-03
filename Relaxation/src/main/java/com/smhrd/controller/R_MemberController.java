@@ -304,6 +304,17 @@ public class R_MemberController {
 			return"userMusicPlayer";
 		}
 		
+		// userAlbums로 이동
+		@RequestMapping("/goUserAlbums")
+		public String goUserAlbums(Model model) {
+			
+			List<R_Music> findRandom48 = Music_repo.findRandom48();
+			
+			model.addAttribute("findRandom48",findRandom48);
+			
+			return"userAlbums";
+		}
+		
 		
 		
 		
@@ -326,6 +337,11 @@ public class R_MemberController {
 		// 마이페이지 세션 종료시
 		@RequestMapping("/setUserMypageSession")
 		public String setsession5() {
+			return "redirect:/goUserMain";
+		}
+		// 앨범페이지 세션 종료시
+		@RequestMapping("/setUserAlbumsSession")
+		public String setsession6() {
 			return "redirect:/goUserMain";
 		}
 		//===========================================================================
