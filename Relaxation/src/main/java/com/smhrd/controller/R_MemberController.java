@@ -1,5 +1,6 @@
 package com.smhrd.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.smhrd.entity.R_Member;
 import com.smhrd.entity.R_Music;
+import com.smhrd.entity.R_Nowlist;
 import com.smhrd.repository.R_MemberRepository;
 import com.smhrd.repository.R_MusicRepository;
+import com.smhrd.repository.R_NowlistRepository;
 
 @Controller
 public class R_MemberController {
@@ -27,6 +30,8 @@ public class R_MemberController {
 	private R_MemberRepository Member_repo;
 	@Autowired
 	private R_MusicRepository Music_repo;
+	@Autowired
+	private R_NowlistRepository Nowlist_repo;
 
 	// 메인 이동
 	@RequestMapping("/goUserMain")
@@ -298,9 +303,45 @@ public class R_MemberController {
 			return mav;
 		}
 
-		// MyMusicPlayer로 이동
+		
+		// MyMusicPlayer 현재재생목록페이지로 이동
 		@RequestMapping("/goUserMusicPlayer")
-		public String goMyMusicPlayer() {
+		public String goMyMusicPlayer(HttpSession session, Model model) {
+			
+		//세션에 저장된 이메일값 가져오기
+		R_Member member = (R_Member)session.getAttribute("user");
+		String rmEmail = member.getRmEmail();
+		
+		if(rmEmail == null) {	
+			//만약 rmNick이 null이라면 세션이 만료되었으니 그냥 메인으로 보내버림
+			return "redirect:/goUserMain";
+		}
+		
+		// 이메일을 이용해서 nowlist 테이블 조회
+		// 그리고 테이블 정보 다 nowlist에 저장
+
+		
+		List<R_Nowlist> nowlist = Nowlist_repo.findByRmEmail(rmEmail);
+		// nowlist에있는 음악 Seq 번호를 이용해서 Music테이블을 다시 조회 하고 음악 정보를 가지고 오기
+		
+		// 빈 배열 타입은 R_music테이블 정보를 담을 배열
+		List<R_Music> musicInfo = new ArrayList<R_Music>();
+		// nowlist에는 내 이메일로 조회한 정보만 있음
+		for(R_Nowlist n : nowlist) {
+		// 내 nowlist에있는 음악seq는 중복이 없음 그래서 이걸로 다시 music테이블을 조회한 후 그 seq와 같은 
+		// 노래 정보들을 다 가지고 옴
+			R_Music music = Music_repo.findByRmuSeq(n.getRmuSeq());
+
+			
+			if (music != null) {
+		        musicInfo.add(music);
+		    }
+		}
+		
+		// 이제 musicInfo에는 내가 저장한 재생목록 노래들 정보가 다 저장되어 있음
+		System.out.println(musicInfo + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		model.addAttribute("musicInfo",musicInfo);
+
 			return"userMusicPlayer";
 		}
 		

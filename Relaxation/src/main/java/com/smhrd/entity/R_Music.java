@@ -47,19 +47,6 @@ public class R_Music {
 
     @Column(nullable = false)
     private Double acoustic; // 악기가 얼마나 사용되었는지
-
-    
-    
-    
-    
-    @OneToMany(mappedBy = "rmuSeq")
-    private List<R_FavMusic> rFavMusics;
-    
-    @OneToMany(mappedBy = "rmuSeq")
-    private List<R_Nowlist> rNowlists;
-
-    @OneToMany(mappedBy = "rmuSeq")
-    private List<R_Playlist> rPlaylists;
    
     
 }
