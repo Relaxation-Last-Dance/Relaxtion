@@ -8,7 +8,6 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -17,13 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
 
-import com.smhrd.repository.R_MemberRepository;
 
 @Controller
 public class FlaskController {
-	
-	@Autowired	
-	private R_MemberRepository repo;
 	
 	
 	
@@ -35,6 +30,7 @@ public class FlaskController {
 			byte[] bytes = new byte[(int)file.length()];
 			fileInputStreamReader.read(bytes);
 			encodedfile = Base64.getEncoder().encodeToString(bytes);
+			fileInputStreamReader.close();
 		} catch (FileNotFoundException e) {
 			// handle exception
 		} catch (IOException e) {

@@ -16,7 +16,7 @@ public interface R_MusicRepository extends JpaRepository<R_Music, Long>{
 	
 	Page<R_Music> findByRmuSingerContainingOrRmuTitleContaining(String rmuSinger, String rmuTitle, Pageable pageable);
 	
-	
+	R_Music findByRmuSeq(Long rmuSeq);
 	
 	
 	
@@ -34,7 +34,7 @@ public interface R_MusicRepository extends JpaRepository<R_Music, Long>{
 	// 랜덤으로 7개 음악가지고 오는 쿼리, 리스트에담기
 	@Query(value = "SELECT * " +
 	        "FROM r_music " +
-	        "WHERE rmu_seq BETWEEN 1734 AND 5792 " +
+	        "WHERE rmu_seq BETWEEN 1 AND 4017 " +
 	        "ORDER BY RAND() " +
 	        "LIMIT 7", nativeQuery = true)
 	List<R_Music> findRandom7();
@@ -42,7 +42,7 @@ public interface R_MusicRepository extends JpaRepository<R_Music, Long>{
 	//albums페이지에 랜덤으로 48개 음악가지고 오는 쿼리, 리스트에담기
 	@Query(value = "SELECT * " +
 			"FROM r_music " +
-			"WHERE rmu_seq BETWEEN 1734 AND 5792 " +
+			"WHERE rmu_seq BETWEEN 1 AND 4017 " +
 			"ORDER BY RAND() " +
 			"LIMIT 48", nativeQuery = true)
 	List<R_Music> findRandom48();

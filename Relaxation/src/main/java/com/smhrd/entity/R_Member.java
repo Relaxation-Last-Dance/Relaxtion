@@ -33,16 +33,4 @@ public class R_Member {
 	@Column(length = 20, nullable = false)
 	private String rmPhone; // 전화번호
 
-    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
-    @ToString.Exclude
-    private List<R_Faceimg> rFaceimgs;
-	
-    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
-    private List<R_FavMusic> rFavMusics;
-    
-    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
-    private List<R_Nowlist> rNowlists;
-	
-    @OneToMany(mappedBy = "rmEmail", cascade = CascadeType.REMOVE)
-    private List<R_Playlist> rPlaylists;
 }

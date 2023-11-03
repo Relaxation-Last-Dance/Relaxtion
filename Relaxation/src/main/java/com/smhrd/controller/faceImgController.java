@@ -9,7 +9,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.smhrd.entity.R_Faceimg;
 import com.smhrd.entity.R_Member;
 import com.smhrd.repository.R_FaceimgRepository;
-import com.smhrd.repository.R_MemberRepository;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
 				maxFileSize = 1024 * 1024 * 20, // 20메가
@@ -33,8 +31,6 @@ public class faceImgController {
 
 	@Autowired
 	private R_FaceimgRepository repo;
-	@Autowired
-	private R_MemberRepository memberRepository;
 	
 	
 
@@ -104,9 +100,8 @@ public class faceImgController {
 		
 		// 저장할 이메일
 		String rmEmail = email;
-		R_Member user = memberRepository.findByRmEmail(rmEmail);
 		
-		Faceimg.setRmEmail(user);
+		Faceimg.setRmEmail(rmEmail);
 		
 		repo.save(Faceimg);
 		// 여기까지 이미지 저장=========================================

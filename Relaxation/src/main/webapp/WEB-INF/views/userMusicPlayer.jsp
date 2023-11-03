@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,13 +32,68 @@
 	    background-color: #4caf50;
 	    width: 0;
 	}
-	
+	/*=================================== */
+
+<style>
+    .playlist-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .playlist-container > div {
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    .playlist-wrapper {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .playlist-table {
+        width: 100%;
+        height: 300px; /* 테이블 높이를 고정 값으로 설정 */
+        border-collapse: collapse;
+    }
+
+    .playlist-table th, .playlist-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle; /* 텍스트를 수직 방향으로 가운데 정렬 */
+    }
+
+    .playlist-table th {
+        background-color: #d3d3d3;
+        color: white;
+    }
+
+    .playlist-table tr:nth-child(even) {
+        background-color: #e9e9e9;
+    }
+
+    .playlist-table tr:hover {
+        background-color: #c0c0c0;
+    }
+
+    .playlist-table button {
+        padding: 5px;
+        background-color: #4CAF50; /* 버튼의 배경색 */
+        color: white; /* 버튼의 텍스트 색상 */
+        border: none; /* 버튼의 테두리 제거 */
+    }
+
+    .playlist-table button:hover {
+        background-color: #45a049; /* 마우스가 버튼 위에 있을 때의 배경색 */
+    }
+</style>
+
 	</style>
 </head>
 
 <body>
 
-			<h2>${user.rmNick}의 Music</h2>
+			<h2>${user.rmNick}의 재생목록</h2>
 
 			<div>
 				<button id="prevTrack" class="fas fa-step-backward"></button>
@@ -54,36 +110,34 @@
 			</div>
 
 
+<div class="playlist-container">
+    <div class="playlist-wrapper">
+        <table class="playlist-table" border="1">
+            <thead>
+                <tr>
+                    <th>노래 제목</th>
+                    <th>아티스트</th>
+                    <th>재생버튼</th>
+                    <th>플레이리스트 버튼</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="song" items="${musicInfo}">
+                    <tr>
+                        <td>${song.rmuTitle}</td>
+                        <td>${song.rmuSinger}</td>
+                        <td><button type="button" class="playlist-button">재생</button></td>
+                        <td><button type="button" class="playlist-button">플레이리스트에 추가</button></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
 <script>
 	console.log('Access Token: ${sessionScope.accessToken}')
 	console.log('Token Type: ${sessionScope.tokenType}')
@@ -130,7 +184,13 @@
             console.error(message);
         });
         const playButton = document.getElementById('togglePlay');
-        const playlist = ["spotify:track:5mdl3TlXrImNPrIo3aO70q?si=6f41bac7bf16401c", "spotify:track:1q3axbxKGkwHdLLQtxmyl2?si=863452f5a7524f97"];
+        var playlist = [];
+        
+        <c:forEach var="song" items="${musicInfo}">
+        playlist.push('${song.rmuUri}');
+    	</c:forEach>
+    	console.log(playlist);
+        
         document.getElementById('togglePlay').onclick = function() {
             player.togglePlay().then(() => {
                 // 재생 버튼 클릭 시 fetch를 호출하여 트랙을 로드하고 재생합니다.
@@ -239,5 +299,5 @@
             }
         });
 </script>
-
+</body>
 </html>
