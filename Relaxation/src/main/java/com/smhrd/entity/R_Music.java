@@ -36,6 +36,22 @@ public class R_Music {
     @Column(length = 500, nullable = false)
     private String rmuArtistImg; // 아티스트 이미지
 
+    @Column(nullable = false)
+    private Double dance; // 리듬감 있는 노래
+    
+    @Column(nullable = false)
+    private Double energy; // 활기찬 힘있는 노래
+    
+    @Column(nullable = false)
+    private Double valence; // 긍정적, 부정적 
+
+    @Column(nullable = false)
+    private Double acoustic; // 악기가 얼마나 사용되었는지
+
+    
+    
+    
+    
     @OneToMany(mappedBy = "rmuSeq")
     private List<R_FavMusic> rFavMusics;
     
