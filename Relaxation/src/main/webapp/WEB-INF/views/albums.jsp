@@ -35,7 +35,7 @@
     </div>
 
     <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
+    <header class="header-area another-header">
         <!-- Navbar Area -->
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">

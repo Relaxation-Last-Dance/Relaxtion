@@ -44,7 +44,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
                         
                         <!-- Nav brand -->
-                        <a href="goIdex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
+                        <a href="goIndex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
                         
 
                         <!-- Navbar Toggler -->
@@ -76,10 +76,16 @@
                         
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="goIndex">Home</a></li>
-                                    <li><a href="goAlbums">Albums</a></li>
-                            
-                                    <li><a href="goFacemusic">Face Music</a></li>
+	                                <c:if test="${empty user}">
+	                                    <li><a href="goIndex">Home</a></li>
+	                                    <li><a href="goAlbums">Albums</a></li>
+	                                    <li><a href="#">Face Music</a></li>
+	                                </c:if>
+	                                <c:if test="${!empty user}">
+	                                    <li><a href="goIndex">Home</a></li>
+	                                    <li><a href="goAlbums">Albums</a></li>
+	                                    <li><a href="goFacemusic">Face Music</a></li>
+	                                </c:if>
                                     <!--<li><a href="contact.html">Contact</a></li>-->
                                 </ul>
 

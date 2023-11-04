@@ -70,9 +70,14 @@ public class R_MemberController {
 	public String Join(R_Member member) {
 
 		String Email = member.getRmEmail();
-
+		
+		System.out.println(Email);
 		Email.replace(",,", "@");
+		
+		System.out.println(Email);
 		Email.replace(",", "");
+		
+		System.out.println(Email);
 		if (Email.contains(",,")) {
 			Email = Email.replace(",,", "@");
 		} else {
@@ -85,7 +90,7 @@ public class R_MemberController {
 
 		Member_repo.save(member);
 
-		return "redirect:/goUserMain";
+		return "redirect:/goIndex";
 	}
 	
 	// 로그인
@@ -123,11 +128,11 @@ public class R_MemberController {
 			session.removeAttribute("k_accessToken");
 			session.removeAttribute("user");
 			mav.setViewName(
-					"redirect:https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goUserMain");
+					"redirect:https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goIndex");
 			return mav;
 		} else {
 
-			mav.setViewName("redirect:/goUserMain");
+			mav.setViewName("redirect:/goIndex");
 			session.removeAttribute("user");
 			return mav;
 		}
@@ -387,21 +392,21 @@ public class R_MemberController {
 		}
 		//===========================================================================
 		
-//		// 준연이 앨범페이지
-//		@RequestMapping("/goAlbums")
-//		public String goAlbums() {
-//			return "albums";
-//		}
-//		// 준연이 facemusic페이지
-//		@RequestMapping("/goFacemusic")
-//		public String goFacemusic() {
-//			return "facemusic";
-//		}
-//		// 준연이 index페이지
-//		@RequestMapping("/goIndex")
-//		public String goIndex() {
-//			return "index";
-//		}
+		// 준연이 앨범페이지
+		@RequestMapping("/goAlbums")
+		public String goAlbums() {
+			return "albums";
+		}
+		// 준연이 facemusic페이지
+		@RequestMapping("/goFacemusic")
+		public String goFacemusic() {
+			return "facemusic";
+		}
+		// 준연이 index페이지
+		@RequestMapping("/goUserMain")
+		public String goUserMain() {
+			return "userMain";
+		}
 		// 준연이 login페이지
 		@RequestMapping("/goLogin")
 		public String goLogin() {
