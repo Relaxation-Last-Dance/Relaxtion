@@ -57,15 +57,6 @@
                         <div class="classy-navbar-toggler">
                             <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-                        <div class="searchBox">
-                            <input class="searchInput"type="text" name="" placeholder="검색어를 입력하세요.">
-                                 <button class="searchButton" href="">
-                   <i class="material-icons">
-                       <img src = "./assets/img/bg-img/돋보기.png">
-                       
-                   </i>
-               </button>
-           </div>
                         <!-- Menu -->
                         <div class="classy-menu">
 
@@ -86,19 +77,6 @@
 
                                 <!-- Login/Register & Cart Button -->
                                 <div class="login-register-cart-button d-flex align-items-center"></div>
-                                    
-                                    <ul>
-                                        <li><a href="#">Login / Register</a>
-                                            <ul class="dropdown">
-                                                <li><a href="goMypage">My page</a></li>
-                                                <li><a href="">Login</a></li>
-                                                <li><a href="">Logout</a></li>
-                                            
-                                            </ul>
-                                        </li>
-                                        
-                                    </ul>
-                                   
                             </div>
                             <!-- Nav End -->
 
@@ -128,7 +106,7 @@
                         <h3>Welcome Back</h3>
                         <!-- Login Form -->
                         <div class="login-form">
-                            <form action="#" method="post">
+                            <form action="userLogin" method="post">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter E-mail">

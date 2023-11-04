@@ -89,15 +89,16 @@
                                     <ul>
                                         <li><a href="#"></a>
                                             <ul class="dropdown">
-                                                <li><a href="goMypage">My page</a></li>
-                                                <li><a href="goLogin">Login</a></li>
-                                                <li><a href="">Logout</a></li>
-                                            
+                                            	<c:if test="${empty user}">
+                                                	<li><a href="goLogin">Login</a></li>
+                                                </c:if>
+                                            	<c:if test="${!empty user}">
+	                                                <li><a href="goMypage">My page</a></li>
+	                                                <li><a href="userLogout">Logout</a></li>
+                                                </c:if>
                                             </ul>
                                         </li>
-                                        
                                     </ul>
-                                   
                             </div>
                             <!-- Nav End -->
 
@@ -758,7 +759,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>ìŠ
                 <div class="col-12 col-md-6">
                     <div class="footer-nav">
                         <ul>
-                            <li><a href="goIndex">Home</a></li>
+                            <li><a href="#">Home</a></li>
                             <li><a href="goAlbums">Albums</a></li>
                             <li><a href="goFacemusic">Face Music</a></li>
                             <li><a href="goMypage">My page</a></li>

@@ -34,7 +34,7 @@ public class R_MemberController {
 	private R_NowlistRepository Nowlist_repo;
 
 	// 메인 이동
-	@RequestMapping("/goUserMain")
+	@RequestMapping("/goIndex")
 	public String goMain(Model model) {
 		
 	// main페이지 top7 아티스트 불러오기	
@@ -50,7 +50,7 @@ public class R_MemberController {
 	model.addAttribute("findRandom7",findRandom7);	
 	model.addAttribute("findRandom7BySinger",findRandom7BySinger);
 	
-	return "userMain";
+	return "index";
 	}
 	
 	@RequestMapping("/goSpoMain")
@@ -387,41 +387,41 @@ public class R_MemberController {
 		}
 		//===========================================================================
 		
-		// 준연이 앨범페이지
-		@RequestMapping("/goAlbums")
-		public String goAlbums() {
-			return "albums";
-		}
-		// 준연이 facemusic페이지
-		@RequestMapping("/goFacemusic")
-		public String goFacemusic() {
-			return "facemusic";
-		}
-		// 준연이 index페이지
-		@RequestMapping("/goIndex")
-		public String goIndex() {
-			return "index";
-		}
+//		// 준연이 앨범페이지
+//		@RequestMapping("/goAlbums")
+//		public String goAlbums() {
+//			return "albums";
+//		}
+//		// 준연이 facemusic페이지
+//		@RequestMapping("/goFacemusic")
+//		public String goFacemusic() {
+//			return "facemusic";
+//		}
+//		// 준연이 index페이지
+//		@RequestMapping("/goIndex")
+//		public String goIndex() {
+//			return "index";
+//		}
 		// 준연이 login페이지
 		@RequestMapping("/goLogin")
 		public String goLogin() {
 			return "login";
 		}
-		// 준연이 mypage페이지
-		@RequestMapping("/goMypage")
-		public String goMypage() {
-			return "mypage";
-		}
-		// 준연이 player페이지
-		@RequestMapping("/goPlayer")
-		public String goPlayer() {
-			return "player";
-		}
-		// 준연이 sign페이지
-		@RequestMapping("/goSign")
-		public String goSign() {
-			return "sign";
-		}
+//		// 준연이 mypage페이지
+//		@RequestMapping("/goMypage")
+//		public String goMypage() {
+//			return "mypage";
+//		}
+//		// 준연이 player페이지
+//		@RequestMapping("/goPlayer")
+//		public String goPlayer() {
+//			return "player";
+//		}
+//		// 준연이 sign페이지
+//		@RequestMapping("/goSign")
+//		public String goSign() {
+//			return "sign";
+//		}
 		
 
 }
