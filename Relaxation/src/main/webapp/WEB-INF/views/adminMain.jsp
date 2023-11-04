@@ -50,6 +50,7 @@
 			    <div class="total-time" id="totalTime"></div>
 			</div>
 		</div>
+</form>
 </body>
 
 <script>
