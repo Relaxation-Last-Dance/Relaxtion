@@ -18,7 +18,7 @@
     <title>One Music - Modern Music HTML5 Template</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="./assets/img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./assets/style.css">
@@ -39,7 +39,7 @@
     </div>
 
     <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
+    <header class="header-area another-header">
         <!-- Navbar Area -->
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">

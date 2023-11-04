@@ -34,7 +34,7 @@ public class R_MemberController {
 	private R_NowlistRepository Nowlist_repo;
 
 	// 메인 이동
-	@RequestMapping("/goUserMain")
+	@RequestMapping("/goIndex")
 	public String goMain(Model model) {
 		
 	// main페이지 top7 아티스트 불러오기	
@@ -50,7 +50,7 @@ public class R_MemberController {
 	model.addAttribute("findRandom7",findRandom7);	
 	model.addAttribute("findRandom7BySinger",findRandom7BySinger);
 	
-	return "userMain";
+	return "index";
 	}
 	
 	@RequestMapping("/goSpoMain")
@@ -70,9 +70,14 @@ public class R_MemberController {
 	public String Join(R_Member member) {
 
 		String Email = member.getRmEmail();
-
+		
+		System.out.println(Email);
 		Email.replace(",,", "@");
+		
+		System.out.println(Email);
 		Email.replace(",", "");
+		
+		System.out.println(Email);
 		if (Email.contains(",,")) {
 			Email = Email.replace(",,", "@");
 		} else {
@@ -85,7 +90,7 @@ public class R_MemberController {
 
 		Member_repo.save(member);
 
-		return "redirect:/goUserMain";
+		return "redirect:/goIndex";
 	}
 	
 	// 로그인
@@ -123,11 +128,11 @@ public class R_MemberController {
 			session.removeAttribute("k_accessToken");
 			session.removeAttribute("user");
 			mav.setViewName(
-					"redirect:https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goUserMain");
+					"redirect:https://kauth.kakao.com/oauth/logout?client_id=5f4adf5f781d4507aaf15fdd092cf73b&logout_redirect_uri=http://localhost:8087/relax/goIndex");
 			return mav;
 		} else {
 
-			mav.setViewName("redirect:/goUserMain");
+			mav.setViewName("redirect:/goIndex");
 			session.removeAttribute("user");
 			return mav;
 		}
@@ -402,30 +407,30 @@ public class R_MemberController {
 			return "facemusic";
 		}
 		// 준연이 index페이지
-		@RequestMapping("/goIndex")
-		public String goIndex() {
-			return "index";
+		@RequestMapping("/goUserMain")
+		public String goUserMain() {
+			return "userMain";
 		}
 		// 준연이 login페이지
 		@RequestMapping("/goLogin")
 		public String goLogin() {
 			return "login";
 		}
-		// 준연이 mypage페이지
-		@RequestMapping("/goMypage")
-		public String goMypage() {
-			return "mypage";
-		}
-		// 준연이 player페이지
-		@RequestMapping("/goPlayer")
-		public String goPlayer() {
-			return "player";
-		}
-		// 준연이 sign페이지
-		@RequestMapping("/goSign")
-		public String goSign() {
-			return "sign";
-		}
+//		// 준연이 mypage페이지
+//		@RequestMapping("/goMypage")
+//		public String goMypage() {
+//			return "mypage";
+//		}
+//		// 준연이 player페이지
+//		@RequestMapping("/goPlayer")
+//		public String goPlayer() {
+//			return "player";
+//		}
+//		// 준연이 sign페이지
+//		@RequestMapping("/goSign")
+//		public String goSign() {
+//			return "sign";
+//		}
 		
 
 }

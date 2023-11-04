@@ -44,7 +44,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
                         
                         <!-- Nav brand -->
-                        <a href="goIdex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
+                        <a href="goIndex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
                         
 
                         <!-- Navbar Toggler -->
@@ -76,10 +76,16 @@
                         
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="goIndex">Home</a></li>
-                                    <li><a href="goAlbums">Albums</a></li>
-                            
-                                    <li><a href="goFacemusic">Face Music</a></li>
+	                                <c:if test="${empty user}">
+	                                    <li><a href="goIndex">Home</a></li>
+	                                    <li><a href="goAlbums">Albums</a></li>
+	                                    <li><a href="#">Face Music</a></li>
+	                                </c:if>
+	                                <c:if test="${!empty user}">
+	                                    <li><a href="goIndex">Home</a></li>
+	                                    <li><a href="goAlbums">Albums</a></li>
+	                                    <li><a href="goFacemusic">Face Music</a></li>
+	                                </c:if>
                                     <!--<li><a href="contact.html">Contact</a></li>-->
                                 </ul>
 
@@ -89,15 +95,16 @@
                                     <ul>
                                         <li><a href="#"></a>
                                             <ul class="dropdown">
-                                                <li><a href="goMypage">My page</a></li>
-                                                <li><a href="goLogin">Login</a></li>
-                                                <li><a href="">Logout</a></li>
-                                            
+                                            	<c:if test="${empty user}">
+                                                	<li><a href="goLogin">Login</a></li>
+                                                </c:if>
+                                            	<c:if test="${!empty user}">
+	                                                <li><a href="goMypage">My page</a></li>
+	                                                <li><a href="userLogout">Logout</a></li>
+                                                </c:if>
                                             </ul>
                                         </li>
-                                        
                                     </ul>
-                                   
                             </div>
                             <!-- Nav End -->
 
@@ -758,7 +765,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
                 <div class="col-12 col-md-6">
                     <div class="footer-nav">
                         <ul>
-                            <li><a href="goIndex">Home</a></li>
+                            <li><a href="#">Home</a></li>
                             <li><a href="goAlbums">Albums</a></li>
                             <li><a href="goFacemusic">Face Music</a></li>
                             <li><a href="goMypage">My page</a></li>
