@@ -55,6 +55,8 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/goMypage",
             		"/goPlayer",
             		"/goSign",
+            		"/goImgEndToPlayList",
+            		
             				
             		//musicController
             		"/searchAlbums"

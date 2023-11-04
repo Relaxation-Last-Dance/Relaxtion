@@ -356,6 +356,10 @@ public class R_MemberController {
 			return"userAlbums";
 		}
 		
+		@RequestMapping("goImgEndToPlayList")
+		public String goImgEndToPlayList() {
+			return"redirect:/goUserMusicPlayer";
+		}
 		
 		
 		

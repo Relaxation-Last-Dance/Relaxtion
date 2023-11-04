@@ -162,10 +162,10 @@
 		                contentType: false,
 		                success: function(result){
 
-		                    console.log(result);
-
-		                    // 여기서 result는 서버에서 보내온 응답입니다.
-		                    // 필요한 작업을 여기에 추가하세요.
+		                	// AJAX 요청이 성공하면 이 코드가 실행됩니다.
+		                    // 여기서 알림을 보여주고 페이지를 리디렉션합니다.
+		                    alert(result.message);
+		                    window.location.href = "goImgEndToPlayList";
 		                },
 		                error: function(xhr, status, error){
 		                    console.log("===========오류============")

@@ -390,10 +390,10 @@ function updateTrackInfo() {
             
             // 페이지 로딩 완료 후 첫 번째 곡 정보 업데이트
         <c:forEach var="song" items="${musicInfo}">
-              playlist.push('${song.rmuUri}');
-              titles.push('${song.rmuTitle}');
-             singers.push('${song.rmuSinger}');
-             albums.push('${song.rmuAlbumImg}')
+              playlist.push("${song.rmuUri}");
+              titles.push("${song.rmuTitle}");
+             singers.push("${song.rmuSinger}");
+             albums.push("${song.rmuAlbumImg}")
        </c:forEach>
           console.log("값이 잘 들어왔는가?");
           console.log(titles);
