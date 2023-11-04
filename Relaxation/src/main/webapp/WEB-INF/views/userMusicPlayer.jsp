@@ -285,7 +285,7 @@ function updateTrackInfo() {
             document.getElementById('currentTime').textContent = currentTime;
             document.getElementById('totalTime').textContent = totalTime;
             document.getElementById('progress').style.width = (progress * 100) + '%';
-            
+
         });
         setInterval(function() {
             player.getCurrentState().then(state => {
