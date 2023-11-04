@@ -286,7 +286,22 @@ function updateTrackInfo() {
             document.getElementById('totalTime').textContent = totalTime;
             document.getElementById('progress').style.width = (progress * 100) + '%';
 
+            var currentUri = state.track_window.current_track.uri;
+            
+            console.log("재생중 노래 URI")
+            console.log(currentUri)
+            
+            for (var i = 0; i < playlist.length; i++) {
+        if (playlist[i] === currentUri) {
+            currentTrack = i;
+            break;
+        }
+    }
+            updateTrackInfo();
+            
         });
+        
+        
         setInterval(function() {
             player.getCurrentState().then(state => {
                 if (!state) return;
