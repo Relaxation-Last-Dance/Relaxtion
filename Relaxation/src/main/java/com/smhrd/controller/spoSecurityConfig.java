@@ -13,6 +13,7 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // CSRF protection disable if not needed.
             .authorizeRequests()
+            .antMatchers("/assets/**").permitAll()
             .antMatchers("/spoLogin","/spoCallback","/refresh_token",
             		
             		//apiController
@@ -47,7 +48,14 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/goUserMusicPlayer",
             		"/goSpoMain",
             		"/goUserAlbums",
-            		
+            		"/goAlbums",
+            		"/goFacemusic",
+            		"/goIndex",
+            		"/goLogin",
+            		"/goMypage",
+            		"/goPlayer",
+            		"/goSign",
+            				
             		//musicController
             		"/searchAlbums"
             		).permitAll() // permit all for login page

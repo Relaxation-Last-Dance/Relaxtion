@@ -1143,7 +1143,12 @@ img {
   border: 1px solid #d8d8d8;
   padding: 50px 100px;
   box-shadow: 0 2px 70px 0 rgba(0, 0, 0, 0.15);
-  text-align: center; }
+  text-align: center; 
+  width : 40%;
+  margin-left : 30%;
+  
+  
+  }
   @media only screen and (max-width: 767px) {
     .login-content {
       padding: 50px 30px; } }
@@ -2921,8 +2926,8 @@ audio {
 
 .image-button {
   position: absolute;
-  right: 270px; /* 오른쪽으로부터의 거리 */
-  top: 450px; /* 상단으로부터의 거리 */
+  right: 290px; /* 오른쪽으로부터의 거리 */
+  top: 370px; /* 상단으로부터의 거리 */
 
   transform: translateY(-50%); /* 이미지의 중심을 상하 중간으로 조정 */
 }
