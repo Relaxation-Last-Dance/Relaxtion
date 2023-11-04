@@ -4,35 +4,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-	<script src="https://sdk.scdn.co/spotify-player.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-	
-	<style>
-	.player-bar {
-	    display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	    width: 400px;
-	    height: 20px;
-	    margin-top: 20px;
-	}
-	
-	.progress-bar {
-	    flex-grow: 1;
-	    height: 10px;
-	    background-color: #eee;
-	    margin: 0 10px;
-	}
-	
-	.progress {
-	    height: 100%;
-	    background-color: #4caf50;
-	    width: 0;
-	}
-	/*=================================== */
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+   
+   <style>
+   .player-bar {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       width: 400px;
+       height: 20px;
+       margin-top: 20px;
+   }
+   
+   .progress-bar {
+       flex-grow: 1;
+       height: 10px;
+       background-color: #eee;
+       margin: 0 10px;
+   }
+   
+   .progress {
+       height: 100%;
+       background-color: #4caf50;
+       width: 0;
+   }
+   /*=================================== */
 
     .playlist-container {
         display: flex;
@@ -113,9 +113,9 @@
 
 <body>
 
-			<h2>${user.rmNick}의 재생목록</h2>
+         <h2>${user.rmNick}의 재생목록</h2>
 <div class="player-info">
-	<img id="currentAlbum" src="" alt="album image">
+   <img id="currentAlbum" src="" alt="album image">
     <div id="currentTitle"></div>
     <div id="currentSinger"></div>
 </div>
@@ -161,7 +161,7 @@
 </div>
 
 
-
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
@@ -178,83 +178,67 @@ function updateTrackInfo() {
     document.getElementById('currentAlbum').src = albums[currentTrack];
 }
 
-	console.log('Access Token: ${sessionScope.accessToken}')
-	console.log('Token Type: ${sessionScope.tokenType}')
-	console.log('Scope: ${sessionScope.scope}')
-	console.log('Expires In: ${sessionScope.expiresIn}')
-	console.log('Refresh Token: ${sessionScope.refreshToken}')
-	
-	const url = 'https://api.spotify.com/v1/me/player/play?device_id=';
-	const token = '${sessionScope.accessToken}';
-	const headers = {
-		    'Authorization': `Bearer ${sessionScope.accessToken}`,
-		    'Content-Type': 'application/json'
-	};
-	
-	
-	// 여기 시작
-	window.onSpotifyWebPlaybackSDKReady = () => {
-		const player = new Spotify.Player({
-		    name: 'Web Playback SDK Quick Start Player',
-		    getOAuthToken: cb => { cb(token); },
-		    volume: 0.5
-		});
-	
-		var device_id;
-		
-		player.addListener('ready', ({ device_id : id }) => {
-			console.log('The Web Playback SDK is ready to play music!');
-			console.log('Device ID', id);
-			device_id = id;
-		});
-		
-	
-        // Not Ready
-        player.addListener('not_ready', ({ device_id }) => {
-            console.log('Device ID has gone offline', device_id);
-        });
-
-        player.addListener('initialization_error', ({ message }) => {
-            console.error(message);
-        });
-
-        player.addListener('authentication_error', ({ message }) => {
-            console.error(message);
-        });
-
-        player.addListener('account_error', ({ message }) => {
-            console.error(message);
-        });
+   console.log('Access Token: ${sessionScope.accessToken}')
+   console.log('Token Type: ${sessionScope.tokenType}')
+   console.log('Scope: ${sessionScope.scope}')
+   console.log('Expires In: ${sessionScope.expiresIn}')
+   console.log('Refresh Token: ${sessionScope.refreshToken}')
+   
+   const url = 'https://api.spotify.com/v1/me/player/play?device_id=';
+   const token = '${sessionScope.accessToken}';
+   const headers = {
+          'Authorization': `Bearer ${sessionScope.accessToken}`,
+          'Content-Type': 'application/json'
+   };
+   
+   
+   // 여기 시작
+   window.onSpotifyWebPlaybackSDKReady = () => {
+      const player = new Spotify.Player({
+          name: 'Web Playback SDK Quick Start Player',
+          getOAuthToken: cb => { cb(token); },
+          volume: 0.5
+      });
+   
+      var device_id;
+      
+      player.addListener('ready', ({ device_id : id }) => {
+         console.log('The Web Playback SDK is ready to play music!');
+         console.log('Device ID', id);
+         device_id = id;
+      });
+      
+   
         const playButton = document.getElementById('togglePlay');
 
         
-    	// 재생 버튼 클릭 이벤트 핸들러
+       // 재생 버튼 클릭 이벤트 핸들러
         document.getElementById('togglePlay').onclick = function() {
             player.togglePlay().then(() => {
                 // 재생 버튼 클릭 시 fetch를 호출하여 트랙을 로드하고 재생합니다.
                 player.getCurrentState().then(state => {
-	                
-	                if(state == null){
-		                fetch(url + device_id, {
-		                    method: 'PUT',
-		                    headers: headers,
-		                    body: JSON.stringify({
-		                        "uris": playlist
-		                    })
-		                }).then(data => console.log(data)).catch(error => console.error('Error:', error));
-		                
-		                playButton.className ='fas fa-pause';
-		                
-		                updateTrackInfo();
-		                
-	                } else {
-	                	if(state.paused){
-	                		playButton.className ='fas fa-pause';
-	                	}else{
-	                		playButton.className ='fas fa-play';
-	                	}
-	                }
-	                console.log(state)
+                   
+                   if(state == null){
+                      fetch(url + device_id, {
+                          method: 'PUT',
+                          headers: headers,
+                          body: JSON.stringify({
+                              "uris": playlist
+                          })
+                      }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+                      
+                      playButton.className ='fas fa-pause';
+                      
+                      updateTrackInfo();
+                      
+                   } else {
+                      if(state.paused){
+                         playButton.className ='fas fa-pause';
+                      }else{
+                         playButton.className ='fas fa-play';
+                      }
+                   }
+                   console.log(state)
                 });
             });
         };
@@ -277,7 +261,7 @@ function updateTrackInfo() {
             });
         });
 
-        // 재생 상태가 변경될 때마다 현재 재생 시간과 진행 바를 업데이트하는 처리
+     // 재생 상태가 변경될 때마다 현재 재생 시간과 진행 바를 업데이트하는 처리
         player.addListener('player_state_changed', state => {
             var currentTime = formatTime(state.position);
             var totalTime = formatTime(state.duration);
@@ -287,18 +271,46 @@ function updateTrackInfo() {
             document.getElementById('progress').style.width = (progress * 100) + '%';
 
             var currentUri = state.track_window.current_track.uri;
-            
+
             console.log("재생중 노래 URI")
             console.log(currentUri)
-            
+
             for (var i = 0; i < playlist.length; i++) {
-        if (playlist[i] === currentUri) {
-            currentTrack = i;
-            break;
-        }
-    }
+                if (playlist[i] === currentUri) {
+                    currentTrack = i;
+                    break;
+                }
+            }
+
+            // 마지막 트랙이 끝났는지 확인
+            if (state.track_window.previous_track && state.track_window.previous_track.uri === playlist[playlist.length - 1] &&
+                state.paused && state.position === 0) {
+                // 첫 번째 트랙으로 돌아감
+                fetch(url + device_id, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify({
+                        "uris": [playlist[0]]
+                    })
+                }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+                currentTrack = 0;
+                player.resume();
+            }
+            // 현재 트랙이 끝났는지 확인
+            else if (state.paused && state.position === 0) {
+                // 다음 트랙으로 넘어감
+                currentTrack = (currentTrack + 1) % playlist.length;
+                fetch(url + device_id, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify({
+                        "uris": [playlist[currentTrack]]
+                    })
+                }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+                player.resume();
+            }
+
             updateTrackInfo();
-            
         });
         
         
@@ -316,69 +328,94 @@ function updateTrackInfo() {
         
      // 이전 트랙 버튼 클릭 이벤트 핸들러
         document.getElementById('prevTrack').onclick = function() {
-            player.previousTrack();
-            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // 이전 트랙 인덱스로 업데이트
-            if(playButton.className ='fas fa-play'){
-                playButton.className ='fas fa-pause';
-            }
-            updateTrackInfo();
-        };
+            player.previousTrack().then(() => {
+                currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // 이전 트랙 인덱스로 업데이트
 
-        // 다음 트랙 버튼 클릭 이벤트 핸들러
+                // 이전 곡의 URI를 재생 목록에 추가
+                fetch(url + device_id, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify({
+                        "uris": [playlist[currentTrack]]
+                    })
+                }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+
+                if(playButton.className = 'fas fa-play'){
+                    playButton.className = 'fas fa-pause';
+                }
+                updateTrackInfo();
+
+                // setTimeout 함수를 사용하여 resume 함수 호출을 1초 지연
+                setTimeout(() => {
+                    player.resume();
+                }, 1000);
+            });
+        };
+        
+     // 다음 트랙 버튼 클릭 이벤트 핸들러
         document.getElementById('nextTrack').onclick = function() {
-            player.nextTrack();
             currentTrack = (currentTrack + 1) % playlist.length; // 다음 트랙 인덱스로 업데이트
-            if(playButton.className ='fas fa-play'){
-                playButton.className ='fas fa-pause';
+
+            // 다음 곡의 URI를 재생 목록에 추가
+            fetch(url + device_id, {
+                method: 'PUT',
+                headers: headers,
+                body: JSON.stringify({
+                    "uris": [playlist[currentTrack]]
+                })
+            }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+
+            if(playButton.className = 'fas fa-play'){
+                playButton.className = 'fas fa-pause';
             }
             updateTrackInfo();
-            player.resume();
+
+            // setTimeout 함수를 사용하여 resume 함수 호출을 1초 지연
+            setTimeout(() => {
+                player.resume();
+            }, 1000);
         };
 
-
-		player.connect().then(success => {
-			  if (success) {
-			    console.log('The Web Playback SDK successfully connected to Spotify!');
-			  }
-		});
-	};// 여기 끝
+      player.connect().then(success => {
+           if (success) {
+             console.log('The Web Playback SDK successfully connected to Spotify!');
+           }
+      });
+   };// 여기 끝
     
 
         $(document).ready(function(){
-        	var accessToken = '${sessionScope.accessToken}';
+           var accessToken = '${sessionScope.accessToken}';
             var refreshToken = '${sessionScope.refreshToken}';
             
             // 페이지 로딩 완료 후 첫 번째 곡 정보 업데이트
         <c:forEach var="song" items="${musicInfo}">
-      	  	playlist.push('${song.rmuUri}');
-      	 	 titles.push('${song.rmuTitle}');
-     	 	 singers.push('${song.rmuSinger}');
-     	 	 albums.push('${song.rmuAlbumImg}')
-    	</c:forEach>
-    		console.log("값이 다 잘 들어왔는가?");
-    		console.log(playlist);
-    		console.log(titles);
-    		console.log(singers);
-    		console.log(albums);
+              playlist.push('${song.rmuUri}');
+              titles.push('${song.rmuTitle}');
+             singers.push('${song.rmuSinger}');
+             albums.push('${song.rmuAlbumImg}')
+       </c:forEach>
+          console.log("값이 잘 들어왔는가?");
+          console.log(titles);
             
             updateTrackInfo();
             
             if (!accessToken) {
 
-	            $.ajax({
-	                url: 'refresh_token',
-	                method: 'GET',
-	                success: function(response) {
-	                    // accessToken과 refreshToken을 세션 스토리지에 저장합니다.
-	                    console.log(response)
-	                },
-	                error: function(xhr, status, error) {
-	                    console.error('Failed to refresh token: ', status, error);
-	                }
-	            });
+               $.ajax({
+                   url: 'refresh_token',
+                   method: 'GET',
+                   success: function(response) {
+                       // accessToken과 refreshToken을 세션 스토리지에 저장합니다.
+                       console.log(response)
+                   },
+                   error: function(xhr, status, error) {
+                       console.error('Failed to refresh token: ', status, error);
+                   }
+               });
             }
         });
-
+   
 
 </script>
 </body>
