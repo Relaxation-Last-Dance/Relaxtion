@@ -2,36 +2,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<title>Main Page</title>
-	<script src="https://sdk.scdn.co/spotify-player.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-	
-	<style>
-	.player-bar {
-	    display: flex;
-	    align-items: center;
-	    justify-content: space-between;
-	    width: 400px;
-	    height: 20px;
-	    margin-top: 20px;
-	}
-	
-	.progress-bar {
-	    flex-grow: 1;
-	    height: 10px;
-	    background-color: #eee;
-	    margin: 0 10px;
-	}
-	
-	.progress {
-	    height: 100%;
-	    background-color: #4caf50;
-	    width: 0;
-	}
-	
-	</style>
+<title>Main Page</title>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<style>
+.player-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 10px;
+    background-color: #eee;
+    margin: 0 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0;
+}
+
+</style>
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 	<h1>Welcome to the Main Page</h1>
 		<div>
@@ -50,6 +50,7 @@
 			    <div class="total-time" id="totalTime"></div>
 			</div>
 		</div>
+</form>
 </body>
 
 <script>

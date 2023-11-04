@@ -16,7 +16,7 @@
     <title>One Music - Modern Music HTML5 Template</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="./assets/img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./assets/style.css">
@@ -44,7 +44,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="./assets/index.html" class="nav-brand"><img src="img/core-img/로고.png" alt=""></a>
+                        <a href="goIndex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -54,7 +54,7 @@
                             <input class="searchInput"type="text" name="" placeholder="검색어를 입력하세요.">
                                  <button class="searchButton" href="">
                    <i class="material-icons">
-                       <img src = "img/bg-img/돋보기.png">
+                       <img src = "./assets/img/bg-img/돋보기.png">
                        
                    </i>
                </button>
@@ -71,10 +71,10 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="./assets/index.html">Home</a></li>
-                                    <li><a href="./assets/albums.html">Albums</a></li>
+                                    <li><a href="goIndex">Home</a></li>
+                                    <li><a href="goAlbums">Albums</a></li>
                             
-                                    <li><a href="./assets/facemusic.html">Face Music</a></li>
+                                    <li><a href="goFacemusic">Face Music</a></li>
                                     <!--<li><a href="contact.html">Contact</a></li>-->
                                 </ul>
 
@@ -84,8 +84,8 @@
                                     <ul>
                                         <li><a href="#">Login / Register</a>
                                             <ul class="dropdown">
-                                                <li><a href="./assets/mypage.html">My page</a></li>
-                                                <li><a href="./assets/login.html">Login</a></li>
+                                                <li><a href="goMypage">My page</a></li>
+                                                <li><a href="goLogin">Login</a></li>
                                                 <li><a href="">Logout</a></li>
                                             
                                             </ul>
@@ -105,7 +105,7 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(./assets/img/bg-img/.jpg);">
         <div class="bradcumbContent">
             <p>See what’s new</p>
             <h2> Albums</h2>
@@ -122,7 +122,7 @@
                 <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item category-ballad">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/광화문에서_규현.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/광화문에서_규현.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>광화문에서</h5>
@@ -135,7 +135,7 @@
                    <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item category-rnb">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/나였으면_나윤권.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/나였으면_나윤권.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>나였으면</h5>
@@ -148,7 +148,7 @@
                   <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item category-dance">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/술이야_바이브.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/술이야_바이브.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>술이야</h5>
@@ -161,7 +161,7 @@
                    <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t g u">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/두사람_성시경.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/두사람_성시경.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>두사람</h5>
@@ -174,7 +174,7 @@
                   <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item d h v">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/마음을 드려요_아이유.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/마음을 드려요_아이유.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>마음을 드려요</h5>
@@ -187,7 +187,7 @@
                    <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t i x">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/밤편지_아이유.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/밤편지_아이유.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>밤편지</h5>
@@ -200,7 +200,7 @@
                    <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item b j y">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/별 보러 가자_적재.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/별 보러 가자_적재.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>별 보러 가자</h5>
@@ -213,7 +213,7 @@
                   <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item a k z">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/사랑합니다_팀.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/사랑합니다_팀.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>사랑합니다</h5>
@@ -226,7 +226,7 @@
                   <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item w l number">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/안아줘_정준일.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/안아줘_정준일.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>안아줘</h5>
@@ -239,7 +239,7 @@
                  <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item d m">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/오르막길_윤종신.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/오르막길_윤종신.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>오르막길</h5>
@@ -252,7 +252,7 @@
                    <!-- 발라드 -->
                 <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item t n">
                     <div class="single-album">
-                        <img src="img/album_img/발라드/화장을 고치고_왁스.jpg" alt="">
+                        <img src="./assets/img/album_img/발라드/화장을 고치고_왁스.jpg" alt="">
                         <div class="album-info">
                             <a href="#">
                                 <h5>화장을 고치고</h5>
@@ -779,7 +779,7 @@
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
                 <div class="col-12 col-md-6">
-                    <a href="#"><img src="img/core-img/footer로고.PNG" alt=""></a>
+                    <a href="#"><img src="./assets/img/core-img/footer로고.PNG" alt=""></a>
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>스마트인재개발원 | 광주광역시 남구 송암로 60  | 대표이사 : 김준우  </a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
@@ -788,10 +788,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
                 <div class="col-12 col-md-6">
                     <div class="footer-nav">
                         <ul>
-                            <li><a href="./assets/index.html">Home</a></li>
-                            <li><a href="./assets/albums.html">Albums</a></li>
-                            <li><a href="./assets/facemusic.html">Face Music</a></li>
-                            <li><a href="./assets/mypage.html">My page</a></li>
+                            <li><a href="goIndex">Home</a></li>
+                            <li><a href="goAlbums">Albums</a></li>
+                            <li><a href="goFacemusic">Face Music</a></li>
+                            <li><a href="goMypage">My page</a></li>
                            <!-- <li><a href="#">Contact</a></li> -->
                         </ul>
                     </div>

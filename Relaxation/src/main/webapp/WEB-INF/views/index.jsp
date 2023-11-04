@@ -16,12 +16,10 @@
     <title>Relaxation</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="./assets/img/core-img/favicon.ico">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./assets/style.css">
-    
-
 </head>
 
 <body>
@@ -46,7 +44,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
                         
                         <!-- Nav brand -->
-                        <a href="./assets/index.html" class="nav-brand"><img src="img/core-img/로고.png" alt=""></a>
+                        <a href="goIdex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
                         
 
                         <!-- Navbar Toggler -->
@@ -58,7 +56,7 @@
                          <input class="searchInput"type="text" name="" placeholder="검색어를 입력하세요.">
                               <button class="searchButton" href="">
                 <i class="material-icons">
-                    <img src = "img/bg-img/돋보기.png">
+                    <img src = "./assets/img/bg-img/돋보기.png">
                     
                 </i>
             </button>
@@ -78,10 +76,10 @@
                         
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="./assets/index.html">Home</a></li>
-                                    <li><a href="./assets/albums.html">Albums</a></li>
+                                    <li><a href="goIndex">Home</a></li>
+                                    <li><a href="goAlbums">Albums</a></li>
                             
-                                    <li><a href="./assets/facemusic.html">Face Music</a></li>
+                                    <li><a href="goFacemusic">Face Music</a></li>
                                     <!--<li><a href="contact.html">Contact</a></li>-->
                                 </ul>
 
@@ -91,8 +89,8 @@
                                     <ul>
                                         <li><a href="#"></a>
                                             <ul class="dropdown">
-                                                <li><a href="./assets/mypage.html">My page</a></li>
-                                                <li><a href="./assets/login.html">Login</a></li>
+                                                <li><a href="goMypage">My page</a></li>
+                                                <li><a href="goLogin">Login</a></li>
                                                 <li><a href="">Logout</a></li>
                                             
                                             </ul>
@@ -117,7 +115,7 @@
             <!-- Single Hero Slide -->
             <div class="single-hero-slide d-flex align-items-center justify-content-center">
                 <!-- Slide Img -->
-                <div class="slide-img bg-img" style="background-image: url(img/bg-img/배경7.jpg);"></div>
+                <div class="slide-img bg-img" style="background-image: url(./assets/img/bg-img/배경7.jpg);"></div>
                 <!-- Slide Content -->
                 <div class="container">
                     <div class="row">
@@ -153,7 +151,7 @@
                     <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
                         <div class="first-part d-flex align-items-center">
                             <div class="thumbnail">
-                                <img src="img/index-img/뉴진스.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=뉴진스.jpg','asdfo8or');">
+                                <img src="./assets/img/index-img/뉴진스.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=뉴진스.jpg','asdfo8or');">
 
 
                                 
@@ -172,7 +170,7 @@
                     <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="150ms">
                         <div class="first-part d-flex align-items-center">
                             <div class="thumbnail">
-                                <img src="img/index-img/정국.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=정국.jpg');">
+                                <img src="./assets/img/index-img/정국.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=정국.jpg');">
 
                             </div>
                             <div class="content-">
@@ -751,7 +749,7 @@
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
                 <div class="col-12 col-md-6">
-                    <a href="#"><img src="img/core-img/footer로고.PNG" alt=""></a>
+                    <a href="#"><img src="./assets/img/core-img/footer로고.PNG" alt=""></a>
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>스마트인재개발원 | 광주광역시 남구 송암로 60  | 대표이사 : 김준우  </a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
@@ -760,10 +758,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
                 <div class="col-12 col-md-6">
                     <div class="footer-nav">
                         <ul>
-                            <li><a href="./assets/index.html">Home</a></li>
-                            <li><a href="./assets/albums.html">Albums</a></li>
-                            <li><a href="./assets/facemusic.html">Face Music</a></li>
-                            <li><a href="./assets/mypage.html">My page</a></li>
+                            <li><a href="goIndex">Home</a></li>
+                            <li><a href="goAlbums">Albums</a></li>
+                            <li><a href="goFacemusic">Face Music</a></li>
+                            <li><a href="goMypage">My page</a></li>
                             <!--<li><a href="#">Contact</a></li> -->
                         </ul>
                     </div>
