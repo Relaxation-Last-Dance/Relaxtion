@@ -34,7 +34,6 @@
 	}
 	/*=================================== */
 
-<style>
     .playlist-container {
         display: flex;
         justify-content: space-between;
@@ -86,28 +85,54 @@
     .playlist-table button:hover {
         background-color: #45a049; /* 마우스가 버튼 위에 있을 때의 배경색 */
     }
+    
+    .player-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.player-info #currentTitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.player-info #currentSinger {
+    font-size: 16px;
+    color: #666;
+}
+
+#currentAlbum {
+    width: 100px;
+    height: 100px;
+}
+
+    
 </style>
 
-	</style>
 </head>
 
 <body>
 
 			<h2>${user.rmNick}의 재생목록</h2>
+<div class="player-info">
+	<img id="currentAlbum" src="" alt="album image">
+    <div id="currentTitle"></div>
+    <div id="currentSinger"></div>
+</div>
 
-			<div>
-				<button id="prevTrack" class="fas fa-step-backward"></button>
-				<button id="togglePlay" class="fas fa-play"></button>
-				<button id="nextTrack" class="fas fa-step-forward"></button>
-			</div>
+<div>
+    <button id="prevTrack" class="fas fa-step-backward"></button>
+    <button id="togglePlay" class="fas fa-play"></button>
+    <button id="nextTrack" class="fas fa-step-forward"></button>
+</div>
 
-			<div class="player-bar">
-			    <div class="current-time" id="currentTime"></div>
-			    <div class="progress-bar">
-			        <div class="progress" id="progress"></div>
-			    </div>
-			    <div class="total-time" id="totalTime"></div>
-			</div>
+<div class="player-bar">
+    <div class="current-time" id="currentTime"></div>
+    <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+    </div>
+    <div class="total-time" id="totalTime"></div>
+</div>
 
 
 <div class="playlist-container">
@@ -122,7 +147,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="song" items="${musicInfo}">
+                <c:forEach var="song" items="${musicInfo}" varStatus="status">
                     <tr>
                         <td>${song.rmuTitle}</td>
                         <td>${song.rmuSinger}</td>
@@ -137,8 +162,22 @@
 
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
 
-<script>
+var playlist = [];
+var titles = [];
+var singers = [];
+var albums = [];
+var currentTrack = 0; // 현재 재생 중인 트랙의 인덱스
+
+// 재생되는 노래 정보를 화면에 표시하는 함수
+function updateTrackInfo() {
+    document.getElementById('currentTitle').textContent = titles[currentTrack];
+    document.getElementById('currentSinger').textContent = singers[currentTrack];
+    document.getElementById('currentAlbum').src = albums[currentTrack];
+}
+
 	console.log('Access Token: ${sessionScope.accessToken}')
 	console.log('Token Type: ${sessionScope.tokenType}')
 	console.log('Scope: ${sessionScope.scope}')
@@ -151,13 +190,16 @@
 		    'Authorization': `Bearer ${sessionScope.accessToken}`,
 		    'Content-Type': 'application/json'
 	};
+	
+	
+	// 여기 시작
 	window.onSpotifyWebPlaybackSDKReady = () => {
 		const player = new Spotify.Player({
 		    name: 'Web Playback SDK Quick Start Player',
 		    getOAuthToken: cb => { cb(token); },
 		    volume: 0.5
 		});
-		
+	
 		var device_id;
 		
 		player.addListener('ready', ({ device_id : id }) => {
@@ -184,13 +226,9 @@
             console.error(message);
         });
         const playButton = document.getElementById('togglePlay');
-        var playlist = [];
+
         
-        <c:forEach var="song" items="${musicInfo}">
-        playlist.push('${song.rmuUri}');
-    	</c:forEach>
-    	console.log(playlist);
-        
+    	// 재생 버튼 클릭 이벤트 핸들러
         document.getElementById('togglePlay').onclick = function() {
             player.togglePlay().then(() => {
                 // 재생 버튼 클릭 시 fetch를 호출하여 트랙을 로드하고 재생합니다.
@@ -207,6 +245,8 @@
 		                
 		                playButton.className ='fas fa-pause';
 		                
+		                updateTrackInfo();
+		                
 	                } else {
 	                	if(state.paused){
 	                		playButton.className ='fas fa-pause';
@@ -218,6 +258,8 @@
                 });
             });
         };
+        
+        
         function formatTime(ms) {
             var seconds = Math.floor(ms / 1000);
             var minutes = Math.floor(seconds / 60);
@@ -243,6 +285,7 @@
             document.getElementById('currentTime').textContent = currentTime;
             document.getElementById('totalTime').textContent = totalTime;
             document.getElementById('progress').style.width = (progress * 100) + '%';
+
         });
         setInterval(function() {
             player.getCurrentState().then(state => {
@@ -255,33 +298,55 @@
                 document.getElementById('progress').style.width = (progress * 100) + '%';
             });
         }, 1000);
+        
+     // 이전 트랙 버튼 클릭 이벤트 핸들러
         document.getElementById('prevTrack').onclick = function() {
-        	player.previousTrack()
-        	if(playButton.className ='fas fa-play'){
-	         	playButton.className ='fas fa-pause';
-        	}
+            player.previousTrack();
+            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // 이전 트랙 인덱스로 업데이트
+            if(playButton.className ='fas fa-play'){
+                playButton.className ='fas fa-pause';
+            }
+            updateTrackInfo();
         };
+
+        // 다음 트랙 버튼 클릭 이벤트 핸들러
         document.getElementById('nextTrack').onclick = function() {
-        	player.nextTrack()
-        	if(playButton.className ='fas fa-play'){
-	         	playButton.className ='fas fa-pause';
-        	}
+            player.nextTrack();
+            currentTrack = (currentTrack + 1) % playlist.length; // 다음 트랙 인덱스로 업데이트
+            if(playButton.className ='fas fa-play'){
+                playButton.className ='fas fa-pause';
+            }
+            updateTrackInfo();
+            player.resume();
         };
+
+
 		player.connect().then(success => {
 			  if (success) {
 			    console.log('The Web Playback SDK successfully connected to Spotify!');
 			  }
 		});
-	};
+	};// 여기 끝
     
- 
-</script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+
         $(document).ready(function(){
         	var accessToken = '${sessionScope.accessToken}';
             var refreshToken = '${sessionScope.refreshToken}';
+            
+            // 페이지 로딩 완료 후 첫 번째 곡 정보 업데이트
+        <c:forEach var="song" items="${musicInfo}">
+      	  	playlist.push('${song.rmuUri}');
+      	 	 titles.push('${song.rmuTitle}');
+     	 	 singers.push('${song.rmuSinger}');
+     	 	 albums.push('${song.rmuAlbumImg}')
+    	</c:forEach>
+    		console.log("값이 다 잘 들어왔는가?");
+    		console.log(playlist);
+    		console.log(titles);
+    		console.log(singers);
+    		console.log(albums);
+            
+            updateTrackInfo();
             
             if (!accessToken) {
 
@@ -298,6 +363,8 @@
 	            });
             }
         });
+
+
 </script>
 </body>
 </html>
