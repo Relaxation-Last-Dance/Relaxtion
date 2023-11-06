@@ -380,8 +380,8 @@ img {
     .header-area.another-header .oneMusic-main-menu .classy-navbar {
       background-color: transparent;
       height: 85px;
-      padding-left : 300px;
-      padding-right : 300px;
+      padding-left : 200px;
+      padding-right : 200px;
       }
       
       @media only screen and (max-width: 767px) {
