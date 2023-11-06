@@ -143,7 +143,7 @@
                     <th>노래 제목</th>
                     <th>아티스트</th>
                     <th>재생버튼</th>
-                    <th>플레이리스트 버튼</th>
+                    <th>삭제</th>
                 </tr>
             </thead>
             <tbody>
@@ -152,7 +152,7 @@
                         <td>${song.rmuTitle}</td>
                         <td>${song.rmuSinger}</td>
                         <td><button type="button" class="playlist-button">재생</button></td>
-                        <td><button type="button" class="playlist-button">플레이리스트에 추가</button></td>
+                        <td><button type="button" class="delete-button" data-song-id="${song.rmuSeq}">삭제</button></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -191,6 +191,9 @@ function updateTrackInfo() {
           'Content-Type': 'application/json'
    };
    
+   var device_id;
+   const playButton = document.getElementById('togglePlay');
+  
    
    // 여기 시작
    window.onSpotifyWebPlaybackSDKReady = () => {
@@ -200,7 +203,7 @@ function updateTrackInfo() {
           volume: 0.5
       });
    
-      var device_id;
+      device_id;
       
       player.addListener('ready', ({ device_id : id }) => {
          console.log('The Web Playback SDK is ready to play music!');
@@ -209,7 +212,7 @@ function updateTrackInfo() {
       });
       
    
-        const playButton = document.getElementById('togglePlay');
+      
 
         
        // 재생 버튼 클릭 이벤트 핸들러
@@ -414,8 +417,68 @@ function updateTrackInfo() {
                    }
                });
             }
+            
+            // 삭제버튼 클릭시 삭제기능
+            $('.delete-button').click(function() {
+        var songId = $(this).data('song-id');
+        
+        $.ajax({
+            url: 'deleteSong',  // 서버에 요청할 URL
+            type: 'POST',  // HTTP 메서드
+            data: { 'rmuSeq': songId },  // 서버에 보낼 데이터
+            success: function(data) {
+                // 서버로부터 응답이 성공적으로 왔을 때 실행할 코드
+                let table = $('.playlist-table tbody');
+                table.empty();  // 기존의 테이블 데이터 삭제
+                for (let i = 0; i < data.length; i++) {
+                    let tr = '<tr>';
+                    tr += '<td>' + data[i].rmuTitle + '</td>';
+                    tr += '<td>' + data[i].rmuSinger + '</td>';
+                    tr += '<td><button type="button" class="playlist-button">재생</button></td>';
+                    tr += '<td><button type="button" class="delete-button" data-song-id="' + data[i].rmuSeq + '">삭제</button></td>';
+                    tr += '</tr>';
+                    table.append(tr);
+                }
+                location.reload();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 요청이 실패했을 때 실행할 코드
+            }
         });
-   
+    });
+            
+            
+            $('.playlist-button').click(function() {
+                // 현재 클릭된 행의 인덱스를 가져옵니다.
+                var rowIndex = $(this).closest('tr').index();
+                
+                // 해당 인덱스의 곡을 재생합니다.
+                currentTrack = rowIndex;
+                
+                // 재생할 곡의 URI를 재생 목록에 추가
+                fetch(url + device_id, {
+                    method: 'PUT',
+                    headers: headers,
+                    body: JSON.stringify({
+                        "uris": [playlist[currentTrack]]
+                    })
+                }).then(data => console.log(data)).catch(error => console.error('Error:', error));
+                
+                
+                if(playButton.className = 'fas fa-play'){
+                    playButton.className = 'fas fa-pause';
+                }
+                
+                updateTrackInfo();
+
+                // setTimeout 함수를 사용하여 resume 함수 호출을 1초 지연
+                setTimeout(() => {
+                    player.resume();
+                }, 1000);
+            });
+            
+            
+        });
 
 </script>
 </body>
