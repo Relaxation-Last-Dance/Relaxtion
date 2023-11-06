@@ -2,6 +2,7 @@ package com.smhrd.controller;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,9 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smhrd.entity.R_Faceimg;
 import com.smhrd.entity.R_Member;
+import com.smhrd.entity.R_Nowlist;
 import com.smhrd.repository.R_FaceimgRepository;
+import com.smhrd.repository.R_NowlistRepository;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
 				maxFileSize = 1024 * 1024 * 20, // 20메가
@@ -30,8 +36,10 @@ import com.smhrd.repository.R_FaceimgRepository;
 public class faceImgController {
 
 	@Autowired
-	private R_FaceimgRepository repo;
+	private R_NowlistRepository nowList_repo;
 	
+	@Autowired
+	private R_FaceimgRepository faceImg_repo;
 	
 
 	@RequestMapping(value="/imgUpload", method=RequestMethod.POST)
@@ -41,19 +49,20 @@ public class faceImgController {
 		R_Faceimg Faceimg = new R_Faceimg();
 
 		// 1. uuid 생성 (랜덤 16글자 문자열)
+		// 실무 --> 이미지 이름을 날짜로 저장 받음 날짜 중요!!
 		String uuid = UUID.randomUUID().toString();
 		// 2. 파일 이름
 		
 		// 회원의 아이디만 불러오기
 		R_Member member = (R_Member)session.getAttribute("user");
 
-		String email = member.getRmEmail();
+		String rmEmail = member.getRmEmail();
 		String userEmail = "";
 		
-		int idx = email.indexOf("@");
+		int idx = rmEmail.indexOf("@");
 		
 		if(idx != -1) {
-			userEmail = email.substring(0,idx);
+			userEmail = rmEmail.substring(0,idx);
 		}
 		// 여기까지 
 		
@@ -97,29 +106,64 @@ public class faceImgController {
 		}
 
 		// 2. 기능 구현
-		
-		// 저장할 이메일
-		String rmEmail = email;
-		
-		Faceimg.setRmEmail(rmEmail);
-		
-		repo.save(Faceimg);
-		// 여기까지 이미지 저장=========================================
-		
-		
+
 		// 플라스크로 이미지 전송 --> 결과 받오고 
 		FlaskController flask = new FlaskController();
 		
-		flask.sendImgToFlask(savePath, imgname, email);
+		String emotionResult = flask.sendImgToFlask(savePath, imgname, rmEmail);
 
-		// 분석결과 보여줘야함 지 금은 예시로 메인으로 가게함
+		// 4 저장한 뒤에 ajax로 다시 돌아가서 success로 돌아감
+		// 5 페이지 이동을 플레이리스트로 가게 코드만들기 
+		// 6 nowlist에 방금 저장했던 노래들이 출력됨
+		//   (추천한 노래 다 저장되서 사용자한테 보여지면 성공)
+
+		// 1 분석결과를 emotionResult에 JSON타입인데 딕셔너리로 받기
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> responseMap = null;
 		
+	    try {
+	        responseMap = mapper.readValue(emotionResult, new TypeReference<Map<String, Object>>(){});
+	    } catch (JsonProcessingException e) {
+	        e.printStackTrace();
+	    }
+		String emo = "";
+	    Map<String, Object> resultMap = (Map<String, Object>) responseMap.get("result");
+	    if(resultMap != null) {
+	    	// 2 받은결과 키값을 이용해서 리스트에 담기
+	    	String rfImg = (String) resultMap.get("image_name");
+	    	List<Integer> seq = (List<Integer>) resultMap.get("seq");
+	        
+	        System.out.println(rfImg);
+	        System.out.println(seq);
+	        System.out.println("================================================");
+	        
+	        R_Faceimg content = faceImg_repo.findByRfImg(rfImg);
+	        System.out.println(content);
+        	emo = content.getRmContent();
+        	System.out.println(emo);	        	
+	        
+	        // 3 담은 리스트를 사용자의 nowlist 테이블에 저장
+	        // seq는 배열이라 값을 하나씩 DB에 저장해야함
+	        for (int i = 0 ; i <seq.size() ; i ++) {
+	        	R_Nowlist nowList = new R_Nowlist();
+	        	nowList.setRmEmail(rmEmail);
+	            Long rmuSeq = Long.valueOf(seq.get(i));
+	            nowList.setRmuSeq(rmuSeq);
+	        	System.out.println("성공이라면 소리질러라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	        	nowList_repo.save(nowList);
+	        }
+	        
+	    } else {
+	        System.out.println("result key does not exist in the response");
+	    }
+	    
+	    
 		Map<String, String> result = new HashMap<>();
-		result.put("message", "※※※※※※성공입니다!※※※※※");
+		result.put("message", emo);
 		result.put("imageName", imgname);
 		
 		
-		return new ResponseEntity<>("Success Message", HttpStatus.OK);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 
 	

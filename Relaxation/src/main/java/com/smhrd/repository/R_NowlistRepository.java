@@ -11,6 +11,6 @@ import com.smhrd.entity.R_Nowlist;
 public interface R_NowlistRepository extends JpaRepository<R_Nowlist, Long>{
 
 		 List<R_Nowlist> findByRmEmail(String rmEmail);
-	
+		 
 	
 }
