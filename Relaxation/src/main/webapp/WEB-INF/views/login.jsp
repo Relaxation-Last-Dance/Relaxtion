@@ -171,9 +171,11 @@
 	                            </div>
 	                            <div class="signUp">
 	                                <button id="signUpButton" style="margin-bottom: 10px;" type="sumbmit">가입하기</button>
-	                                <button id="closeButton" onclick="closeCheck()">나가기</button>
 	                            </div>
                             </form>
+	                            <div class="signUp">
+	                                <button id="closeButton" >나가기</button>
+	                            </div>
                         </div>
                     </div>
 
@@ -189,7 +191,7 @@
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
                 <div class="col-12 col-md-6">
-                    <a href="#"><img src="img/core-img/footer로고.PNG" alt=""></a>
+                    <a href="#"><img src="./assets/img/core-img/footer로고.PNG" alt=""></a>
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>스마트인재개발원 | 광주광역시 남구 송암로 60  | 대표이사 : 김준우  </a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
@@ -457,6 +459,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 			}
 		});
 	})	
+	// 'closeButton' 요소를 찾습니다.
+	var closeButton = document.getElementById('closeButton');
+	
+	// 'click' 이벤트 리스너를 추가합니다.
+	closeButton.addEventListener('click', function() {
+	    // 모달 창 요소를 찾습니다.
+	    // 여기서는 'myModal'이라는 id를 가진 요소가 모달 창이라고 가정합니다.
+	    var modal = document.getElementById('myModal');
+	
+	    // 모달 창을 닫습니다.
+	    modal.style.display = 'none';
+});
 	</script>
 
 </html>
