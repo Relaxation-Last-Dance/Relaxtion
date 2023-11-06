@@ -124,7 +124,7 @@ public class spoAuthorizController {
 			session.setAttribute("issuedAt", issuedAt);
 			session.setAttribute("expiresAt", expiresAt);
 
-			return "redirect:/goUserMain";
+			return "redirect:/goIndex";
 		}
 	}
 

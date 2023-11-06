@@ -93,7 +93,7 @@
                                 <div class="login-register-cart-button d-flex align-items-center"></div>
                                     
                                     <ul>
-                                        <li><a href="#"></a>
+                                        <li><a href="#">MENU</a>
                                             <ul class="dropdown">
                                             	<c:if test="${empty user}">
                                                 	<li><a href="goLogin">Login</a></li>
@@ -158,8 +158,8 @@
                     <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
                         <div class="first-part d-flex align-items-center">
                             <div class="thumbnail">
-                                <img src="./assets/img/index-img/뉴진스.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=뉴진스.jpg','asdfo8or');">
-
+                                <img src="./assets/img/index-img/뉴진스.jpg"  style="cursor:pointer" onclick="PopupCenter('goPlayer?img=뉴진스.jpg','asdfo8or');">
+																												<!-- url goPlayer -->
 
                                 
                             </div>
@@ -813,5 +813,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
     </script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">  
 </body>
+<script type="text/javascript">
+console.log('Access Token: ${sessionScope.accessToken}')
+console.log('Token Type: ${sessionScope.tokenType}')
+console.log('Scope: ${sessionScope.scope}')
+console.log('Expires In: ${sessionScope.expiresIn}')
+console.log('Refresh Token: ${sessionScope.refreshToken}')
+</script>
 
 </html>

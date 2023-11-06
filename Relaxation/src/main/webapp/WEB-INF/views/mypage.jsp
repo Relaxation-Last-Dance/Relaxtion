@@ -47,7 +47,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="./assets/index.html" class="nav-brand"><img src="img/core-img/로고.png" alt=""></a>
+                        <a href="goIndex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -57,7 +57,7 @@
                             <input class="searchInput"type="text" name="" placeholder="검색어를 입력하세요.">
                                  <button class="searchButton" href="">
                    <i class="material-icons">
-                       <img src = "img/bg-img/돋보기.png">
+                       <img src = "./assets/img/bg-img/돋보기.png">
                        
                    </i>
                </button>
@@ -84,12 +84,15 @@
                                 <div class="login-register-cart-button d-flex align-items-center"></div>
                                     
                                     <ul>
-                                        <li><a href="#">Login / Register</a>
+                                        <li><a href="#">MENU</a>
                                             <ul class="dropdown">
-                                                <li><a href="./assets/mypage.html">My page</a></li>
-                                                <li><a href="./assets/login.html">Login</a></li>
-                                                <li><a href="">Logout</a></li>
-                                            
+                                            	<c:if test="${!empty user }">
+                                               		<li><a href="#">My page</a></li>
+                                              		<li><a href="userLogout">Logout</a></li>
+                                           		</c:if>
+                                            	<c:if test="${empty user }">
+                                                	<li><a href="goLogin">Login</a></li>
+                                                </c:if>
                                             </ul>
                                         </li>
                                         
@@ -157,16 +160,15 @@
             <div class="wrapper">
                 <div class="title"><h1 style="font-size: 21px; text-align: center;">회원정보 수정</h1></div>
         
-                이메일 : <input type="text" name="str_email01" id="str_email01" style="width:100px"> @
-                <input type="text" name="str_email02" id="str_email02" style="width:100px;" disabled value="naver.com">
-                <select style="width:100px;margin-right:10px" name="selectEmail" id="selectEmail">
-                     <option value="1">직접입력</option>
-                     <option value="naver.com" selected>naver.com</option>
-                     <option value="hanmail.net">hanmail.net</option>
-                     <option value="nate.com">nate.com</option>
-                     <option value="gmail.com">gmail.com</option>
-                     
-                </select>
+                <input type="text" name="rmEmail" placeholder="email">@
+				<input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요">
+				<select name="rmEmail" onchange="handleLastEmailChange(this)">
+					<option value="@naver.com">naver.com</option>
+					<option value="@gmail.com">gmail.com</option>
+					<option value="@nate.com">nate.com</option>
+					<option value="@hanmail.net">hanmail.net</option>
+					<option value="">직접입력</option>
+				</select> 
                 
                 <div class="password" style="margin-top: 30px; ">
                     <input id="password" type="password" placeholder="비밀번호를 입력해 주세요.">
@@ -205,9 +207,9 @@
         </div>
         
         <a href="#" class="item" onclick=" showModal('정말 탈퇴하시겠습니까?'); return false;">
-            
             <div class="icon">ii</div>
             <div class="text">회원탈퇴</div>
+            <input type="hidden" value="${user.rmPw }" id="userPw">
         </a>
     </div>
     <div id="content"></div>
@@ -222,7 +224,7 @@
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
                 <div class="col-12 col-md-6">
-                    <a href="#"><img src="img/core-img/footer로고.PNG" alt=""></a>
+                    <a href="goIndex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>스마트인재개발원 | 광주광역시 남구 송암로 60  | 대표이사 : 김준우  </a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
@@ -231,10 +233,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
                 <div class="col-12 col-md-6">
                     <div class="footer-nav">
                         <ul>
-                            <li><a href="./assets/index.html">Home</a></li>
-                            <li><a href="./assets/albums.html">Albums</a></li>
-                            <li><a href="./assets/facemusic.html">Face Music</a></li>
-                            <li><a href="./assets/mypage.html">My page</a></li>
+                            <li><a href="goIndex">Home</a></li>
+                            <li><a href="goAlbums">Albums</a></li>
+                            <li><a href="goFacemusic">Face Music</a></li>
+                            <li><a href="#">My page</a></li>
                             <!--<li><a href="#">Contact</a></li>-->
                         </ul>
                     </div>
@@ -263,5 +265,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
 
 
 </body>
-
+<script type="text/javascript">
+function handleLastEmailChange(selectElement) {
+    var customDomainInput = document.getElementById('customInput');
+    if (selectElement.value === "") {
+        customDomainInput.style.display = 'inline';  // Show the text input for custom domain
+    } else {
+        customDomainInput.style.display = 'none';  // Hide the text input for custom domain
+    };
+};
+</script>
 </html>

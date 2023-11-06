@@ -1,16 +1,10 @@
 document.body.style.overflow = 'hidden';
 
 var modal = document.getElementById("myModal2");
-var btn = document.getElementById("openModal2");
 var span = document.getElementById("closeModal2");
 
-btn.onclick = function() {
-	modal.style.display = "block";
-}
 
-span.onclick = function() {
-	modal.style.display = "none";
-}
+
 
 window.onclick = function(event) {
 	if (event.target == modal) {
@@ -98,19 +92,31 @@ function showModal(modalContent) {
     passwordLabel.innerHTML = '비밀번호 입력';
     passwordLabel.style.color = 'white';
     passwordLabel.style.fontSize = '16px';
-
+	
     
 
     // 비밀번호 입력 필드 생성
-    var passwordInputContainer = document.createElement('div');
+var passwordInputContainer = document.createElement('div');
 passwordInputContainer.style.position = 'relative';  // 위치 지정 방식을 상대적으로 설정
 passwordInputContainer.style.top = '-20px';  // 상자를 위로 20px 올림
+// 폼 생성
+var form = document.createElement('form');
+form.action = 'dropUserInfo';
+form.id = 'DropForm';
+form.method = 'post';
+document.body.appendChild(form);
+// 사용자 비밀번호 필드 생성
+var userPasswordInput = document.getElementById('userPw');
+form.appendChild(userPasswordInput);
+// 비밀번호 입력 필드 생성
 var passwordInput = document.createElement('input');
-passwordInput.type = 'password';  // type을 password로 설정
-passwordInput.style.width = '50%';  // 입력 필드 너비를 100%로 설정
-passwordInput.placeholder = '비밀번호를 입력하세요';  // placeholder 텍스트 설정
+passwordInput.id = 'Pw';  // Add id attribute
+passwordInput.type = 'password';
+passwordInput.style.width = '50%';
+passwordInput.name = 'rmPw';
+passwordInput.placeholder = '비밀번호를 입력하세요';
 passwordInputContainer.appendChild(passwordInput);
-
+form.appendChild(passwordInputContainer);
 
 var confirmPasswordLabel = document.createElement('p');
 confirmPasswordLabel.innerHTML = '비밀번호 확인';
@@ -121,31 +127,49 @@ confirmPasswordLabel.style.fontSize = '16px';
 var confirmPasswordInputContainer = document.createElement('div');
 confirmPasswordInputContainer.style.position = 'relative';  // 위치 지정 방식을 상대적으로 설정
 confirmPasswordInputContainer.style.top = '-20px';  // 상자를 위로 20px 올림
+// 비밀번호 확인 입력 필드 생성
 var confirmPasswordInput = document.createElement('input');
-confirmPasswordInput.type = 'password';  // type을 password로 설정
-confirmPasswordInput.style.width = '50%';  // 입력 필드 너비를 100%로 설정
-confirmPasswordInput.placeholder = '비밀번호를 다시 입력하세요';  // placeholder 텍스트 설정
+confirmPasswordInput.id = 'confirmPw';  // Add id attribute
+confirmPasswordInput.type = 'password';
+confirmPasswordInput.style.width = '50%';
+confirmPasswordInput.name = 'rmPwConfirm';
+confirmPasswordInput.placeholder = '비밀번호를 다시 입력하세요';
 confirmPasswordInputContainer.appendChild(confirmPasswordInput);
+form.appendChild(confirmPasswordInputContainer);
+
 // 확인 버튼 생성
 var confirmButtonContainer = document.createElement('div');
 var confirmButton = document.createElement('button');
+confirmButton.type = 'submit';
 confirmButton.innerHTML = '탈퇴하기';
 confirmButton.style.width = '20%';
 confirmButton.style.position = 'relative';
 confirmButton.style.top = '-20px';
-
-confirmButton.onclick = function() {
-    // 확인 버튼을 누르면 수행할 동작을 여기에 작성
-    alert('탈퇴되었습니다');
-};
 confirmButtonContainer.appendChild(confirmButton);
+form.appendChild(confirmButtonContainer);
 
-modal.appendChild(textContainer);
-modal.appendChild(passwordLabel);
-modal.appendChild(passwordInputContainer);
-modal.appendChild(confirmPasswordLabel);
-modal.appendChild(confirmPasswordInputContainer);
-modal.appendChild(confirmButtonContainer);
+document.getElementById('DropForm').addEventListener('submit', function(e) {
+    var password = document.getElementById('Pw').value;
+    var confirmPassword = document.getElementById('confirmPw').value;
+    var userPassword = document.getElementById('userPw').value;
+
+    if (password !== confirmPassword) {
+        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        e.preventDefault();
+    } else if (password !== userPassword) {
+        alert('입력하신 비밀번호가 일치하지 않습니다.');
+        e.preventDefault();
+    }
+});
+
+
+form.appendChild(textContainer);
+form.appendChild(passwordLabel);
+form.appendChild(passwordInputContainer);
+form.appendChild(confirmPasswordLabel);
+form.appendChild(confirmPasswordInputContainer);
+form.appendChild(confirmButtonContainer);
+modal.appendChild(form);
 
     // 컨테이너, 비밀번호 확인 텍스트, 비밀번호 입력 필드, 확인 버튼을 모달 창에 추가
 

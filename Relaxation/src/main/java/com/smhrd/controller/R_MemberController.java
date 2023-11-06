@@ -273,14 +273,15 @@ public class R_MemberController {
 				System.out.println("회원 탈퇴기능 실행 성공");
 				System.out.println("=================");
 
-				return "redirect:/goUserMain";
+				return "redirect:/goIndex";
 
 			} else {
 				// 회원 정보가 없음 --> 비밀번호를 잘못 입력함
 				System.out.println("=================");
 				System.out.println("  회원 탈퇴기능 실패  ");
 				System.out.println("=================");
-				return "redirect:/goUserDropInfo";
+				System.out.println(rmPw);
+				return "redirect:/goIndex";
 			}
 		}
 	
@@ -412,21 +413,21 @@ public class R_MemberController {
 		public String goLogin() {
 			return "login";
 		}
-//		// 준연이 mypage페이지
-//		@RequestMapping("/goMypage")
-//		public String goMypage() {
-//			return "mypage";
-//		}
-//		// 준연이 player페이지
-//		@RequestMapping("/goPlayer")
-//		public String goPlayer() {
-//			return "player";
-//		}
-//		// 준연이 sign페이지
-//		@RequestMapping("/goSign")
-//		public String goSign() {
-//			return "sign";
-//		}
+		// 준연이 mypage페이지
+		@RequestMapping("/goMypage")
+		public String goMypage() {
+			return "mypage";
+		}
+		// 준연이 player페이지
+		@RequestMapping("/goPlayer")
+		public String goPlayer() {
+			return "player";
+		}
+		// 준연이 sign페이지
+		@RequestMapping("/goSign")
+		public String goSign() {
+			return "sign";
+		}
 		
 
 }
