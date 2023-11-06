@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -307,7 +308,6 @@ public class R_MemberController {
 
 			return mav;
 		}
-
 		
 		// MyMusicPlayer 현재재생목록페이지로 이동
 		@RequestMapping("/goUserMusicPlayer")
@@ -324,27 +324,22 @@ public class R_MemberController {
 		
 		// 이메일을 이용해서 nowlist 테이블 조회
 		// 그리고 테이블 정보 다 nowlist에 저장
+		
+		// 세션에서 musicInfo 가져오기
+		List<R_Music> musicInfo = (List<R_Music>)session.getAttribute("musicInfo");
+		
+	    if (musicInfo == null) {
+	        List<R_Nowlist> nowlist = Nowlist_repo.findByRmEmail(rmEmail);
+	        musicInfo = new ArrayList<R_Music>();
+	        for(R_Nowlist n : nowlist) {
+	            R_Music music = Music_repo.findByRmuSeqOrderByRmuSeqDesc(n.getRmuSeq());
+	            if (music != null) {
+	                musicInfo.add(0,music);
+	            }
+	        }
+	    }
 
-		
-		List<R_Nowlist> nowlist = Nowlist_repo.findByRmEmail(rmEmail);
-		// nowlist에있는 음악 Seq 번호를 이용해서 Music테이블을 다시 조회 하고 음악 정보를 가지고 오기
-		
-		// 빈 배열 타입은 R_music테이블 정보를 담을 배열
-		List<R_Music> musicInfo = new ArrayList<R_Music>();
-		// nowlist에는 내 이메일로 조회한 정보만 있음
-		for(R_Nowlist n : nowlist) {
-		// 내 nowlist에있는 음악seq는 중복이 없음 그래서 이걸로 다시 music테이블을 조회한 후 그 seq와 같은 
-		// 노래 정보들을 다 가지고 옴
-			R_Music music = Music_repo.findByRmuSeq(n.getRmuSeq());
-
-			
-			if (music != null) {
-		        musicInfo.add(music);
-		    }
-		}
-		
-		// 이제 musicInfo에는 내가 저장한 재생목록 노래들 정보가 다 저장되어 있음
-		System.out.println(musicInfo + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+	    
 		model.addAttribute("musicInfo",musicInfo);
 
 			return"userMusicPlayer";
@@ -365,6 +360,55 @@ public class R_MemberController {
 		public String goImgEndToPlayList() {
 			return"redirect:/goUserMusicPlayer";
 		}
+		
+		
+		//검색한 노래 클릭시 내 재생목록에 띄워주기
+		@RequestMapping("musicAlbumsInfo")
+		public String goMusicAlbumsInfo(@RequestParam("rmuSeq")Long rmuSeq, HttpSession session) {
+			
+			//세션에 저장된 이메일값 가져오기
+			R_Member member = (R_Member)session.getAttribute("user");
+			String rmEmail = member.getRmEmail();
+			
+			if(rmEmail == null) {	
+				//만약 rmNick이 null이라면 세션이 만료되었으니 그냥 메인으로 보내버림
+				return "redirect:/goUserMain";
+			}
+			
+			
+			
+			List<R_Nowlist> nowlist = Nowlist_repo.findByRmEmail(rmEmail);
+			// nowlist에있는 음악 Seq 번호를 이용해서 Music테이블을 다시 조회 하고 음악 정보를 가지고 오기
+			
+			// 빈 배열 타입은 R_music테이블 정보를 담을 배열
+			List<R_Music> musicInfo = new ArrayList<R_Music>();
+			// nowlist에는 내 이메일로 조회한 정보만 있음
+			for(R_Nowlist n : nowlist) {
+			// 내 nowlist에있는 음악seq는 중복이 없음 그래서 이걸로 다시 music테이블을 조회한 후 그 seq와 같은 
+			// 노래 정보들을 다 가지고 옴
+				R_Music music = Music_repo.findByRmuSeqOrderByRmuSeqDesc(n.getRmuSeq());
+
+				
+				if (music != null) {
+			        musicInfo.add(music);
+			    }
+			}
+			
+			// 검색한 노래 내 재생목록 맨 위에 넣기
+			R_Music selectOne = Music_repo.findByRmuSeqOrderByRmuSeqDesc(rmuSeq);
+			
+			musicInfo.add(0,selectOne);
+			R_NowlistRepository.save(rmEmail,rmuSeq);
+			System.out.println(rmuSeq + "저장~~");
+			
+			// 세션에 리스트 저장
+			session.setAttribute("musicInfo", musicInfo);
+			
+			return"redirect:/goUserMusicPlayer";
+		}
+		
+		
+		
 		
 		
 		

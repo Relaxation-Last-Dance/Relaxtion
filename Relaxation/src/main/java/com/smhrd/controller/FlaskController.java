@@ -66,7 +66,7 @@ public class FlaskController {
 			HttpEntity<Map<String,Object>> requestEntity 
 			    = new HttpEntity<>(map, headers);
 
-			String flaskUrl = "http://172.30.1.23:5000/upload"; 
+			String flaskUrl = "http://0.0.0.0:5000/upload"; 
 
 			ResponseEntity<String> response 
 			    = restTemplate.exchange(flaskUrl,

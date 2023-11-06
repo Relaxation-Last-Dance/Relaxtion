@@ -149,7 +149,7 @@ public class faceImgController {
 	        	nowList.setRmEmail(rmEmail);
 	            Long rmuSeq = Long.valueOf(seq.get(i));
 	            nowList.setRmuSeq(rmuSeq);
-	        	System.out.println("성공이라면 소리질러라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	        	System.out.println("@@@@@@@@@@@@@" + rmuSeq + " 노래를 추천하는 중입니다@@@@@@@@@@@@@@@@@");
 	        	nowList_repo.save(nowList);
 	        }
 	        

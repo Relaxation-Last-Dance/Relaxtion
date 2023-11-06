@@ -102,8 +102,10 @@
 			<c:forEach var="music" items="${findRandom48}" varStatus="status">
 				<td>
 					<div class="image-container">
+					<a href="musicAlbumsInfo?rmuSeq=${music.rmuSeq}">
 						<img src="${music.rmuAlbumImg}"
 							alt="Album Image ${status.index + 1}">
+					</a>
 					</div>
 					<div class="title">${music.rmuTitle}</div>
 					<div class="artist">${music.rmuSinger}</div>
@@ -186,7 +188,9 @@ function loadMore() {
 
                 let td = "<td>";
                 td += "<div class='image-container'>";
+                td += "<a href='musicAlbumsInfo?rmuSeq=" + results[i].rmuSeq + "'>";
                 td += "<img src='" + results[i].rmuAlbumImg + "' alt='Album Image " + (i + 1) + "'>";
+                td += "</a>";
                 td += "</div>";
                 td += "<div class='title'>" + results[i].rmuTitle + "</div>";
                 td += "<div class='artist'>" + results[i].rmuSinger + "</div>";

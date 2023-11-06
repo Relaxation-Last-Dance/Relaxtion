@@ -16,7 +16,7 @@ public interface R_MusicRepository extends JpaRepository<R_Music, Long>{
 	
 	Page<R_Music> findByRmuSingerContainingOrRmuTitleContaining(String rmuSinger, String rmuTitle, Pageable pageable);
 	
-	R_Music findByRmuSeq(Long rmuSeq);
+	R_Music findByRmuSeqOrderByRmuSeqDesc(Long rmuSeq);
 	
 	
 	
