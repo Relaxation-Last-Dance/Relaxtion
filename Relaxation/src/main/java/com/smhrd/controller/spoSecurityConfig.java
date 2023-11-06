@@ -60,7 +60,8 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		
             				
             		//musicController
-            		"/searchAlbums"
+            		"/searchAlbums",
+            		"/deleteSong"
             		).permitAll() // permit all for login page
             .anyRequest().authenticated() // any other request needs authentication.
             .and()
