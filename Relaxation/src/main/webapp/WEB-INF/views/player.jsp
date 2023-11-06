@@ -19,11 +19,11 @@
 <body>
     <div class="play-container">
         <header class="page_one__header">
-            <img src="/img/bg-img/닫기.png" alt="Your image">
+            <img src="./assets/img/bg-img/닫기.png" alt="Your image">
             
           
             <button type="button" id="popupBtn">
-              <img src="/img/core-img/음악목록 2.png" alt="버튼 이미지">
+              <img src="./assets/img/core-img/음악목록 2.png" alt="버튼 이미지">
             </button>
 
         <div id="modalWrap">
@@ -32,23 +32,23 @@
             <h6>플레이리스트에 음악 추가</h6>
             <ul id="musicList">
               <li class="musicItem">
-                  <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
+                  <img src="./assets/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
                   <h6>준우 favorite</h6>
               </li>
               <li class="musicItem">
-                  <img src="img/album_img/POP/l'm not the only one_샘스미스.jpg" alt="음악2 이미지">
+                  <img src="./assets/img/album_img/POP/l'm not the only one_샘스미스.jpg" alt="음악2 이미지">
                   <h6>유성 favorite</h6>
               </li>
               <li class="musicItem">
-                  <img src="img/album_img/POP/Unholy_샘스미스.jpg" alt="음악3 이미지">
+                  <img src="./assets/img/album_img/POP/Unholy_샘스미스.jpg" alt="음악3 이미지">
                   <h6>우석 favorite</h6>
               </li>
               <li class="musicItem">
-                <img src="img/album_img/R&B/square_백예린.jpg" alt="음악3 이미지">
+                <img src="./assets/img/album_img/R&B/square_백예린.jpg" alt="음악3 이미지">
                 <h6>래정 favorite</h6>
             </li>
             <li class="musicItem">
-              <img src="img/album_img/R&B/trip_릴러말즈.jpg" alt="음악3 이미지">
+              <img src="./assets/img/album_img/R&B/trip_릴러말즈.jpg" alt="음악3 이미지">
               <h6>준연 favorite</h6>
           </li>
               <!-- 필요한 만큼 더 추가 -->
@@ -72,7 +72,7 @@
           </div>
           <div id="myModal" class="modal">
               <div class="modal-content">
-                <img class="close" src="/img/core-img/check.png" alt="">
+                <img class="close" src="./assets/img/core-img/check.png" alt="">
                   <p id="caption"></p>
               </div>
           </div>

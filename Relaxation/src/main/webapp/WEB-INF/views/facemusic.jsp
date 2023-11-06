@@ -48,7 +48,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="./assets/index.html" class="nav-brand"><img src="img/core-img/로고.png" alt=""></a>
+                        <a href="goIndex" class="nav-brand"><img src="./assets/img/core-img/로고.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -58,7 +58,7 @@
                             <input class="searchInput"type="text" name="" placeholder="검색어를 입력하세요.">
                                  <button class="searchButton" href="">
                    <i class="material-icons">
-                       <img src = "img/bg-img/돋보기.png">
+                       <img src = "./assets/img/bg-img/돋보기.png">
                        
                    </i>
                </button>
@@ -74,10 +74,9 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="./assets/index.html">Home</a></li>
-                                    <li><a href="./assets/albums.html">Albums</a></li>
-                            
-                                    <li><a href="./assets/facemusic.html">Face Music</a></li>
+                                    <li><a href="goIndex">Home</a></li>
+                                    <li><a href="goAlbums">Albums</a></li>
+                                    <li><a href="#">Face Music</a></li>
                                     <!--<li><a href="contact.html">Contact</a></li>-->
                                 </ul>
 
@@ -85,12 +84,15 @@
                                 <div class="login-register-cart-button d-flex align-items-center"></div>
                                     
                                     <ul>
-                                        <li><a href="#">Login / Register</a>
+                                        <li><a href="#">MENU</a>
                                             <ul class="dropdown">
-                                                <li><a href="./assets/mypage.html">My page</a></li>
-                                                <li><a href="./assets/login.html">Login</a></li>
-                                                <li><a href="">Logout</a></li>
-                                            
+                                            <c:if test="${!empty user }">
+                                                <li><a href="goMypage">My page</a></li>
+                                                <li><a href="userLogout">Logout</a></li>
+                                            </c:if>
+                                            <c:if test="${empty user }">
+                                                <li><a href="goLogin">Login</a></li>
+                                            </c:if>
                                             </ul>
                                         </li>
                                         
@@ -108,7 +110,7 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(./assets/img/bg-img/.jpg);">
         <div class="bradcumbContent">
             <p>이럴 땐, 이런 음악!</p>
             <h2>Face Music</h2>

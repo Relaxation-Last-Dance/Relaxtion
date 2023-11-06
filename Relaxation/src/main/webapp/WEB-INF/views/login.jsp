@@ -104,12 +104,12 @@
                             <form action="userLogin" method="post" id="loginForm">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter E-mail">
+                                    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter E-mail" name="rmEmail">
                                     <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
+                                    <input type="password" class="form-control" id="InputPassword1" placeholder="Password" name="rmPw">
                                 </div>
 	                            <button type="button" class="btn oneMusic-btn mt-30" id="signupButton">회원가입</button>
                                 
@@ -126,8 +126,8 @@
                             <div class="title"><h1 style="font-size: 21px;">회원가입</h1></div>
                             
                             <form action="userJoin" method="post">
-	                     		<input type="text" name="rmEmail" placeholder="email"> @
-							    <input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요">
+	                     		<input type="text" name="rmEmail" placeholder="email" class="joinEmail">@
+							    <input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요" class="joinEmail">
 							    <select name="rmEmail" onchange="handleLastEmailChange(this)">
 									<option value="@naver.com">naver.com</option>
 									<option value="@gmail.com">gmail.com</option>
@@ -171,9 +171,11 @@
 	                            </div>
 	                            <div class="signUp">
 	                                <button id="signUpButton" style="margin-bottom: 10px;" type="sumbmit">가입하기</button>
-	                                <button id="closeButton" onclick="closeCheck()">나가기</button>
 	                            </div>
                             </form>
+	                            <div class="signUp">
+	                                <button id="closeButton" >나가기</button>
+	                            </div>
                         </div>
                     </div>
 
@@ -189,7 +191,7 @@
         <div class="container">
             <div class="row d-flex flex-wrap align-items-center">
                 <div class="col-12 col-md-6">
-                    <a href="#"><img src="img/core-img/footer로고.PNG" alt=""></a>
+                    <a href="#"><img src="./assets/img/core-img/footer로고.PNG" alt=""></a>
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>스마트인재개발원 | 광주광역시 남구 송암로 60  | 대표이사 : 김준우  </a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
@@ -242,7 +244,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	        customDomainInput.style.display = 'inline';  // Show the text input for custom domain
 	    } else {
 	        customDomainInput.style.display = 'none';  // Hide the text input for custom domain
-
 	    };
 	};
 	
@@ -424,8 +425,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	//이메일과 닉네임에 한글,영어,숫자 외의 특수문자 입력 X 코드=======================================
 
 	$(document).ready(function() {
-	    var emailInput = $('input[name="rmEmail"]');
-	    var nickInput = $('input[name="rmNick"]');
+	    var emailInput = $('input[class="joinEmail"]');
+	    var nickInput = $('input[class="joinEmail"]');
 	
 	    // 이메일 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
 	    emailInput.on('input', function() {
@@ -438,7 +439,38 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	    });
 	});
 		
+	$('#loginForm').submit(function(e){
+		e.preventDefault();
 		
+		var form = $(this)
+		var url = form.attr('action')
+		
+		$.ajax({
+			type : 'POST',
+			url :  url,		
+			data : form.serialize(),
+			success : function(data){
+				// 로그인 성공시 메인 페이지로 이동
+				window.location.href = '/relax/goIndex';
+			}, 
+			error : function(data){
+				// 로그인 실패시 에러 메세지 표시
+				alert('이메일 또는 비밀번호를 잘못 입력하셨습니다.')
+			}
+		});
+	})	
+	// 'closeButton' 요소를 찾습니다.
+	var closeButton = document.getElementById('closeButton');
+	
+	// 'click' 이벤트 리스너를 추가합니다.
+	closeButton.addEventListener('click', function() {
+	    // 모달 창 요소를 찾습니다.
+	    // 여기서는 'myModal'이라는 id를 가진 요소가 모달 창이라고 가정합니다.
+	    var modal = document.getElementById('myModal');
+	
+	    // 모달 창을 닫습니다.
+	    modal.style.display = 'none';
+});
 	</script>
 
 </html>

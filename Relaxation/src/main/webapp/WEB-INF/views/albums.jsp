@@ -72,8 +72,7 @@
                             <div class="classynav">
                                 <ul>
                                     <li><a href="goIndex">Home</a></li>
-                                    <li><a href="goAlbums">Albums</a></li>
-                            
+                                    <li><a href="#">Albums</a></li>
                                     <li><a href="goFacemusic">Face Music</a></li>
                                     <!--<li><a href="contact.html">Contact</a></li>-->
                                 </ul>
@@ -82,11 +81,15 @@
                                 <div class="login-register-cart-button d-flex align-items-center"></div>
                                     
                                     <ul>
-                                        <li><a href="#">Login / Register</a>
+                                        <li><a href="#">MENU</a>
                                             <ul class="dropdown">
-                                                <li><a href="goMypage">My page</a></li>
+                                            <c:if test="${empty user }">
                                                 <li><a href="goLogin">Login</a></li>
+                                            </c:if>
+                                            <c:if test="${!empty user }">
+                                                <li><a href="goMypage">My page</a></li>
                                                 <li><a href="">Logout</a></li>
+                                            </c:if>
                                             
                                             </ul>
                                         </li>
@@ -789,7 +792,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>ì
                     <div class="footer-nav">
                         <ul>
                             <li><a href="goIndex">Home</a></li>
-                            <li><a href="goAlbums">Albums</a></li>
+                            <li><a href="#">Albums</a></li>
                             <li><a href="goFacemusic">Face Music</a></li>
                             <li><a href="goMypage">My page</a></li>
                            <!-- <li><a href="#">Contact</a></li> -->
