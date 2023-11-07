@@ -1,174 +1,183 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8">
-   <title>Insert title here</title>
-   
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-   
-   <style>
-   .player-bar {
-       display: flex;
-       align-items: center;
-       justify-content: space-between;
-       width: 400px;
-       height: 20px;
-       margin-top: 20px;
-   }
-   
-   .progress-bar {
-       flex-grow: 1;
-       height: 10px;
-       background-color: #eee;
-       margin: 0 10px;
-   }
-   
-   .progress {
-       height: 100%;
-       background-color: #4caf50;
-       width: 0;
-   }
-   /*=================================== */
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
-    .playlist-container {
-        display: flex;
-        justify-content: space-between;
-    }
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
-    .playlist-container > div {
-        flex: 1;
-        margin: 0 10px;
-    }
+<style>
+.player-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 400px;
+	height: 20px;
+	margin-top: 20px;
+}
 
-    .playlist-wrapper {
-        width: 70%;
-        margin: 0 auto;
-    }
+.progress-bar {
+	flex-grow: 1;
+	height: 10px;
+	background-color: #eee;
+	margin: 0 10px;
+}
 
-    .playlist-table {
-        width: 100%;
-        height: 300px; /* 테이블 높이를 고정 값으로 설정 */
-        border-collapse: collapse;
-    }
+.progress {
+	height: 100%;
+	background-color: #4caf50;
+	width: 0;
+}
+/*=================================== */
+.playlist-container {
+	display: flex;
+	justify-content: space-between;
+}
 
-    .playlist-table th, .playlist-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-        vertical-align: middle; /* 텍스트를 수직 방향으로 가운데 정렬 */
-    }
+.playlist-container>div {
+	flex: 1;
+	margin: 0 10px;
+}
 
-    .playlist-table th {
-        background-color: #d3d3d3;
-        color: white;
-    }
+.playlist-wrapper {
+	width: 70%;
+	margin: 0 auto;
+}
 
-    .playlist-table tr:nth-child(even) {
-        background-color: #e9e9e9;
-    }
+.playlist-table {
+	width: 100%;
+	height: 300px; /* 테이블 높이를 고정 값으로 설정 */
+	border-collapse: collapse;
+}
 
-    .playlist-table tr:hover {
-        background-color: #c0c0c0;
-    }
+.playlist-table th, .playlist-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+	vertical-align: middle; /* 텍스트를 수직 방향으로 가운데 정렬 */
+}
 
-    .playlist-table button {
-        padding: 5px;
-        background-color: #4CAF50; /* 버튼의 배경색 */
-        color: white; /* 버튼의 텍스트 색상 */
-        border: none; /* 버튼의 테두리 제거 */
-    }
+.playlist-table th {
+	background-color: #d3d3d3;
+	color: white;
+}
 
-    .playlist-table button:hover {
-        background-color: #45a049; /* 마우스가 버튼 위에 있을 때의 배경색 */
-    }
-    
-    .player-info {
-    text-align: center;
-    margin-bottom: 20px;
+.playlist-table tr:nth-child(even) {
+	background-color: #e9e9e9;
+}
+
+.playlist-table tr:hover {
+	background-color: #c0c0c0;
+}
+
+.playlist-table button {
+	padding: 5px;
+	background-color: #4CAF50; /* 버튼의 배경색 */
+	color: white; /* 버튼의 텍스트 색상 */
+	border: none; /* 버튼의 테두리 제거 */
+}
+
+.playlist-table button:hover {
+	background-color: #45a049; /* 마우스가 버튼 위에 있을 때의 배경색 */
+}
+
+.player-info {
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .player-info #currentTitle {
-    font-size: 20px;
-    font-weight: bold;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .player-info #currentSinger {
-    font-size: 16px;
-    color: #666;
+	font-size: 16px;
+	color: #666;
 }
 
 #currentAlbum {
-    width: 100px;
-    height: 100px;
+	width: 100px;
+	height: 100px;
 }
 
-    
+.fas.fa-heart {
+	color: red;
+}
 </style>
 
 </head>
 
 <body>
 
-         <h2>${user.rmNick}의 재생목록</h2>
-<div class="player-info">
-   <img id="currentAlbum" src="" alt="album image">
-    <div id="currentTitle"></div>
-    <div id="currentSinger"></div>
-</div>
+	<h2>${user.rmNick}의재생목록</h2>
+	<div class="player-info">
+		<img id="currentAlbum" src="" alt="album image">
+		<div id="currentTitle"></div>
+		<div id="currentSinger"></div>
+	</div>
 
-<div>
-    <button id="prevTrack" class="fas fa-step-backward"></button>
-    <button id="togglePlay" class="fas fa-play"></button>
-    <button id="nextTrack" class="fas fa-step-forward"></button>
-</div>
+	<div>
+		<button id="prevTrack" class="fas fa-step-backward"></button>
+		<button id="togglePlay" class="fas fa-play"></button>
+		<button id="nextTrack" class="fas fa-step-forward"></button>
+		<button id="likeButton" class="far fa-heart"></button>
+	</div>
 
-<div class="player-bar">
-    <div class="current-time" id="currentTime"></div>
-    <div class="progress-bar">
-        <div class="progress" id="progress"></div>
-    </div>
-    <div class="total-time" id="totalTime"></div>
-</div>
-
-
-<div class="playlist-container">
-    <div class="playlist-wrapper">
-        <table class="playlist-table" border="1">
-            <thead>
-                <tr>
-                    <th>노래 제목</th>
-                    <th>아티스트</th>
-                    <th>재생버튼</th>
-                    <th>삭제</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="song" items="${musicInfo}" varStatus="status">
-                    <tr>
-                        <td>${song.rmuTitle}</td>
-                        <td>${song.rmuSinger}</td>
-                        <td><button type="button" class="playlist-button">재생</button></td>
-                        <td><button type="button" class="delete-button" data-song-id="${song.rmuSeq}">삭제</button></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-</div>
+	<div class="player-bar">
+		<div class="current-time" id="currentTime"></div>
+		<div class="progress-bar">
+			<div class="progress" id="progress"></div>
+		</div>
+		<div class="total-time" id="totalTime"></div>
+	</div>
 
 
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
+	<div class="playlist-container">
+		<div class="playlist-wrapper">
+			<table class="playlist-table" border="1">
+				<thead>
+					<tr>
+						<th>노래 제목</th>
+						<th>아티스트</th>
+						<th>재생버튼</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="song" items="${musicInfo}" varStatus="status">
+						<tr>
+							<td>${song.rmuTitle}</td>
+							<td>${song.rmuSinger}</td>
+							<td><button type="button" class="playlist-button">재생</button></td>
+							<td><button type="button" class="delete-button"
+									data-song-id="${song.rmuSeq}">삭제</button></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
+
+	<script src="https://sdk.scdn.co/spotify-player.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+
+
+var currentSongId = null;  // 현재 재생 중인 노래의 시퀀스 번호를 저장할 변수
 var playlist = [];
 var titles = [];
 var singers = [];
 var albums = [];
+var songIds = []; // 좋아요취소버튼시 사용
+var favMusic = [];
 var currentTrack = 0; // 현재 재생 중인 트랙의 인덱스
 
 // 재생되는 노래 정보를 화면에 표시하는 함수
@@ -176,6 +185,20 @@ function updateTrackInfo() {
     document.getElementById('currentTitle').textContent = titles[currentTrack];
     document.getElementById('currentSinger').textContent = singers[currentTrack];
     document.getElementById('currentAlbum').src = albums[currentTrack];
+    
+    // 현재 재생 중인 노래의 ID를 가져옵니다.
+    var currentSongId = songIds[currentTrack];
+	console.log(currentSongId)
+	console.log("여기 잘뜨노??!!")
+    // 현재 노래의 좋아요 상태를 확인하고, 좋아요 버튼의 상태를 업데이트
+    if (favMusic.includes(currentSongId)) {
+        // 해당 노래에 좋아요를 눌렀다면, 좋아요 버튼을 활성화 상태로 설정
+        $('#likeButton').removeClass('far').addClass('fas');
+    } else {
+        // 해당 노래에 좋아요를 누르지 않았다면, 좋아요 버튼을 비활성화 상태로 설정
+        $('#likeButton').removeClass('fas').addClass('far');
+    }
+    
 }
 
    console.log('Access Token: ${sessionScope.accessToken}')
@@ -215,7 +238,7 @@ function updateTrackInfo() {
       
 
         
-       // 재생 버튼 클릭 이벤트 핸들러
+       // 재생 버튼 클릭 이벤트 핸들러dkslaus
         document.getElementById('togglePlay').onclick = function() {
             player.togglePlay().then(() => {
                 // 재생 버튼 클릭 시 fetch를 호출하여 트랙을 로드하고 재생합니다.
@@ -333,7 +356,7 @@ function updateTrackInfo() {
         document.getElementById('prevTrack').onclick = function() {
             player.previousTrack().then(() => {
                 currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; // 이전 트랙 인덱스로 업데이트
-
+                currentSongId = songIds[currentTrack];  // 현재 재생 중인 노래의 ID를 업데이트
                 // 이전 곡의 URI를 재생 목록에 추가
                 fetch(url + device_id, {
                     method: 'PUT',
@@ -358,7 +381,7 @@ function updateTrackInfo() {
      // 다음 트랙 버튼 클릭 이벤트 핸들러
         document.getElementById('nextTrack').onclick = function() {
             currentTrack = (currentTrack + 1) % playlist.length; // 다음 트랙 인덱스로 업데이트
-
+            currentSongId = songIds[currentTrack];  // 현재 재생 중인 노래의 ID를 업데이트
             // 다음 곡의 URI를 재생 목록에 추가
             fetch(url + device_id, {
                 method: 'PUT',
@@ -390,16 +413,27 @@ function updateTrackInfo() {
         $(document).ready(function(){
            var accessToken = '${sessionScope.accessToken}';
             var refreshToken = '${sessionScope.refreshToken}';
+            	<c:forEach var="song" items="${favMusicList}">
+            		favMusic.push("${song.rmuSeq}");  // 좋아요 누른 곡의 시퀀스 번호 추가
+      			</c:forEach>
+            		console.log("좋아요 누른 노래?")
+            		console.log(favMusic)
             
             // 페이지 로딩 완료 후 첫 번째 곡 정보 업데이트
         <c:forEach var="song" items="${musicInfo}">
+        	  songIds.push("${song.rmuSeq}");  // 시퀀스 번호 추가
               playlist.push("${song.rmuUri}");
               titles.push("${song.rmuTitle}");
-             singers.push("${song.rmuSinger}");
-             albums.push("${song.rmuAlbumImg}")
+              singers.push("${song.rmuSinger}");
+              albums.push("${song.rmuAlbumImg}")
        </c:forEach>
+              
+             if (songIds.length > 0) {
+                  currentSongId = songIds[0];  // 첫 번째 곡의 시퀀스 번호로 초기화
+              } 
+             
           console.log("값이 잘 들어왔는가?");
-          console.log(titles);
+          console.log(songIds);
             
             updateTrackInfo();
             
@@ -454,7 +488,7 @@ function updateTrackInfo() {
                 
                 // 해당 인덱스의 곡을 재생합니다.
                 currentTrack = rowIndex;
-                
+                currentSongId = songIds[rowIndex];  // 시퀀스 번호 저장
                 // 재생할 곡의 URI를 재생 목록에 추가
                 fetch(url + device_id, {
                     method: 'PUT',
@@ -476,6 +510,49 @@ function updateTrackInfo() {
                     player.resume();
                 }, 1000);
             });
+            
+            
+            
+            $('#likeButton').click(function() {
+                // 현재 재생 중인 노래의 ID를 가져옵니다.
+                var songId = currentSongId
+                console.log("songId: ", songId); 
+
+                // 좋아요 버튼의 현재 상태를 가져옵니다.
+                var isLiked = $(this).hasClass('fas');
+
+                // AJAX 요청을 보냅니다.
+                $.ajax({
+                    url: isLiked ? 'unlikeSong' : 'likeSong',  // 서버에 요청할 URL
+                    type: isLiked ? 'DELETE' : 'POST',  // HTTP 메서드
+                    data: { 'rmuSeq': songId },  // 서버에 보낼 데이터
+                    success: function(response) {
+                        // 서버로부터 응답이 성공적으로 왔을 때 실행할 코드
+                        // 좋아요 버튼의 상태를 업데이트합니다.
+            if (isLiked) {
+                $('#likeButton').removeClass('fas').addClass('far');
+                console.log("좋아요 취소성공!")
+
+                // favMusic 배열에서 노래 ID를 제거합니다.
+                var index = favMusic.indexOf(songId);
+                if (index !== -1) favMusic.splice(index, 1);
+         			   } else {
+                $('#likeButton').removeClass('far').addClass('fas');
+                console.log("좋아요 클릭성공!")
+
+                // favMusic 배열에 노래 ID를 추가합니다.
+                favMusic.push(songId);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // 요청이 실패했을 때 실행할 코드
+                        console.error('Failed to like/unlike the song: ', textStatus, errorThrown);
+                        alert('Failed to like/unlike the song: ' + textStatus);
+                    }
+                });
+            });
+            
+            
             
             
         });

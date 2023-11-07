@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.smhrd.entity.R_FavMusic;
 import com.smhrd.entity.R_Member;
 import com.smhrd.entity.R_Music;
 import com.smhrd.entity.R_Nowlist;
+import com.smhrd.repository.R_FavMusicRepository;
 import com.smhrd.repository.R_MemberRepository;
 import com.smhrd.repository.R_MusicRepository;
 import com.smhrd.repository.R_NowlistRepository;
@@ -33,7 +35,9 @@ public class R_MemberController {
 	private R_MusicRepository Music_repo;
 	@Autowired
 	private R_NowlistRepository Nowlist_repo;
-
+	@Autowired
+	private R_FavMusicRepository FavMusic_repo;
+	
 	// 메인 이동
 	@RequestMapping("/goIndex")
 	public String goMain(Model model) {
@@ -339,8 +343,13 @@ public class R_MemberController {
 	            }
 	        }
 	    }
+	    List<R_FavMusic> favMusicList = FavMusic_repo.findByRmEmail(rmEmail);
 
 	    
+	    System.out.println("좋아요 누른 곡들이 이것이냐 =>" + favMusicList);
+	    
+	    
+	    model.addAttribute("favMusicList",favMusicList);
 		model.addAttribute("musicInfo",musicInfo);
 
 			return"userMusicPlayer";

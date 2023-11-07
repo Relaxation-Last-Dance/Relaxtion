@@ -141,7 +141,7 @@ public class faceImgController {
 	        System.out.println(content);
         	emo = content.getRmContent();
         	System.out.println(emo);	        	
-	        
+	        int count = 1;
 	        // 3 담은 리스트를 사용자의 nowlist 테이블에 저장
 	        // seq는 배열이라 값을 하나씩 DB에 저장해야함
 	        for (int i = 0 ; i <seq.size() ; i ++) {
@@ -149,7 +149,8 @@ public class faceImgController {
 	        	nowList.setRmEmail(rmEmail);
 	            Long rmuSeq = Long.valueOf(seq.get(i));
 	            nowList.setRmuSeq(rmuSeq);
-	        	System.out.println("@@@@@@@@@@@@@" + rmuSeq + " 노래를 추천하는 중입니다@@@@@@@@@@@@@@@@@");
+	        	System.out.println(count +"번째 " + rmuSeq +"시퀀스의" + " 노래를 추천하는 중입니다@@@@@@@@@@@@@@@@@");
+	        	count+=1;
 	        	nowList_repo.save(nowList);
 	        }
 	        
