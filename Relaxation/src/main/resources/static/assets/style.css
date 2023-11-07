@@ -145,7 +145,6 @@ img {
   padding-top: 100px;
   padding-bottom: 70px; }
 
-/* :: 3.4.0 Section Heading */
 .section-heading {
   position: relative;
   z-index: 1;
@@ -1818,9 +1817,9 @@ color : #2f3640;
 
 
 .upload-box {
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
-  margin-right: 30px;
+  margin-left: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1856,6 +1855,7 @@ color : #2f3640;
 
 .contents .upload-box .file-label1 {
   margin-top: 30px;
+  margin-bottom: 20px; 
   background-color: #5b975b;
   color: #fff;
   text-align: center;

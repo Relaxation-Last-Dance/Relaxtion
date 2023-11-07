@@ -128,13 +128,13 @@
   
 
     <div class="listContainer" style="float : left; margin-left :250px; margin-bottom: 110px; margin-top: 80px; ">
-        <div class="item">
+       <!--  <div class="item">
             <div class="icon">ii</div>
             <a href="#" onclick="showImage(['/img/index-img/뉴진스.jpg', '/img/index-img/에스파.jpg', '/img/index-img/르세라핌.jpg','/img/index-img/아이들.jpg','/img/index-img/아이브.jpg']); return false;">
                 <div class="text">최근 들었던 곡</div>
             </a>
             <div class="imgContainer"></div>
-        </div>
+        </div>  -->
         <div class="item">
             <div class="icon">ii</div>
             <a href="#" onclick="showImage(['/img/index-img/라이즈.jpg', '/img/index-img/스테이씨.jpg', '/img/index-img/방탄소년단.jpg','/img/index-img/다듀.jpg','/img/index-img/악동뮤지션.jpg']); return false;">
@@ -142,13 +142,13 @@
             </a>
             <div class="imgContainer"></div>
         </div>
-        <div class="item">
+       <!--  <div class="item">
             <div class="icon">ii</div>
             <a href="#" onclick="showImage(['/img/index-img/임영웅.jpg', '/img/index-img/스테이씨.jpg', '/img/index-img/방탄소년단.jpg','/img/index-img/다듀.jpg','/img/index-img/악동뮤지션.jpg']); return false;">
                 <div class="text">내 플레이리스트</div>
             </a>
             <div class="imgContainer"></div>
-        </div>
+        </div>   -->
         <a href="#" class="item" onclick="showContent('회원정보 수정'); return false;">
             <div class="icon">ii</div>
             <div class="text">회원정보 수정</div>

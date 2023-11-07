@@ -34,6 +34,17 @@
     color: black;
     text-decoration: none;
 }
+
+.classynav ul li.has-down > a:after {
+	font-family: 'classyfonts';
+    content: "\e900";
+    font-size: 12px;
+    color: #000000;
+    padding-left: 5px;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+}
+
 		</style>
 
 <body>

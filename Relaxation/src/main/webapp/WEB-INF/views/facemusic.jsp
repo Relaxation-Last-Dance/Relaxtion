@@ -32,6 +32,16 @@ a {
     color: black;
     text-decoration: none;
 }
+.file-label1 {
+    margin-top: 100px;
+    background-color: #5b975b;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 65%;
+    border-radius: 6px;
+    cursor: pointer;
+    }
 </style>
 <body>
 
