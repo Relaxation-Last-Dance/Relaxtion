@@ -11,7 +11,7 @@
 
 
 
-	<form action="userUpdate" method="post" onsubmit="return validateForm()">
+	<form action="#" method="post" onsubmit="return validateForm()">
 		<table width="auto">
 
 			<tr>

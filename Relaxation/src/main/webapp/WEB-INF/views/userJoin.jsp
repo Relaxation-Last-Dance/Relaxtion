@@ -25,8 +25,8 @@
 						<option value="@nate.com">nate.com</option>
 						<option value="@hanmail.net">hanmail.net</option>
 						<option value="">직접입력</option>
-				</select> <input type="text" name="rmEmail" id="customInput"
-					style="display: none;" placeholder="입력해주세요">
+				</select> 
+				<input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요">
 					<div id="checkResult" style="display: none;"></div></td>
 
 			</tr>

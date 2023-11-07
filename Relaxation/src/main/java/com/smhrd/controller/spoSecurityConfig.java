@@ -55,9 +55,18 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/goMypage",
             		"/goPlayer",
             		"/goSign",
+            		"/goImgEndToPlayList",
+            		"/musicAlbumsInfo",
+            		
             				
             		//musicController
-            		"/searchAlbums"
+            		"/searchAlbums",
+            		"/deleteSong",
+            		"/unlikeSong",
+            		"/likeSong"
+            		
+            		
+            		
             		).permitAll() // permit all for login page
             .anyRequest().authenticated() // any other request needs authentication.
             .and()

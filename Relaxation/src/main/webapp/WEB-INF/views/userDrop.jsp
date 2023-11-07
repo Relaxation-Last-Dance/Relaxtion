@@ -20,7 +20,6 @@
 		<br>
 		<input type="submit" value="회원탈퇴">
 		<input type="button" value="뒤로가기" id="backBtn">
-		
 		</form>
 		
 		

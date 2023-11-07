@@ -179,7 +179,7 @@ public class ApiController {
 				System.out.println("신규 카카오회원 정보 세션 저장 성공!");
 				System.out.println("★★★ 유저 세션 : " + session.getAttribute("user"));
 				System.out.println("==============================================================");
-				return"redirect:/goUserMain";
+				return"redirect:/goIndex";
 			}else {
 				// else라면 가입자이기 때문에 바로 로그인 처리를 해야함  여기 나중에 다시 수정해야함
 				String rmEmail = rm.getRmEmail();
@@ -195,7 +195,7 @@ public class ApiController {
 				System.out.println("기존 카카오회원 로그인 성공!");
 				System.out.println("================================================================");
 				
-				return"redirect:/goUserMain";
+				return"redirect:/goIndex";
 			}
 			// jason view라는 크롬 확장크로그램 설치하면 json타입이 크롬에서 보기 편하게 뜸
 

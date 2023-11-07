@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
@@ -15,6 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Controller
@@ -42,7 +47,7 @@ public class FlaskController {
 
 	
 	
-	public void sendImgToFlask(String imagePath, String imageName, String RmEmail) {
+	public String sendImgToFlask(String imagePath, String imageName, String RmEmail) {
 
 			RestTemplate restTemplate  = new RestTemplate();
 		    HttpHeaders headers = new HttpHeaders();
@@ -61,7 +66,7 @@ public class FlaskController {
 			HttpEntity<Map<String,Object>> requestEntity 
 			    = new HttpEntity<>(map, headers);
 
-			String flaskUrl = "http://172.30.1.23:5000/upload"; 
+			String flaskUrl = "http://0.0.0.0:5000/upload"; 
 
 			ResponseEntity<String> response 
 			    = restTemplate.exchange(flaskUrl,
@@ -72,11 +77,14 @@ public class FlaskController {
 			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★");
 			System.out.println("응답 상태코드 : " + response.getStatusCode());
 			System.out.println("응답 헤더 : " + response.getHeaders());
-			System.out.println("응답 본문 : " + response.getBody()); // {"probability":0.85,"result":"Example Result"}
+			System.out.println("응답 본문 : " + response.getBody());
 		    System.out.println("★★★★★★★★★★★★★★★★★★★★★★★");
 		
-	}
+		    return response.getBody();
 
+		    
+	} 
+ 
 	
 
 }
