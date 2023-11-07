@@ -153,111 +153,23 @@
                         <p>See what’s new</p>
                         <h2>이번주 TOP 100</h2>
                     </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="./assets/img/index-img/뉴진스.jpg"  style="cursor:pointer" onclick="PopupCenter('goPlayer?img=뉴진스.jpg','asdfo8or');">
-																												<!-- url goPlayer -->
-
-                                
-                            </div>
-                            <div class="content-">
-                                <h6>뉴진스</h6>
-                                <p>hype boy</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="150ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="./assets/img/index-img/정국.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=정국.jpg');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>정국</h6>
-                                <p>세븐</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="200ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/악동뮤지션.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=악동뮤지션.jpg');">
-
-                            </div>
-
-                            <div class="content-">
-                                <h6>악뮤</h6>
-                                <p>다이노소울</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="250ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/아이브.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=아이브.jpg');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>아이브</h6>
-                                <p>유후아하</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="300ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/르세라핌.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=르세라핌.jpg');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>르세라핌</h6>
-                                <p>르세라핌</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="350ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/임영웅.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=임영웅.jpg');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>임영웅</h6>
-                                <p>사랑은 늘 도망가</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
+                 <%--맨왼쪽 테이블--%>
+				<c:forEach var="artist" items="${findRandom7}" varStatus="status">
+    				<div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="${status.index * 50}ms">
+      					<div class="first-part d-flex align-items-center">
+            				<div class="thumbnail">
+                			<img src="${artist.rmuAlbumImg}" style="cursor:pointer" onclick="PopupCenter('goPlayer?img=${artist.rmuAlbumImg}','asdfo8or');">
+            				</div>
+            			<div class="content-">
+               		 	<h6>${artist.rmuSinger}</h6>
+                		<p>${artist.rmuTitle}</p>
+            				</div>
+        				</div>
+        			<audio preload="auto" controls>
+            			<source src="audio/dummy-audio.mp3">
+        			</audio>
+    				</div>
+				</c:forEach>
                 </div>
             </div>
 
@@ -269,107 +181,24 @@
                         <h2>최신앨범</h2>
                     </div>
 
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/방탄소년단.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=방탄소년단.jpg');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>Sam Smith</h6>
-                                <p>Underground</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="150ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/에스파.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=에스파.jpg','asdfo8or');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>Power Play</h6>
-                                <p>In my mind</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="200ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/다듀.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=다듀.jpg','asdfo8or');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>Cristinne Smith</h6>
-                                <p>My Music</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="250ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/라이즈.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=라이즈.jpg','asdfo8or');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>The Music Band</h6>
-                                <p>Underground</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="300ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/스테이씨.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=스테이씨.jpg','asdfo8or');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>Creative Lyrics</h6>
-                                <p>Songs and stuff</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
-
-                    <!-- Single Top Item -->
-                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="350ms">
-                        <div class="first-part d-flex align-items-center">
-                            <div class="thumbnail">
-                                <img src="img/index-img/아이들.jpg"  style="cursor:pointer" onclick="PopupCenter('./assets/player.html?img=아이들.jpg','asdfo8or');">
-
-                            </div>
-                            <div class="content-">
-                                <h6>The Culture</h6>
-                                <p>Pop Songs</p>
-                            </div>
-                        </div>
-                        <audio preload="auto" controls>
-                            <source src="audio/dummy-audio.mp3">
-                        </audio>
-                    </div>
+				<c:forEach var="item" items="${findRandom7BySinger}" varStatus="status">
+    				<div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+        				<div class="first-part d-flex align-items-center">
+            			<div class="thumbnail">
+                			<img src="${item.rmuAlbumImg}" style="cursor:pointer" onclick="PopupCenter('?img=${item.rmuAlbumImg}');">
+            			</div>
+		            		<div class="content-">
+				                <h6>${item.rmuAlbum}</h6>
+				                <p>${item.rmuTitle}</p>
+				            </div>
+				        </div>
+				        <audio preload="auto" controls>
+				            <source src="audio/dummy-audio.mp3">
+				        </audio>
+				    </div>
+				</c:forEach>
+                
+            
                 </div>
             </div>
 
@@ -380,79 +209,25 @@
                         <p>See what’s new</p>
                         <h2>Popular Artist</h2>
                     </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="100ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/뉴진스.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>Sam Smith</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="150ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/다듀.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>William Parker</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="200ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/라이즈.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>Jessica Walsh</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="250ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/스테이씨.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>Tha Stoves</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="300ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/방탄소년단.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>DJ Ajay</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="350ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/아이브.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>Radio Vibez</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Artist -->
-                    <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="400ms">
-                        <div class="thumbnail">
-                            <img src="img/index-img/에스파.jpg" alt="">
-                        </div>
-                        <div class="content-">
-                            <p>Music 4u</p>
-                        </div>
-                    </div>
-
+					<c:forEach var="artist" items="${top7Artist}">
+					    <tr>
+					        <td>
+					            <div class="single-artists d-flex align-items-center wow fadeInUp" data-wow-delay="400ms">
+					                <div class="thumbnail">
+					                    <img src="${artist[1]}" alt="">
+					                </div>
+					                <div class="content-">
+					                    <p>${artist[0]}</p>
+					                </div>
+					            </div>
+					        </td>
+					        <td></td>
+					    </tr>
+					</c:forEach>
                 </div>
             </div>
+            
+            
         </div>
     </div>
 </section>
@@ -473,277 +248,30 @@
 
             <div class="row">
                 
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/뉴진스.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=jOTfBlKSQYY" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                           
-                        </div>
-
-                        <div class="album-info">
-                            <a href="">
-                                <h5>NewJeans</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/정국.jpg" alt="">
-                            
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=Wgj9t0k94yQ" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>정국</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/악동뮤지션.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=EIz09kLzN9k" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>AKMU(악뮤)</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/아이브.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=Da4P2uT4mVc" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>아이브(IVE)</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="500ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/르세라핌.jpg" alt="">
-                           
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=hLvWy2b857I" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>르세라핌</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/임영웅.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=tJut2wIsC1w" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>임영웅</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/방탄소년단.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=zrjqB0Bpf1E" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>방탄소년단</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/에스파.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=w92u4od6wxk" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>aespa</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="300ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/다듀.jpg" alt="">
-                        
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=LqoP8Gg9yOs" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>다이나믹 듀오</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/라이즈.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=gJMheHHf4GQ" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>라이즈</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/스테이씨.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=3-ptVHZZdBg" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>STAYC</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Album Area -->
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
-                        <div class="album-thumb">
-                            <img src="img/index-img/아이들.jpg" alt="">
-                            
-                            <!-- Play Icon -->
-                            <div class="play-button">
-                                <div class="play-icon">
-                                    <a href="https://www.youtube.com/watch?v=Iewisp9KYRw" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="album-info">
-                            <a href="#">
-                                <h5>(여자)아이들</h5>
-                            </a>
-                            <p>Radio Station</p>
-                        </div>
-                    </div>
-                </div>
+				
+			<c:forEach var="album" items="${find12}">
+			    <!-- Single Album Area -->
+			    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+			        <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
+			            <div class="album-thumb">
+			                <img src="${album[1]}" alt="">
+			                
+			                <!-- Play Icon -->
+			                <div class="play-button">
+			                    <div class="play-icon">
+			                        <a href="${album[2]}" target="_blank" class="video--play--btn"><span class="icon-play-button"></span></a>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="album-info">
+			                <a href="">
+			                    <h5>${album[0]}</h5>
+			                </a>
+			                <p></p>
+			            </div>
+			        </div>
+			    </div>
+			</c:forEach>
 
            
         </div>

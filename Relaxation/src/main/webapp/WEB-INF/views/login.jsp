@@ -23,8 +23,7 @@
 
 
 </head>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 <body>
 
     <!-- Preloader -->
@@ -112,7 +111,7 @@
                                     <input type="password" class="form-control" id="InputPassword1" placeholder="Password" name="rmPw">
                                 </div>
 	                            <button type="button" class="btn oneMusic-btn mt-30" id="signupButton">회원가입</button>
-                                
+                                <!-- 여기회원가입 버튼 누르면 -->
                                 <button type="submit" class="btn oneMusic-btn mt-30">로그인</button>
                                 <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=5f4adf5f781d4507aaf15fdd092cf73b&redirect_uri=http://localhost:8087/relax/kakaoCallback">
                                 	<img src=./assets/img/core-img/카카오로그인.png alt="Login" class="image-button">
@@ -123,11 +122,12 @@
                     
                     <div class="modal-content">
                         <div class="wrapper">
+                        <!-- 여기 아래 회원가입 창이 뜸 -->
                             <div class="title"><h1 style="font-size: 21px;">회원가입</h1></div>
                             
-                            <form action="userJoin" method="post">
+                            <%-- 폼 시작 --%>
+                            <form action="userJoin" method="post" onsubmit="return validateForm()">
 	                     		<input type="text" name="rmEmail" placeholder="email" class="joinEmail">@
-							    <input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요" class="joinEmail">
 							    <select name="rmEmail" onchange="handleLastEmailChange(this)">
 									<option value="@naver.com">naver.com</option>
 									<option value="@gmail.com">gmail.com</option>
@@ -135,11 +135,12 @@
 									<option value="@hanmail.net">hanmail.net</option>
 									<option value="">직접입력</option>
 								</select> 
+							    <input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요" class="joinEmail">
 								<div id="checkResult" style="display: none;"></div>
 	                            
 	                            <div class="password" style="margin-top: 30px;">
 	                                <input name="rmPw" id="password" type="password" placeholder="비밀번호를 입력해 주세요.">
-	                            </div>
+<!-- 	                            </div> -->
 	                            
 	                            <div class="passwordCheck">
 	                                <input name="rmPwConfirm" id="passwordCheck" type="password" placeholder="비밀번호를 다시 입력해 주세요.">
@@ -173,8 +174,9 @@
 	                                <button id="signUpButton" style="margin-bottom: 10px;" type="sumbmit">가입하기</button>
 	                            </div>
                             </form>
+                            <%--폼 끝--%>
 	                            <div class="signUp">
-	                                <button id="closeButton" >나가기</button>
+	                                <button id="closeButton" type="button" >나가기</button>
 	                            </div>
                         </div>
                     </div>
@@ -215,12 +217,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
         </div>
     </footer>
 
-
     <!-- ##### Footer Area Start ##### -->
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="./assets/js/jquery/jquery-2.2.4.min.js"></script> 
+    <script src="./assets/js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
     <script src="./assets/js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->  
@@ -230,8 +231,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
     <!-- Active js -->
     <script src="./assets/js/active.js"></script>
     <script src="./assets/js/login.js"></script>
-
-</body>
+	
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 
 	var isEmailDuplicate = false; // 이메일 중복 여부 저장하는 변수
@@ -250,19 +251,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	//===========================================================================
 	$(document).ready(function(){
 	    //email 확인
-	    var inputEmail = $('input[name="rmEmail"]');
-	    var selectEmail = $('select[name="rmEmail"]');
-	    var customEmail = $('#customInput');
-	
-	    inputEmail.on('input', emailCheck);
-	    selectEmail.on('change', emailCheck);
-	    customEmail.on('input', emailCheck);
+		  var inputEmail = $('form[action="userJoin"] input[name="rmEmail"]');
+		    var selectEmail = $('form[action="userJoin"] select[name="rmEmail"]');
+		    var customEmail = $('#customInput');
+
+		    inputEmail.on('input', emailCheck);
+		    selectEmail.on('change', emailCheck);
+		    customEmail.on('input', emailCheck);
 	});
 
 
 	 function emailCheck(){
-		    var emailPrefix = $('input[name="rmEmail"]').val();
-		    var emailSuffix = $('select[name="rmEmail"]').val();
+		 var emailPrefix = $('form[action="userJoin"] input[name="rmEmail"]').val();
+		    var emailSuffix = $('form[action="userJoin"] select[name="rmEmail"]').val();
 		    var customSuffix = $('#customInput').val();
 
 	        // 사용자가 직접입력을 선택했을 경우
@@ -332,40 +333,40 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	
 	// 비밀번호 확인 ajax코드===================================================================
 		
+$(document).ready(function() {
+  //비밀번호 확인
+  var inputPw = $('form[action="userJoin"] input[name="rmPw"]');
+  var inputPwConfirm = $('form[action="userJoin"] input[name="rmPwConfirm"]');
+  inputPw.on('input', passwordCheck);
+  inputPwConfirm.on('input', passwordCheck);
+});
 
-	$(document).ready(function() {
-	  //비밀번호 확인
-	  var inputPw = $('input[name="rmPw"]');
-	  var inputPwConfirm = $('input[name="rmPwConfirm"]');
-	  inputPw.on('input', passwordCheck);
-	  inputPwConfirm.on('input', passwordCheck);
-	});
-	function passwordCheck() {
-	  var pw = $('input[name="rmPw"]').val();
-	  var pwConfirm = $('input[name="rmPwConfirm"]').val();
-	  if (pw === '' || pwConfirm === '') {
-	    $('#pwCheckResult').hide();
-	    return;
-	  }
-	  if (pw === pwConfirm) {
-	    console.log("비밀번호 일치");
-	    $('#pwCheckResult').html('비밀번호가 일치합니다').css("color", "Blue")
-	        .css("font-size", "13px").show();
-	  } else {
-	    console.log("비밀번호 불일치");
-	    $('#pwCheckResult').html('비밀번호가 일치하지 않습니다').css("color", "red")
-	        .css("font-size", "12px").show();
-	  }
-	  
-	}
+function passwordCheck() {
+  var pw = $('form[action="userJoin"] input[name="rmPw"]').val();
+  var pwConfirm = $('form[action="userJoin"] input[name="rmPwConfirm"]').val();
+  if (pw === '' || pwConfirm === '') {
+    $('#pwCheckResult').hide();
+    return;
+  }
+  if (pw === pwConfirm) {
+    console.log("비밀번호 일치");
+    $('#pwCheckResult').html('비밀번호가 일치합니다').css("color", "Blue")
+        .css("font-size", "13px").show();
+  } else {
+    console.log("비밀번호 불일치");
+    $('#pwCheckResult').html('비밀번호가 일치하지 않습니다').css("color", "red")
+        .css("font-size", "12px").show();
+  }
+  
+}
 	// 닉네임 중복 ajax코드 ===================================================================	
 
 	$(document).ready(function(){
-	    var inputNick = $('input[name="rmNick"]');
+	    var inputNick = $('form[action="userJoin"] input[name="rmNick"]');
 	    inputNick.on('input', NickCheck);
 	});
 	function NickCheck(){
-	    var Nickname = $('input[name="rmNick"]').val();
+	    var Nickname = $('form[action="userJoin"] input[name="rmNick"]').val();
 	      $.ajax({
 	          url : 'nickCheck',
 	          type: 'post',
@@ -424,21 +425,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 		
 	//이메일과 닉네임에 한글,영어,숫자 외의 특수문자 입력 X 코드=======================================
 
-	$(document).ready(function() {
-	    var emailInput = $('input[class="joinEmail"]');
-	    var nickInput = $('input[class="joinEmail"]');
+$(document).ready(function() {
+    var emailInput = $('form[action="userJoin"] input[name="rmEmail"]');
+    var nickInput = $('form[action="userJoin"] input[name="rmNick"]');
+
+    // 이메일 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
+    emailInput.on('input', function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣._-]/g, '')); // '@' 문자 제거
+    });
+
+    // 닉네임 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
+    nickInput.on('input', function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, ''));
+    });
+});
 	
-	    // 이메일 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
-	    emailInput.on('input', function() {
-	        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣._-]/g, '')); // '@' 문자 제거
-	    });
 	
-	    // 닉네임 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
-	    nickInput.on('input', function() {
-	        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, ''));
-	    });
-	});
-		
 	$('#loginForm').submit(function(e){
 		e.preventDefault();
 		
@@ -472,5 +474,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	    modal.style.display = 'none';
 });
 	</script>
-
+</body>
 </html>

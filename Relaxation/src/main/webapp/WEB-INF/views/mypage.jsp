@@ -112,9 +112,9 @@
 
     <!-- ##### Breadcumb Area Start ##### -->
     <div class="sidebar" style="position: absolute; left: 0; top: 385px; width: 200px; height: 470px; background-color: white; padding: 20px; z-index: 15; box-shadow:2px 0 5px -2px gray;">
-        <img src="img/album_img/POP/dangerously_찰리푸스.jpg" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; margin-top: 50px; margin-left: 30px;">
-        <h5>smhrd@naver.com</h5>
-        <h6>내 플레이리스트 : 5</h6>
+        <img src="https://mblogthumb-phinf.pstatic.net/MjAyMDEyMjBfMjU4/MDAxNjA4NDUxOTk3Mjk2.W88f9Phe4d6mo48vpWuZQ9e9R4CvARFvZEoBW9irbXYg.UWAbicHtrZc1hrgYt38Fp79LOnbMhQ6_hcttqmEu79gg.JPEG.goodmanddo/%EC%9B%83%EA%B8%B4_%EC%B9%B4%ED%86%A1%ED%94%84%EC%82%AC_%EA%B8%B0%EB%B3%B8.jpg?type=w800" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; margin-top: 50px; margin-left: 30px;">
+        <h5>${user.rmNick}</h5>
+        <h6>${user.rmEmail}</h6>
     </div>
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
@@ -153,48 +153,63 @@
             <div class="icon">ii</div>
             <div class="text">회원정보 수정</div>
         </a>
-
+		<form action="userUpdate" method="post" onsubmit="return validateForm()">
         
         <div id="content" style="display: none;">
             <!-- 회원가입 양식 내용 -->
             <div class="wrapper">
                 <div class="title"><h1 style="font-size: 21px; text-align: center;">회원정보 수정</h1></div>
-        
-                <input type="text" name="rmEmail" placeholder="email">@
-				<input type="text" name="rmEmail" id="customInput" style="display: none;" placeholder="입력해주세요">
-				<select name="rmEmail" onchange="handleLastEmailChange(this)">
-					<option value="@naver.com">naver.com</option>
-					<option value="@gmail.com">gmail.com</option>
-					<option value="@nate.com">nate.com</option>
-					<option value="@hanmail.net">hanmail.net</option>
-					<option value="">직접입력</option>
-				</select> 
+                <input type="text" name="rmEmail" value=" ${user.rmEmail}" readonly="readonly">
+                
+                <%-- 카카오톡유저일때 --%>
+                <c:choose>
+					<c:when test="${user.rmPhone eq '카카오회원'}">
                 
                 <div class="password" style="margin-top: 30px; ">
-                    <input id="password" type="password" placeholder="비밀번호를 입력해 주세요.">
+                    <input id="password" type="password" name="rmPw" value="${user.rmPw}" readonly="readonly">
                     <div id="passwordError" class="error"></div>
                 </div>
                 <div class="passwordCheck">
-                    <input id="passwordCheck" type="password" placeholder="비밀번호를 다시 입력해 주세요.">
+                    <input id="passwordCheck" type="password" name="rmPwConfirm" value="${user.rmPw}" readonly="readonly" >
                     <div id="passwordCheckError" class="error"></div>
                 </div>
+                	</c:when>
+                
+      			<%-- 카카오톡유저가 아닐때 --%>
+					<c:otherwise>
+				
+                <div class="password" style="margin-top: 30px; ">
+                    <input id="password" type="password" name="rmPw" value="${user.rmPw}">
+                    
+                </div>
+                <div class="passwordCheck">
+                    <input id="passwordCheck" type="password" name="rmPwConfirm" value="${user.rmPw}">
+                    <div id="passwordCheckError" class="error" style="display: none;"></div>
+                </div>
+				
+					</c:otherwise>
+				</c:choose>
+				
                 <div class="nick">
-                    <input id="nick"  type="text" placeholder="닉네임을 입력해 주세요.">
-                    <div id="nameError" class="error"></div>
+                    닉네임<input id="nick"  type="text" name="rmNick" value="${user.rmNick}">
+                    <div id="nameError" class="error" style="display: none;"></div>
                 </div>
                 <div class="name">
-                    <input id="name"  type="text" placeholder="이름을 입력해 주세요.">
+                    이름<input id="name"  type="text" name="rmName" value="${user.rmName}" readonly="readonly">
                     <div id="nameError" class="error"></div>
                 </div>
-                <div class="gender">
-                    <input id="gender_man" type="radio" name="gender">남성  
-                    <input id="gender_woman" type="radio" name="gender">여성
-                    <div id="genderError" class="error"></div>
-                </div>
-                <div class="phone">
-                    <input id="phone1" type="number"  maxlength="11" placeholder="전화번호를 입력해 주세요."> 
-                   
-                </div>
+                <%-- 카카오톡유저는 전화번호 안뜸 X --%>
+			<c:choose>
+				<c:when test="${user.rmPhone eq '카카오회원'}"></c:when>
+				
+				<%-- 일반유저는 전화번호 수정 가능 --%>
+				<c:otherwise>
+                	<div class="phone">
+          		 		<input id="phone1" type="text"  maxlength="11" name="rmPhone" value="${user.rmPhone}"> 
+                	</div>
+				</c:otherwise>
+			</c:choose>
+            
             
             </div>
              <div class="signUp">
@@ -206,10 +221,12 @@
         </div>
         </div>
         
+        </form>
+        
         <a href="#" class="item" onclick=" showModal('정말 탈퇴하시겠습니까?'); return false;">
             <div class="icon">ii</div>
             <div class="text">회원탈퇴</div>
-            <input type="hidden" value="${user.rmPw }" id="userPw">
+            <input type="hidden" value="${user.rmPw}" id="userPw">
         </a>
     </div>
     <div id="content"></div>
@@ -264,15 +281,63 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
-</body>
+
 <script type="text/javascript">
-function handleLastEmailChange(selectElement) {
-    var customDomainInput = document.getElementById('customInput');
-    if (selectElement.value === "") {
-        customDomainInput.style.display = 'inline';  // Show the text input for custom domain
-    } else {
-        customDomainInput.style.display = 'none';  // Hide the text input for custom domain
-    };
-};
+
+
+
+
+var isNickDuplicate = false; // 닉네임 중복 여부 저장하는 변수
+
+
+// 폼 제출 이벤트 핸들러 추가
+document.querySelector('form').addEventListener('submit', function(e) {
+    var password = document.querySelector('input[name="rmPw"]').value;
+    var confirmPassword = document.querySelectorAll('input[type="password"]')[1].value; 
+    // 비밀번호 확인은 두 번째 password 타입 input
+
+    if (!password || !confirmPassword) {
+			 e.preventDefault();  // 폼 제출 막기
+		     alert('비밀번호를 입력하세요.');
+		 } else if (password !== confirmPassword) {
+			 e.preventDefault();  // 폼 제출 막기
+			 alert('비밀번호가 일치하지 않습니다');
+		 }
+});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
+</body>
 </html>

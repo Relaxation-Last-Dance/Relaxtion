@@ -152,7 +152,7 @@
 		
 function loadMore() {
     $.ajax({
-        url: 'searchAlbums',
+        url: '#',
         type: 'GET',
         data: {
             'Text': searchQuery,

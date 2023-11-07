@@ -1,6 +1,7 @@
  package com.smhrd.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,26 +39,7 @@ public class R_MemberController {
 	@Autowired
 	private R_FavMusicRepository FavMusic_repo;
 	
-	// 메인 이동
-	@RequestMapping("/goIndex")
-	public String goMain(Model model) {
-		
-	// main페이지 top7 아티스트 불러오기	
-	List<String> top7Artist = Music_repo.findTop7();	
-	// main페이지 top relaxation 음악추천
-	List<R_Music> findRandom7 = Music_repo.findRandom7();
-	// main페이지 특정 가수의 노래 7곡 랜덤으로 불러오기
-	List<R_Music> findRandom7BySinger = Music_repo.findRandom7BySinger();
-	
-	
-	// model에 담아서 메인에 보내주기
-	model.addAttribute("top7Artist",top7Artist);	
-	model.addAttribute("findRandom7",findRandom7);	
-	model.addAttribute("findRandom7BySinger",findRandom7BySinger);
-	
-	return "index";
-	}
-	
+
 	@RequestMapping("/goSpoMain")
 	public String goSpoMain() {
 		return "adminMain";
@@ -168,46 +150,7 @@ public class R_MemberController {
 		return "redirect:/goUserMypage";
 	}
 
-	// 정보업데이트 메소드
-	@RequestMapping("/userUpdate")
-	public String UpdateUserInfo(R_Member member, HttpSession session) {
 
-		R_Member user = (R_Member) session.getAttribute("user");
-
-		// 카카오톡 유저는 선호하는 닉네임,장르만 변경 가능
-		if (session.getAttribute("k_accessToken") != null) {
-			String rmEmail = user.getRmEmail();
-			String rmGender = user.getRmGender();
-			String rmPhone = user.getRmPhone();
-			member.setRmEmail(rmEmail);
-			member.setRmGender(rmGender);
-			member.setRmPhone(rmPhone);
-			Member_repo.save(member);
-			return "redirect:/userLogout";
-
-		} else {
-			// 일반 유저는 비밀번호 변경 O
-
-			String rmEmail = user.getRmEmail();
-			String rmName = user.getRmName();
-			String rmGender = user.getRmGender();
-
-			member.setRmEmail(rmEmail);
-			member.setRmName(rmName);
-			member.setRmGender(rmGender);
-
-			Member_repo.save(member);
-			System.out.println("=================");
-			System.out.println("일반유저 정보 수정 성공");
-			System.out.println("=================");
-
-			session.removeAttribute("user");
-
-			return "redirect:/goUserMain";
-
-		}
-
-	}
 
 	// 페이스뮤직 페이지로 이동
 	@RequestMapping("/goUserFaceMusic")
@@ -355,16 +298,7 @@ public class R_MemberController {
 			return"userMusicPlayer";
 		}
 		
-		// userAlbums로 이동
-		@RequestMapping("/goUserAlbums")
-		public String goUserAlbums(Model model) {
-			
-			List<R_Music> findRandom48 = Music_repo.findRandom48();
-			
-			model.addAttribute("findRandom48",findRandom48);
-			
-			return"userAlbums";
-		}
+
 		
 		@RequestMapping("goImgEndToPlayList")
 		public String goImgEndToPlayList() {
@@ -452,7 +386,12 @@ public class R_MemberController {
 		
 		// 준연이 앨범페이지
 		@RequestMapping("/goAlbums")
-		public String goAlbums() {
+		public String goAlbums(Model model) {
+			
+			List<R_Music> findRandom48 = Music_repo.findRandom48();
+			
+			model.addAttribute("findRandom48",findRandom48);
+			
 			return "albums";
 		}
 		// 준연이 facemusic페이지
@@ -485,6 +424,105 @@ public class R_MemberController {
 		public String goSign() {
 			return "sign";
 		}
+		
+		// 정보업데이트 메소드
+		@RequestMapping("/userUpdate")
+		public String UpdateUserInfo(R_Member member, HttpSession session) {
+
+			R_Member user = (R_Member) session.getAttribute("user");
+
+			// 카카오톡 유저는 선호하는 닉네임,장르만 변경 가능
+			if (session.getAttribute("k_accessToken") != null) {
+				String rmEmail = user.getRmEmail();
+				String rmGender = user.getRmGender();
+				String rmPhone = user.getRmPhone();
+				member.setRmEmail(rmEmail);
+				member.setRmGender(rmGender);
+				member.setRmPhone(rmPhone);
+				Member_repo.save(member);
+				return "redirect:/userLogout";
+
+			} else {
+				// 일반 유저는 비밀번호 변경 O
+
+				String rmEmail = user.getRmEmail();
+				String rmName = user.getRmName();
+				String rmGender = user.getRmGender();
+
+				member.setRmEmail(rmEmail);
+				member.setRmName(rmName);
+				member.setRmGender(rmGender);
+
+				Member_repo.save(member);
+				System.out.println("=================");
+				System.out.println("일반유저 정보 수정 성공");
+				System.out.println("=================");
+
+				session.removeAttribute("user");
+
+				return "redirect:/goindex";
+
+			}
+
+		}
+		
+		// 메인 이동
+		@RequestMapping("/goIndex")
+		public String goMain(Model model) {
+			
+		// main페이지 top7 아티스트 불러오기	
+		List<Object[]> top7Artist = Music_repo.findTop7();	
+		// main페이지 top relaxation 음악추천
+		List<R_Music> findRandom7 = Music_repo.findRandom7();
+		// main페이지 특정 가수의 노래 7곡 랜덤으로 불러오기
+		List<R_Music> findRandom7BySinger = Music_repo.findRandom7BySinger();
+		// main페이지 12명 가수 보여주기
+		List<Object[]> find12 = Music_repo.findArtistsAndImages();
+		
+		List<String> links = Arrays.asList("https://www.youtube.com/watch?v=7HDeem-JaSY",
+				"https://www.youtube.com/watch?v=EIz09kLzN9k",
+				"https://www.youtube.com/watch?v=eN5mG_yMDiM",
+				"https://www.youtube.com/watch?v=WMweEpGlu_U",
+				"https://www.youtube.com/watch?v=pSudEWBAYRE",
+				"https://www.youtube.com/watch?v=U7mPqycQ0tQ",
+				"https://www.youtube.com/watch?v=0-q1KafFCLU",
+				"https://www.youtube.com/watch?v=G8GaQdW2wHc",
+				"https://www.youtube.com/watch?v=zSQ48zyWZrY",
+				"https://www.youtube.com/watch?v=d1D1SJ-KqaQ",
+				"https://www.youtube.com/watch?v=cQuqs2LrXbo",
+				"https://www.youtube.com/watch?v=gfk3QLU1x0E"
+				);
+		List<Object[]> newFind12 = new ArrayList<>();
+		
+		for (int i = 0; i < find12.size(); i++) {
+		    Object[] data = find12.get(i);
+		    Object[] newData = new Object[] {data[0], data[1], links.get(i)};
+		    newFind12.add(newData);
+		}
+		
+		
+		//여기서 배열 추가 가능??
+		// model에 담아서 메인에 보내주기
+		model.addAttribute("top7Artist",top7Artist);	
+		model.addAttribute("findRandom7",findRandom7);	
+		model.addAttribute("findRandom7BySinger",findRandom7BySinger);
+		model.addAttribute("find12",newFind12);
+		
+		return "index";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
 }
