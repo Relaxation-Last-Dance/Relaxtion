@@ -28,7 +28,8 @@ h6 {
   font-family: "Archivo Narrow", sans-serif;
   color: #000000;
   line-height: 1.3;
-  font-weight: 700; }
+  font-weight: 700;
+   }
 
 p {
   font-family: "Archivo Narrow", sans-serif;
@@ -377,6 +378,7 @@ img {
       background-color: transparent;
       height: 85px;
       }
+
     .header-area.another-header .oneMusic-main-menu .classy-navbar {
       background-color: transparent;
       height: 85px;
@@ -1065,7 +1067,7 @@ img {
 .popular-artists-area {
   position: relative;
   z-index: 1;
-  padding: 45px 30px;
+  padding: 100px 30px;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   border: 1px solid #d8d8d8;
@@ -1093,11 +1095,17 @@ img {
 .new-hits-area {
   position: relative;
   z-index: 1;
-  padding: 45px 30px;
+  padding: 47px 30px;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   border: 1px solid #d8d8d8;
   background-color: #f5f9fa; }
+  
+  .new-hits-area img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
   .new-hits-area .single-new-item {
     position: relative;
     z-index: 1;
@@ -3139,6 +3147,17 @@ input[type="numbertext"] {
 }
 
 
+
+.justify-content-between{
+	-ms-flex-pack:justify!important;justify-content:space-between!important
+}
+
+
 .album.info{
 	height : 100px;
+	word-wrap: break-word;
 }
+
+
+
+

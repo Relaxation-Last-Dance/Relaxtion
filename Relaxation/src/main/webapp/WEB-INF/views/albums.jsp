@@ -23,6 +23,7 @@
 <!-- Stylesheet -->
 <link rel="stylesheet" href="./assets/style.css">
 
+
 </head>
 
 <body>
@@ -131,36 +132,7 @@
 	<!-- ##### Album Catagory Area End ##### -->
 
 	<!-- ##### Footer Area Start ##### -->
-	<footer class="footer-area">
-		<div class="container">
-			<div class="row d-flex flex-wrap align-items-center">
-				<div class="col-12 col-md-6">
-					<a href="#"><img src="./assets/img/core-img/footer로고.PNG"
-						alt=""></a>
-					<p class="copywrite-text">
-						<a href="#">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>
-								document.write(new Date().getFullYear());
-							</script>
-							<a>스마트인재개발원 | 광주광역시 남구 송암로 60 | 대표이사 : 김준우 </a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</p>
-				</div>
-
-				<div class="col-12 col-md-6">
-					<div class="footer-nav">
-						<ul>
-							<li><a href="goIndex">Home</a></li>
-							<li><a href="#">Albums</a></li>
-							<li><a href="goFacemusic">Face Music</a></li>
-							<li><a href="goMypage">My page</a></li>
-							<!-- <li><a href="#">Contact</a></li> -->
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+	
 	<!-- ##### Footer Area Start ##### -->
 
 	<!-- ##### All Javascript Script ##### -->

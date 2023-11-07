@@ -8,6 +8,8 @@
 <html lang="en">
 
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,10 +24,18 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="./assets/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
-
+<style>
+a {
+    color: black;
+    text-decoration: none;
+}
+</style>
 <body>
+
+
     <div id="loading" class="loader"></div>
 
     <!-- Preloader -->
@@ -293,7 +303,7 @@
                     <div class="single-blog-post mb-100 wow fadeInUp" data-wow-delay="100ms">
                         <!-- Post Thumb -->
                         <div class="blog-post-thumb mt-30">
-                            <a href="#"><img src="img/face_music-img/츄.jpg" alt=""></a>
+                            <a href="#"><img src="./assets/img/face_music-img/츄.jpg" alt=""></a>
                             <!-- Post Date -->
                             <div class="post-date">
                                <span>9</span>
@@ -329,7 +339,7 @@
                     <div class="single-blog-post mb-100 wow fadeInUp" data-wow-delay="100ms">
                         <!-- Post Thumb -->
                         <div class="blog-post-thumb mt-30">
-                            <a href="#"><img src="img/face_music-img/선미.jpg" alt=""></a>
+                            <a href="#"><img src="./assets/img/face_music-img/선미.jpg" alt=""></a>
                             <!-- Post Date -->
                             <div class="post-date">
                                 <span>9</span>
@@ -418,7 +428,7 @@
                         <!-- Widget Area -->
                         <div class="single-widget-area mb-30">
                             <a href="#" class="image-link">
-                                <img src="img/face_music-img/가을.gif" alt="">
+                                <img src="./assets/img/face_music-img/가을.gif" alt="">
                                 <div class="play-button">
                                     <span class="icon-play-button"></span>
                                 </div>
@@ -434,7 +444,7 @@
                         <!-- Widget Area -->
                         <div class="single-widget-area mb-30">
                             <a href="#" class="image-link">
-                                <img src="img/face_music-img/드라이브.gif" alt="">
+                                <img src="./assets/img/face_music-img/드라이브.gif" alt="">
                                 <div class="play-button">
                                     <span class="icon-play-button"></span>
                                 </div>
@@ -496,7 +506,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
     <script src="./assets/js/active.js"></script>
     <script src="./assets/js/facemusic.js"></script>
    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
    
