@@ -114,6 +114,7 @@ public class musicController {
 		R_Member member = (R_Member)session.getAttribute("user");
 		String rmEmail = member.getRmEmail();
 		
+		System.out.println("왜 이값이 없냐!!!!!!!!!!!!!!!!!!!!!!!"+rmuSeq);
 		R_FavMusic fav= FavMusic_repo.findByRmuSeqAndRmEmail(rmuSeq, rmEmail);
 		System.out.println(fav);
 		Long rfSeq = fav.getRfSeq();
