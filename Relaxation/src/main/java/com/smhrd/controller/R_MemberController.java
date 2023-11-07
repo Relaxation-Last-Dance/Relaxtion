@@ -173,19 +173,7 @@ public class R_MemberController {
 		}
 	}
 	
-	// 닉네임 중복확인
-	@RequestMapping(value="/nickCheck" , method=RequestMethod.POST)
-	public @ResponseBody String nickCheck(String nick) {
-		
-		R_Member member = (R_Member)Member_repo.findByRmNick(nick);
-		
-		if(member != null) { // member가 null이 아니면 이미 닉네임값이 존재함
-			return "false";
-		} else {
-			return "true";  // member가 null이면 닉네임 값이 없음
-		}
-		
-	}
+
 	
 	// 회원탈퇴 페이지로 이동
 		@RequestMapping("/goUserDropInfo")
@@ -252,7 +240,7 @@ public class R_MemberController {
 			//세션 정보 삭제
 			session.removeAttribute("user");
 			
-			mav.setViewName("redirect:/goUserMain");
+			mav.setViewName("redirect:/goindex");
 
 			return mav;
 		}
@@ -512,7 +500,19 @@ public class R_MemberController {
 		}
 		
 		
-		
+		// 닉네임 중복확인
+		@RequestMapping(value="/nickCheck" , method=RequestMethod.POST)
+		public @ResponseBody String nickCheck(String nick) {
+			
+			R_Member member = (R_Member)Member_repo.findByRmNick(nick);
+			
+			if(member != null) { // member가 null이 아니면 이미 닉네임값이 존재함
+				return "false";
+			} else {
+				return "true";  // member가 null이면 닉네임 값이 없음
+			}
+			
+		}
 		
 		
 		

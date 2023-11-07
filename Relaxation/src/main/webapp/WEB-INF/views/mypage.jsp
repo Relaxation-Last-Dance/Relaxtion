@@ -205,29 +205,49 @@
 				<%-- 일반유저는 전화번호 수정 가능 --%>
 				<c:otherwise>
                 	<div class="phone">
-          		 		<input id="phone1" type="text"  maxlength="11" name="rmPhone" value="${user.rmPhone}"> 
+          		 		<input id="phone1" type="text"  maxlength="13" name="rmPhone" value="${user.rmPhone}"> 
                 	</div>
 				</c:otherwise>
 			</c:choose>
-            
-            
-            </div>
-             <div class="signUp">
-            <button id="signUpButton" onclick="openPopup()">수정하기</button>
-        </div>
-        <div id="popup" style="display: none; position: fixed; width: 200px; height: 100px; background-color: white; border: 1px solid black; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 20px; border-radius: 10px; font-family: 'Times New Roman', Times, serif;">
-            <p>수정되었습니다.</p>
-            <button onclick="closePopup()" style="border: none; background-color: #4CAF50; color: white; width : 100px">닫기</button>
-        </div>
-        </div>
+	            
+	            
+	            </div>
+	             <div class="signUp">
+	            <button id="signUpButton" onclick="openPopup()">수정하기</button>
+	        </div>
+	        <div id="popup" style="display: none; position: fixed; width: 200px; height: 100px; background-color: white; border: 1px solid black; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 20px; border-radius: 10px; font-family: 'Times New Roman', Times, serif;">
+	            <p>수정되었습니다.</p>
+	            <button onclick="closePopup()" style="border: none; background-color: #4CAF50; color: white; width : 100px">닫기</button>
+	        </div>
+	        </div>
+	        
+	        </form>
         
-        </form>
-        
+   
+   		<c:choose>
+			<c:when test="${user.rmPhone eq '카카오회원'}">
+				<a href="dropKakaoUser" class="item">
+            	<div class="icon">ii</div>
+            	<div class="text">카카오 회원탈퇴</div>
+            	
+        </a>
+			</c:when>
+   
+   			<c:otherwise>
+   			
         <a href="#" class="item" onclick=" showModal('정말 탈퇴하시겠습니까?'); return false;">
             <div class="icon">ii</div>
             <div class="text">회원탈퇴</div>
             <input type="hidden" value="${user.rmPw}" id="userPw">
         </a>
+   			
+   			</c:otherwise>
+		</c:choose>
+   
+   
+   
+   
+   
     </div>
     <div id="content"></div>
     
@@ -290,47 +310,179 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> <a>�
 var isNickDuplicate = false; // 닉네임 중복 여부 저장하는 변수
 
 
-// 폼 제출 이벤트 핸들러 추가
-document.querySelector('form').addEventListener('submit', function(e) {
+//폼 제출 이벤트 핸들러 추가
+document.querySelector('form[action="userUpdate"]').addEventListener('submit', function(e) {
     var password = document.querySelector('input[name="rmPw"]').value;
-    var confirmPassword = document.querySelectorAll('input[type="password"]')[1].value; 
-    // 비밀번호 확인은 두 번째 password 타입 input
+    var confirmPassword = document.querySelectorAll('input[type="password"]')[1].value;
 
     if (!password || !confirmPassword) {
-			 e.preventDefault();  // 폼 제출 막기
-		     alert('비밀번호를 입력하세요.');
-		 } else if (password !== confirmPassword) {
-			 e.preventDefault();  // 폼 제출 막기
-			 alert('비밀번호가 일치하지 않습니다');
-		 }
+        e.preventDefault(); // 폼 제출 막기
+        alert('비밀번호를 입력하세요.');
+    } else if (password !== confirmPassword) {
+        e.preventDefault(); // 폼 제출 막기
+        alert('비밀번호가 일치하지 않습니다');
+    }
 });
 
+//수정 버튼 클릭 시 폼 유효성 검사 및 수정되었습니다 창 띄우기
+function openPopup() {
+    if (validateForm()) {
+        document.getElementById('popup').style.display = 'block';
+    } else {
+        event.preventDefault(); // 폼 제출 막기
+    }
+}
+
+//폼 유효성 검사
+function validateForm() {
+    // 닉네임이 중복되었을 경우
+    if (isNickDuplicate) {
+        alert('이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.');
+        return false; // 폼 제출 중지
+    }
+
+    // 비밀번호 필드나 비밀번호 확인 필드가 빈 경우
+    if (!document.getElementsByName("rmPw")[0].value || !document.getElementsByName("rmPwConfirm")[0].value) {
+        alert("비밀번호를 입력해주세요");
+        return false; // 폼 제출 중지
+    }
+
+    return true;
 }
 
 
 
 
+//전화번호 자동하이픈, 11글자넘지않게, 숫자만입력가능하게 코드작성==============================================
+$(document).ready(function() {
+    var phoneInput = $('form[action="userUpdate"] input[name="rmPhone"]');
+
+    // 전화번호 입력필드에 키 입력 이벤트를 바인딩
+    phoneInput.on('keyup', function(e) {
+        var inputValue = $(this).val();
+        var inputLength = inputValue.replace(/-/g, '').length;  // 하이픈 제외한 길이 계산
+
+        // 백스페이스 키가 눌리지 않았고, 길이에 따라 하이픈 삽입
+        // 입력값의 마지막 문자가 하이픈이 아닌 경우에만 하이픈 추가
+        if(e.keyCode !== 8 && inputValue[inputValue.length-1] !== '-' && inputLength <= 11 && (inputLength === 3 || inputLength === 7)) {
+            $(this).val(inputValue + '-');
+        }
+
+        // 전체 입력값이 13자리를 초과하면 입력을 막음
+        if(inputValue.length > 13) {
+            $(this).val(inputValue.slice(0, 13));
+        }
+    });
+
+    // 숫자, 백스페이스, 탭키, 좌우 화살표키를 제외한 나머지 키 입력을 차단
+    phoneInput.on('keydown', function(e) {
+        if ((e.keyCode !== 109 && e.keyCode !== 189) && (e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105) && e.keyCode !== 8 && e.keyCode !== 9 && e.keyCode !== 37 && e.keyCode !== 39) {
+            e.preventDefault();
+        }
+    });
+
+    // 한글 입력 방지 및 특수문자 입력 방지 (하이픈 제외)
+    phoneInput.on('input', function() {
+        $(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi, ''));
+    });
+});
 
 
+//이메일과 닉네임에 한글,영어,숫자 외의 특수문자 입력 X 코드=======================================
+
+$(document).ready(function() {
+    var emailInput = $('form[action="userUpdate"] input[name="rmEmail"]');
+    var nickInput = $('form[action="userUpdate"] input[name="rmNick"]');
+
+    // 이메일 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
+    emailInput.on('input', function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣@._-]/g, ''));
+    });
+
+    // 닉네임 입력 필드에 한글, 영어, 숫자 외의 문자 입력 방지
+    nickInput.on('input', function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, ''));
+    });
+});
 
 
+//비밀번호 확인 ajax코드===================================================================
 
 
+$(document).ready(function() {
+	//비밀번호 확인
+	var inputPw = $('form[action="userUpdate"] input[name="rmPw"]');
+	var inputPwConfirm = $('form[action="userUpdate"] input[name="rmPwConfirm"]');
+
+	inputPw.on('input', passwordCheck);
+	inputPwConfirm.on('input', passwordCheck);
+});
+
+function passwordCheck() {
+	var pw = $('form[action="userUpdate"] input[name="rmPw"]').val();
+	var pwConfirm = $('form[action="userUpdate"] input[name="rmPwConfirm"]').val();
+
+	if (pw === '' || pwConfirm === '') {
+		$('#passwordCheckError').hide();
+		return;
+	}
+
+	if (pw === pwConfirm) {
+		console.log("비밀번호 일치");
+		$('#passwordCheckError').html('비밀번호가 일치합니다').css("color", "Blue")
+				.css("font-size", "13px").show();
+	} else {
+		console.log("비밀번호 불일치");
+		$('#passwordCheckError').html('비밀번호가 일치하지 않습니다').css("color", "red")
+				.css("font-size", "12px").show();
+	}
+	
+}
 
 
+//닉네임 중복확인=================================================================
+$(document).ready(function(){
+
+    var inputNick = $('form[action="userUpdate"] input[name="rmNick"]');
+
+    inputNick.on('input', NickCheck);
+
+});
 
 
+	 function NickCheck(){
+		    var Nickname = $('form[action="userUpdate"] input[name="rmNick"]').val();
 
-
-
-
-
-
-
-
-
-
-
+		    // user.rmNick와 현재 입력된 닉네임이 일치하면 AJAX 요청을 보내지 않음
+		    if (Nickname === '${user.rmNick}') {
+		        $('#nameError').hide(); // 중복 검사 결과 숨김 처리
+		        return;
+		    }
+		    
+		    
+		    
+	        $.ajax({
+	            url : 'nickCheck',
+	            type: 'post',
+	            data: {
+	                "nick" : Nickname
+	            },
+	            success : function(res){
+	                if(res == "true"){
+	                    console.log("사용가능해요");
+	                    $('#nameError').html('사용가능합니다').css("color","Blue" ).css("font-size" , "13px").show();
+	                    isNickDuplicate = false; 
+	                } else {
+	                    console.log("사용중");
+	                    $('#nameError').html('사용중인 닉네임 입니다').css("color","red").css("font-size" , "12px").show();
+	                    isNickDuplicate = true; 
+	                }
+	            },
+	            error : function(e){
+	                console.log(e)
+	            }
+	        });
+	    }
 
 
 

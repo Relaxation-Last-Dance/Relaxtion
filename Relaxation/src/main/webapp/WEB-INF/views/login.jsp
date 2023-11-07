@@ -317,14 +317,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
 	    }
 	
 	    // 필수 필드 중 하나라도 값이 누락된 경우ㄴ
-	    if (
-	        !document.getElementsByName("rmEmail")[0].value ||
-	        !document.getElementsByName("rmPw")[0].value ||
-	        !document.getElementsByName("rmNick")[0].value ||
-	        !document.getElementsByName("rmName")[0].value ||
-	        !document.querySelector('input[name="rmGender"]:checked') ||
-	        !document.getElementsByName("rmPhone")[0].value
-	    ) {
+	    if (    !document.querySelector('form[action="userJoin"] input[name="rmEmail"]').value ||
+	    	    !document.querySelector('form[action="userJoin"] input[name="rmPw"]').value ||
+	    	    !document.querySelector('form[action="userJoin"] input[name="rmNick"]').value ||
+	    	    !document.querySelector('form[action="userJoin"] input[name="rmName"]').value ||
+	    	    !document.querySelector('form[action="userJoin"] input[name="rmGender"]:checked') ||
+	    	    !document.querySelector('form[action="userJoin"] input[name="rmPhone"]').value
+	    	) {
 	        alert("회원정보를 입력해주세요");
 	        return false; // 폼 제출 중지
 	    }
