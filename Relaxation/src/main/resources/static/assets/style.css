@@ -376,7 +376,15 @@ img {
     .header-area .oneMusic-main-menu .classy-navbar {
       background-color: transparent;
       height: 85px;
-      padding: 0; }
+      }
+  
+    .header-area.another-header .oneMusic-main-menu .classy-navbar {
+      background-color: transparent;
+      height: 85px;
+      padding-left : 300px;
+      padding-right : 300px;
+      }
+  
       @media only screen and (max-width: 767px) {
         .header-area .oneMusic-main-menu .classy-navbar {
           height: 70px; } }
@@ -3129,6 +3137,11 @@ input[type="numbertext"] {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+.justify-content-between{
+	-ms-flex-pack:justify!important;justify-content:space-between!important
 }
 
 
