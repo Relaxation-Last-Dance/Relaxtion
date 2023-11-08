@@ -35,7 +35,7 @@ public interface R_MusicRepository extends JpaRepository<R_Music, Long>{
 	        "FROM r_music " +
 	        "GROUP BY rmu_singer, rmu_artist_img " +
 	        "ORDER BY COUNT(*) DESC " +
-	        "LIMIT 7", nativeQuery = true)
+	        "LIMIT 8", nativeQuery = true)
 	List<Object[]> findTop7();
 	
 	// 랜덤으로 7개 음악가지고 오는 쿼리, 리스트에담기

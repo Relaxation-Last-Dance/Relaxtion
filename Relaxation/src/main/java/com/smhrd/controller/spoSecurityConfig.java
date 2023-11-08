@@ -45,6 +45,7 @@ public class spoSecurityConfig extends WebSecurityConfigurerAdapter {
             		"/setUserDropSession",
             		"/setUserMypageSession",
             		"/setUserAlbumsSession",
+            		"/setPlayerSession",
             		"/goUserMusicPlayer",
             		"/goSpoMain",
             		"/goUserAlbums",

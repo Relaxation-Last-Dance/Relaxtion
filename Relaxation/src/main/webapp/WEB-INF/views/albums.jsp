@@ -153,6 +153,17 @@
       crossorigin="anonymous">
 
 <script type="text/javascript">
+//세션 값이 null인 경우 메인 페이지로 리다이렉션
+<% if (session.getAttribute("user") == null) { %>
+    
+		alert("세션이 만료되어 로그인이 필요합니다."); // alert 메시지
+        window.location.href = "/relax/setUserAlbumsSession"; // 페이지 이동
+        </script>
+	<script type="text/javascript">
+<% } %>
+
+
+
   let totalElements = 0;
   let totalPages = 0;
   let page = 0;

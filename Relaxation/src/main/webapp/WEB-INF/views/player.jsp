@@ -101,11 +101,8 @@
                   <%--좋아요 --%>
                   <button  class="likeButton" style="border: none; background: none;"><i class="far fa-heart"></i></button>
                     <%--재생버튼 --%>
-<<<<<<< HEAD
                    <button id="play" class="actiong-btn big"><i class="fa-solid fa-play"></i></button>
-=======
-                    <button id="playButton" class="action-btn big"><i id="icon" class="fas fa-play"></i></button>
->>>>>>> branch 'master' of https://github.com/Relaxation-Last-Dance/Relaxtion.git
+
                     <%--다음곡 --%>
                     <button id="next" class="actiong-btn"><i class="fa-sharp fa-solid fa-forward"></i></button>
                     <input type="numbertext" placeholder="20/200">
@@ -155,6 +152,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./assets/js/player.js"></script>
 <script type="text/javascript">
+// 세션 값이 null인 경우 메인 페이지로 리다이렉션
+<% if (session.getAttribute("user") == null) { %>
+    
+		alert("세션이 만료되어 로그인이 필요합니다."); // alert 메시지
+        window.location.href = "/relax/setPlayerSession"; // 페이지 이동
+        </script><script>
+<% } %>
 
 
 var currentSongId = null;  // 현재 재생 중인 노래의 시퀀스 번호를 저장할 변수

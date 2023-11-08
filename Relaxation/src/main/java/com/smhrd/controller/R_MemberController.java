@@ -346,30 +346,38 @@ public class R_MemberController {
 		
 		
 		// 이미지전송페이지 세션 종료시============================================
+		// facemusic.jsp
 		@RequestMapping("/setUserFaceMusicSession")
 		public String setsession1() {
-			return "redirect:/goUserMain";
+			return "redirect:/goindex";
 		}
 		// 정보수정페이지 세션 종료시
+		// mypage.jsp
 		@RequestMapping("/setUserChangeInfoSession")
 		public String setsession2() {
-			return "redirect:/goUserMain";
+			return "redirect:/goindex";
 		}
 		// 회원탈퇴페이지 세션 종료시
 		@RequestMapping("/setUserDropSession")
 		public String setsession3() {
-			return "redirect:/goUserMain";
+			return "redirect:/goindex";
 		}
 
 		// 마이페이지 세션 종료시
 		@RequestMapping("/setUserMypageSession")
 		public String setsession5() {
-			return "redirect:/goUserMain";
+			return "redirect:/goindex";
 		}
-		// 앨범페이지 세션 종료시
+		// albums.jsp 세션 종료시
 		@RequestMapping("/setUserAlbumsSession")
 		public String setsession6() {
-			return "redirect:/goUserMain";
+			return "redirect:/goindex";
+		}
+		// 재생목록페이지 세션 종료시
+		// player.jsp
+		@RequestMapping("/setPlayerSession")
+		public String setsession7() {
+			return "redirect:/goindex";
 		}
 		//===========================================================================
 		

@@ -126,7 +126,7 @@
 <% if (session.getAttribute("user") == null) { %>
     
 		alert("세션이 만료되어 로그인이 필요합니다."); // alert 메시지
-        window.location.href = "/relax/setUserAlbumsSession"; // 페이지 이동
+        window.location.href = "/relax/#"; // 페이지 이동
         </script>
 	<script type="text/javascript">
 <% } %>
