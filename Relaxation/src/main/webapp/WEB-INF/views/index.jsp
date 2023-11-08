@@ -206,14 +206,14 @@
 								<div class="first-part d-flex align-items-center">
 									<div class="thumbnail">
 										<img src="${artist.rmuAlbumImg}" style="cursor: pointer"
-											onclick="PopupCenter('goUserMusicPlayer?img=${artist.rmuSeq}','asdfo8or');">
+											onclick="PopupCenter('musicAlbumsInfo?rmuSeq=${artist.rmuSeq}','asdfo8or');">
 									</div>
 									<div class="content-">
 										<h6>${artist.rmuSinger}</h6>
 										<p>${artist.rmuTitle}</p>
 									</div>
 								</div>
-								<button id="playButton" onclick="window.open('goUserMusicPlayer?img=${artist.rmuSeq}', '_blank')"></button>
+								<button id="playButton" onclick="window.open('musicAlbumsInfo?rmuSeq=${artist.rmuSeq}', '_blank')"></button>
 							</div>
 						</c:forEach>
 					</div>
@@ -238,14 +238,14 @@
 								<div class="first-part d-flex align-items-center">
 									<div class="thumbnail">
 										<img src="${item.rmuAlbumImg}" style="cursor: pointer"
-											onclick="PopupCenter('?img=${item.rmuAlbumImg}');">
+											onclick="PopupCenter('musicAlbumsInfo?rmuSeq=${item.rmuSeq}');">
 									</div>
 									<div class="content-">
 										<h5>${item.rmuAlbum}</h5>
 										<p>${item.rmuTitle}</p>
 									</div>
 								</div>
-								<button id="playButton" onclick="window.open('goUserMusicPlayer?img=${artist.rmuSeq}', '_blank')"></button>
+								<button id="playButton" onclick="window.open('musicAlbumsInfo?rmuSeq=${item.rmuSeq}', '_blank')"></button>
 							</div>
 						</c:forEach>
 
