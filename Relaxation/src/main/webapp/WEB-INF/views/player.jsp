@@ -104,6 +104,7 @@
 
                    <button id="play" class="actiong-btn big"><i class="fa-solid fa-play"></i></button>
 
+                  
                     <%--다음곡 --%>
                     <button id="next" class="actiong-btn"><i class="fa-sharp fa-solid fa-forward"></i></button>
                     <input type="numbertext" placeholder="20/200">
