@@ -191,7 +191,7 @@
 						<div class="section-heading text-left mb-50 wow fadeInUp"
 							data-wow-delay="50ms">
 							<p>See what’s new</p>
-							<h2>이번주 TOP 100</h2>
+							<h2>인기 있는 음악</h2>
 						</div>
 						<%--맨왼쪽 테이블--%>
 						<c:forEach var="artist" items="${findRandom7}" varStatus="status">
