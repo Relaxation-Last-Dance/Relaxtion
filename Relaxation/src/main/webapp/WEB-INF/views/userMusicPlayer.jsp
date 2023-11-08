@@ -11,118 +11,179 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
-<style>
-.player-bar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 400px;
-	height: 20px;
-	margin-top: 20px;
-}
+	<style>
+		/* 스타일을 추가해주세요 */
+		/* 헤더 스타일 */
+		h2 {
+			text-align: center;
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
 
-.progress-bar {
-	flex-grow: 1;
-	height: 10px;
-	background-color: #eee;
-	margin: 0 10px;
-}
+		/* 플레이어 정보 스타일 */
+		.player-info {
+			text-align: center;
+			margin-bottom: 20px;
+		}
 
-.progress {
-	height: 100%;
-	background-color: #4caf50;
-	width: 0;
-}
-/*=================================== */
-.playlist-container {
-	display: flex;
-	justify-content: space-between;
-}
+		.player-info img {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
 
-.playlist-container>div {
-	flex: 1;
-	margin: 0 10px;
-}
+		.player-info #currentTitle {
+			font-size: 20px;
+			font-weight: bold;
+			margin-top: 10px;
+		}
 
-.playlist-wrapper {
-	width: 70%;
-	margin: 0 auto;
-}
+		.player-info #currentSinger {
+			font-size: 16px;
+			color: #666;
+			margin-top: 5px;
+		}
 
-.playlist-table {
-	width: 100%;
-	height: 300px; /* 테이블 높이를 고정 값으로 설정 */
-	border-collapse: collapse;
-}
+   #prevTrack, #togglePlay, #nextTrack, #likeButton {
+        border: none;
+        background: none;
+        font-size: 25px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
 
-.playlist-table th, .playlist-table td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: center;
-	vertical-align: middle; /* 텍스트를 수직 방향으로 가운데 정렬 */
-}
+/* 플레이어 바 스타일 */
+	/* 플레이어 바 스타일 */
+	.player-bar {
+		display: flex;
+		align-items: center;
+		justify-content: center; /* 가운데 정렬 */
+		width: 600px; /* 원하는 길이로 조정 */
+		height: 20px;
+		margin-top: 20px;
+		margin-bottom: 20px; /* 바와 하단 간격 조정 */
+		margin-left: auto; /* 왼쪽 여백을 auto로 설정 */
+		margin-right: auto; /* 오른쪽 여백을 auto로 설정 */
+	}
+	.progress-bar {
+		flex-grow: 1;
+		height: 10px;
+		background-color: #eee;
+		margin: 0 10px;
+	}
 
-.playlist-table th {
-	background-color: #d3d3d3;
-	color: white;
-}
+	.progress {
+		height: 100%;
+		background-color: #4caf50;
+		width: 0;
+	}
 
-.playlist-table tr:nth-child(even) {
-	background-color: #e9e9e9;
-}
+	.current-time,
+	.total-time {
+		font-size: 12px;
+	}
 
-.playlist-table tr:hover {
-	background-color: #c0c0c0;
-}
+		/* 플레이리스트 스타일 */
+		.playlist-container {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 20px;
+		}
 
-.playlist-table button {
-	padding: 5px;
-	background-color: #4CAF50; /* 버튼의 배경색 */
-	color: white; /* 버튼의 텍스트 색상 */
-	border: none; /* 버튼의 테두리 제거 */
-}
+		.playlist-container>div {
+			flex: 1;
+			margin: 0 10px;
+		}
 
-.playlist-table button:hover {
-	background-color: #45a049; /* 마우스가 버튼 위에 있을 때의 배경색 */
-}
+		.playlist-wrapper {
+			width: 70%;
+			margin: 0 auto;
+		}
 
-.player-info {
-	text-align: center;
-	margin-bottom: 20px;
-}
+	.playlist-table {
+		width: max-content; /* 최대 내용에 맞게 가로 길이 설정 */
+		height: 300px;
+		border-collapse: collapse;
+		margin: 0 auto; /* 가운데 정렬 */
+	}
+		.playlist-table th,
+		.playlist-table td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: center;
+			vertical-align: middle;
+		}
 
-.player-info #currentTitle {
-	font-size: 20px;
-	font-weight: bold;
-}
+		.playlist-table th {
+			background-color: #d3d3d3;
+			color: white;
+		}
 
-.player-info #currentSinger {
-	font-size: 16px;
-	color: #666;
-}
+		.playlist-table tr:nth-child(even) {
+			background-color: #e9e9e9;
+		}
 
-#currentAlbum {
-	width: 100px;
-	height: 100px;
-}
+		.playlist-table tr:hover {
+			background-color: #c0c0c0;
+		}
 
-.fas.fa-heart {
-	color: red;
-}
-</style>
+  .playlist-table button {
+        padding: 5px;
+        color: white;
+        border: none;
+    }
+
+    .playlist-table button:hover {
+        background-color: #45a049;
+    }
+		.fas.fa-heart {
+			color: red;
+		}
+		
+		 /* 재생 버튼과 다른 버튼들을 가운데로 정렬하는 스타일 */
+	  div.navigation {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	  }
+			
+		.playlist-table img {
+		width: 15%;
+		height: auto;
+	}
+	
+    /* 기존 스타일 아래에 추가 */
+    .playlist-table .playlist-button {
+        background-color: skyblue;
+    }
+
+    .playlist-table .playlist-button:hover {
+        background-color: deepskyblue;
+    }
+
+    .playlist-table .delete-button {
+        background-color: gray;
+    }
+
+    .playlist-table .delete-button:hover {
+        background-color: darkgray;
+    }
+		
+	</style>
 
 </head>
 
 <body>
 
-	<h2>${user.rmNick}의재생목록</h2>
+	<h2>${user.rmNick}의 PlaylisT</h2>
 	<div class="player-info">
 		<img id="currentAlbum" src="" alt="album image">
 		<div id="currentTitle"></div>
 		<div id="currentSinger"></div>
 	</div>
 
-	<div>
+	<div class="navigation">
 		<button id="prevTrack" class="fas fa-step-backward"></button>
 		<button id="togglePlay" class="fas fa-play"></button>
 		<button id="nextTrack" class="fas fa-step-forward"></button>
@@ -143,20 +204,22 @@
 			<table class="playlist-table" border="1">
 				<thead>
 					<tr>
-						<th>노래 제목</th>
-						<th>아티스트</th>
-						<th>재생버튼</th>
-						<th>삭제</th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="song" items="${musicInfo}" varStatus="status">
 						<tr>
+							<td><img src="${song.rmuAlbumImg}"></td>
 							<td>${song.rmuTitle}</td>
 							<td>${song.rmuSinger}</td>
-							<td><button type="button" class="playlist-button">재생</button></td>
+							<td><button type="button" class="playlist-button">PLAY</button></td>
 							<td><button type="button" class="delete-button"
-									data-song-id="${song.rmuSeq}">삭제</button></td>
+									data-song-id="${song.rmuSeq}">X</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
