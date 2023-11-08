@@ -35,6 +35,25 @@
     color: black;
     text-decoration: none;
 }
+#playButton {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #d6d6d6;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+}
+
+#playButton:after {
+    content: "▶";
+    line-height: 40px;
+    padding-left : 5px;
+}
 
 
 		</style>
@@ -189,9 +208,7 @@
 										<p>${artist.rmuTitle}</p>
 									</div>
 								</div>
-								<audio preload="auto" controls>
-									<source src="audio/dummy-audio.mp3">
-								</audio>
+								<button id="playButton" onclick="window.open('goUserMusicPlayer?img=${artist.rmuSeq}', '_blank')"></button>
 							</div>
 						</c:forEach>
 					</div>
@@ -221,9 +238,7 @@
 										<p>${item.rmuTitle}</p>
 									</div>
 								</div>
-								<audio preload="auto" controls>
-									<source src="audio/dummy-audio.mp3">
-								</audio>
+								<button id="playButton" onclick="window.open('goUserMusicPlayer?img=${artist.rmuSeq}', '_blank')"></button>
 							</div>
 						</c:forEach>
 
@@ -405,6 +420,9 @@ $(document).ready(function(){
 	});
 
 </script>
+<script> document.getElementById('playButton').addEventListener('click', function() {
+    window.open('goUserMusicPlayer?img=${artist.rmuSeq}', '_blank');
+});</script>
 	
 </body>
 <script type="text/javascript">

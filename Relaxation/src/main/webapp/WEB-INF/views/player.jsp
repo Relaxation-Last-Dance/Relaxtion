@@ -101,11 +101,9 @@
                   <%--좋아요 --%>
                   <button  class="likeButton" style="border: none; background: none;"><i class="far fa-heart"></i></button>
                     <%--재생버튼 --%>
-<<<<<<< HEAD
+
                    <button id="play" class="actiong-btn big"><i class="fa-solid fa-play"></i></button>
-=======
-                    <button id="playButton" class="action-btn big"><i id="icon" class="fas fa-play"></i></button>
->>>>>>> branch 'master' of https://github.com/Relaxation-Last-Dance/Relaxtion.git
+
                     <%--다음곡 --%>
                     <button id="next" class="actiong-btn"><i class="fa-sharp fa-solid fa-forward"></i></button>
                     <input type="numbertext" placeholder="20/200">

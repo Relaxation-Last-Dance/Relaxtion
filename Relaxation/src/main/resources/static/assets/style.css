@@ -1123,7 +1123,11 @@ img {
     .new-hits-area .single-new-item .audioplayer-playing .audioplayer-playpause,
     .new-hits-area .single-new-item .audioplayer:not(.audioplayer-playing) .audioplayer-playpause:hover,
     .new-hits-area .single-new-item .audioplayer:not(.audioplayer-playing) .audioplayer-playpause {
-      background: #d6d6d6; }
+      background: #d6d6d6;
+        caret-color: transparent;  /* 텍스트 커서를 투명하게 만듦 */
+      
+      
+       }
     .new-hits-area .single-new-item .audioplayer:not(.audioplayer-playing) .audioplayer-playpause a {
       border-left: 12px solid #fff; }
     .new-hits-area .single-new-item .audioplayer-time,
