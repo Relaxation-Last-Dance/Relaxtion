@@ -69,18 +69,18 @@
 						<div class="classy-navbar-toggler">
 							<span class="navbarToggler"><span></span><span></span><span></span></span>
 						</div>
-
+						<form action="searchMusicAlbums" method="get">
 						<div class="searchBox">
-							<input class="searchInput" type="text" name=""
+							<input class="searchInput" type="text" name="query"
 								placeholder="검색어를 입력하세요.">
-							<button class="searchButton" href="">
+							<button class="searchButton">
 								<i class="material-icons"> <img
 									src="./assets/img/bg-img/돋보기.png">
 
 								</i>
 							</button>
 						</div>
-
+						</form>
 
 
 						<!-- Menu -->
@@ -97,16 +97,10 @@
 
 							<div class="classynav">
 								<ul>
-									<c:if test="${empty user}">
-										<li><a href="goIndex">Home</a></li>
-										<li><a href="goAlbums">Albums</a></li>
-										<li><a href="#">Face Music</a></li>
-									</c:if>
-									<c:if test="${!empty user}">
 										<li><a href="goIndex">Home</a></li>
 										<li><a href="goAlbums">Albums</a></li>
 										<li><a href="goFacemusic">Face Music</a></li>
-									</c:if>
+								
 									<!--<li><a href="contact.html">Contact</a></li>-->
 								</ul>
 
@@ -188,7 +182,7 @@
 								<div class="first-part d-flex align-items-center">
 									<div class="thumbnail">
 										<img src="${artist.rmuAlbumImg}" style="cursor: pointer"
-											onclick="PopupCenter('goPlayer?img=${artist.rmuAlbumImg}','asdfo8or');">
+											onclick="PopupCenter('goPlayer?img=${artist.rmuSeq}','asdfo8or');">
 									</div>
 									<div class="content-">
 										<h6>${artist.rmuSinger}</h6>
@@ -328,7 +322,7 @@
 					<a href="#"><img src="./assets/img/core-img/footer로고.PNG"
 						alt=""></a>
 					<p class="copywrite-text">
-						<a href="#">
+						<a href="goPlayer">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;<script>document.write(new Date().getFullYear());</script>
 							<a>스마트인재개발원 | 광주광역시 남구 송암로 60 | 대표이사 : 김준우 </a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

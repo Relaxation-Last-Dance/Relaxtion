@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.smhrd.entity.R_FavMusic;
 import com.smhrd.entity.R_Member;
@@ -244,7 +245,7 @@ public class R_MemberController {
 
 			return mav;
 		}
-		
+		/*
 		// MyMusicPlayer 현재재생목록페이지로 이동
 		@RequestMapping("/goUserMusicPlayer")
 		public String goMyMusicPlayer(HttpSession session, Model model) {
@@ -284,13 +285,13 @@ public class R_MemberController {
 		model.addAttribute("musicInfo",musicInfo);
 
 			return"userMusicPlayer";
-		}
+		}*/
 		
 
 		
 		@RequestMapping("goImgEndToPlayList")
 		public String goImgEndToPlayList() {
-			return"redirect:/goUserMusicPlayer";
+			return"redirect:/goPlayer";
 		}
 		
 		
@@ -382,6 +383,7 @@ public class R_MemberController {
 			
 			return "albums";
 		}
+		
 		// 준연이 facemusic페이지
 		@RequestMapping("/goFacemusic")
 		public String goFacemusic() {
@@ -401,11 +403,6 @@ public class R_MemberController {
 		@RequestMapping("/goMypage")
 		public String goMypage() {
 			return "mypage";
-		}
-		// 준연이 player페이지
-		@RequestMapping("/goPlayer")
-		public String goPlayer() {
-			return "player";
 		}
 		// 준연이 sign페이지
 		@RequestMapping("/goSign")
@@ -514,11 +511,64 @@ public class R_MemberController {
 			
 		}
 		
+		@RequestMapping("goMyAlbums")
+		public String goMyAlbums(){
+			return"redirect:/goAlbums";
+		}
+		@RequestMapping("goMyFaceMusic")
+		public String goMyFaceMusic(){
+			return"redirect:/goFacemusic";
+		}
+		
+		// 준연이 player페이지
+		// MyMusicPlayer 현재재생목록페이지로 이동
+		@RequestMapping("/goPlayer")
+		public String goMyMusicPlayer(HttpSession session, Model model) {
+			
+		//세션에 저장된 이메일값 가져오기
+		R_Member member = (R_Member)session.getAttribute("user");
+		String rmEmail = member.getRmEmail();
+		
+		if(rmEmail == null) {	
+			//만약 rmNick이 null이라면 세션이 만료되었으니 그냥 메인으로 보내버림
+			return "redirect:/goindex";
+		}
+		
+		// 이메일을 이용해서 nowlist 테이블 조회
+		// 그리고 테이블 정보 다 nowlist에 저장
+		
+		// 세션에서 musicInfo 가져오기
+		List<R_Music> musicInfo = (List<R_Music>)session.getAttribute("musicInfo");
+		
+	    if (musicInfo == null) {
+	        List<R_Nowlist> nowlist = Nowlist_repo.findByRmEmail(rmEmail);
+	        musicInfo = new ArrayList<R_Music>();
+	        for(R_Nowlist n : nowlist) {
+	            R_Music music = Music_repo.findByRmuSeqOrderByRmuSeqDesc(n.getRmuSeq());
+	            if (music != null) {
+	                musicInfo.add(0,music);
+	            }
+	        }
+	    }
+	    List<R_FavMusic> favMusicList = FavMusic_repo.findByRmEmail(rmEmail);
+
+	    
+	    System.out.println("좋아요 누른 곡들이 이것이냐 =>" + favMusicList);
+	    
+	    
+	    model.addAttribute("favMusicList",favMusicList);
+		model.addAttribute("musicInfo",musicInfo);
+
+			return"player";
+		}
 		
 		
-		
-		
-		
+		@RequestMapping("/searchMusicAlbums")
+		public String goSearchAlbums(@RequestParam(required = false)String query, RedirectAttributes redirectAttrs) {
+			redirectAttrs.addFlashAttribute("query", query);
+			System.out.println( "검색한 값 : " + query);
+			return"redirect:/goAlbums";
+		}
 		
 		
 		
