@@ -213,7 +213,6 @@ playButtons.forEach(function(button) {
             popupModal.style.display = "none";
         }
     }
-    
     var musicModal = document.getElementById('myModal');
     var captionText = document.getElementById('caption');
     
@@ -227,8 +226,7 @@ playButtons.forEach(function(button) {
             setTimeout(closeModal, 1500); 
         });
     }
-
+    
     function closeModal() {
         musicModal.style.display = "none";
     }
-
