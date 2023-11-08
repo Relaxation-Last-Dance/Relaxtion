@@ -101,6 +101,7 @@
                   <%--좋아요 --%>
                   <button  class="likeButton" style="border: none; background: none;"><i class="far fa-heart"></i></button>
                     <%--재생버튼 --%>
+
                    <button id="play" class="actiong-btn big"><i class="fa-solid fa-play"></i></button>
 
                     <%--다음곡 --%>
