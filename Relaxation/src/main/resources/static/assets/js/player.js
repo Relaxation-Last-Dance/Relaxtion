@@ -20,20 +20,16 @@ function loadSong(song) {
   imgCover.src = "/img/index-img/뉴진스.jpg";
 }
 
-function playMusic() {
-  musicContainer.classList.add("play");
+ var playButton = document.getElementById('playButton');
+        var icon = document.getElementById('icon');
 
-  playBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
-
-  audio.play();
-}
-
-function pauseMusic(){
-    musicContainer.classList.remove('play');
-    playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
-
-    audio.pause();
-}
+        playButton.addEventListener('click', function() {
+            if (icon.classList.contains('fa-play')) {
+                icon.className = "fas fa-pause"; // Change to pause icon
+            } else {
+                icon.className = "fas fa-play"; // Change to play icon
+            }
+        });
 
 function playPrevSong() {
     songIndex--;

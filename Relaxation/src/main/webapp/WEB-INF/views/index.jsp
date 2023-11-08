@@ -182,7 +182,7 @@
 								<div class="first-part d-flex align-items-center">
 									<div class="thumbnail">
 										<img src="${artist.rmuAlbumImg}" style="cursor: pointer"
-											onclick="PopupCenter('goPlayer?img=${artist.rmuSeq}','asdfo8or');">
+											onclick="PopupCenter('goUserMusicPlayer?img=${artist.rmuSeq}','asdfo8or');">
 									</div>
 									<div class="content-">
 										<h6>${artist.rmuSinger}</h6>
@@ -322,7 +322,7 @@
 					<a href="#"><img src="./assets/img/core-img/footer로고.PNG"
 						alt=""></a>
 					<p class="copywrite-text">
-						<a href="goPlayer">
+						<a href="goUserMusicPlayer">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;<script>document.write(new Date().getFullYear());</script>
 							<a>스마트인재개발원 | 광주광역시 남구 송암로 60 | 대표이사 : 김준우 </a> <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

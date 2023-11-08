@@ -245,7 +245,7 @@ public class R_MemberController {
 
 			return mav;
 		}
-		/*
+		
 		// MyMusicPlayer 현재재생목록페이지로 이동
 		@RequestMapping("/goUserMusicPlayer")
 		public String goMyMusicPlayer(HttpSession session, Model model) {
@@ -285,13 +285,13 @@ public class R_MemberController {
 		model.addAttribute("musicInfo",musicInfo);
 
 			return"userMusicPlayer";
-		}*/
+		}
 		
 
 		
 		@RequestMapping("goImgEndToPlayList")
 		public String goImgEndToPlayList() {
-			return"redirect:/goPlayer";
+			return"redirect:/goUserMusicPlayer";
 		}
 		
 		
@@ -522,6 +522,7 @@ public class R_MemberController {
 		
 		// 준연이 player페이지
 		// MyMusicPlayer 현재재생목록페이지로 이동
+		/*
 		@RequestMapping("/goPlayer")
 		public String goMyMusicPlayer(HttpSession session, Model model) {
 			
@@ -561,7 +562,7 @@ public class R_MemberController {
 
 			return"player";
 		}
-		
+		*/
 		
 		@RequestMapping("/searchMusicAlbums")
 		public String goSearchAlbums(@RequestParam(required = false)String query, RedirectAttributes redirectAttrs) {
