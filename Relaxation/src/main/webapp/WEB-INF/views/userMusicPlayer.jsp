@@ -201,6 +201,8 @@ function updateTrackInfo() {
     
 }
 
+
+
    console.log('Access Token: ${sessionScope.accessToken}')
    console.log('Token Type: ${sessionScope.tokenType}')
    console.log('Scope: ${sessionScope.scope}')

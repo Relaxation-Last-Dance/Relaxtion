@@ -104,7 +104,6 @@ img.style.display = "block";
 var modal = document.getElementById("myModal1");
 var btn = document.getElementById("openModal1");
 var span = document.getElementById("closeModal1");
-var loading = document.getElementById("loading");
 
 btn.onclick = function() {
   // 파일 선택 확인
@@ -112,13 +111,9 @@ btn.onclick = function() {
     alert('파일을 선택하세요.');
   } else {
     // 로딩 화면 표시
-    loading.style.display = "block";
 
     // 5초 후에 로딩 화면을 숨기고 모달 창을 표시
-    setTimeout(function() {
-      loading.style.display = "none";
       modal.style.display = "block";
-    }, 5000);  // 5000 밀리초 = 5초
   }
 }
 
@@ -154,5 +149,4 @@ window.onclick = function(event) {
         modal1.style.display = "none";
     }
 }
-
 

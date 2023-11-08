@@ -31,7 +31,7 @@
 </head>
 <body>
 
-	<form action="imgUpload" enctype="multipart/form-data" method="post">
+	<form action="#" enctype="multipart/form-data" method="post">
 		<section id="ex9">
 			<h1>Music : 나의 감정을 분석하여 음악을 추천받아보자!!!</h1>
 

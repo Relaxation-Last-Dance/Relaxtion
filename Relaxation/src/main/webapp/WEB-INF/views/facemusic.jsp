@@ -145,155 +145,43 @@ a {
                 <div class="col-12 col-lg-9">
 
                     <!-- Single Post Start -->
+                 <form action="imgUpload" enctype="multipart/form-data" method="post">
+                   
                     <div id="root">
                         <h2 class="title">File Upload</h2>
                         <hr>
                         <div class="contents">
                           <div class="upload-box">
+                          
                             <div id="drop-file" class="drag-file">
                               <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
                               <p class="message">Drag files to upload</p>
                               <img src="" alt="미리보기 이미지" class="preview">
                             </div>
-                            <label class="file-label1" for="chooseFile1">사진 올리기</label>
-                            <input class="file1" id="chooseFile1" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif"></input>
-                            <button id="openModal1" class="custom-button1">확인</button>
+    		        
                             
+                            <label class="file-label1" for="chooseFile1">사진 업로드</label>
+                            <input class="file1" id="chooseFile1" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif" name="rfImg"></input>
+                            <button id="openModal1" class="custom-button1">확인</button>
+                 	</form>
                             <div id="myModal1" class="modal1">
                               <div class="modal-content1">
                                 <span id="closeModal1" class="close1">&times;</span>
-                                <h3>이런 음악은 어때요?</h3>
+                                <h3>음악이 업로드 될때까지 잠시만 기다려 주세요</h3>
                                 
-                                <h5>당신의 현재 상태는 기쁨이입니다.</h5>
+                                <h5></h5>
         <div id="modalWrap2">
             <div id="modalBody2">
                <ul id="musicList2">
                 <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-                <li class="musicItem2">
-                    <div class="musicItemWrapper2">
-                        <img src="/img/album_img/POP/dangerously_찰리푸스.jpg" alt="음악1 이미지">
-                        <h6>찰리</h6>
-                    </div>
-                </li>
-            </ul>
 
-
-            <!--<img id="myImage" src="/img/core-img/음악목록 2.png" alt="이미지"> -->
-          
-
-                 <!-- 필요한 만큼 더 추가 -->
-         </div>
+                </li>
+               </ul>
+         	</div>
         </div>
         <div class="checkbox-container">
-            <div>
-                <input type="checkbox" id="준우" name="favorite" value="준우">
-                <label for="준우">준우favorite</label>
-            </div>
-        
-            <div>
-                <input type="checkbox" id="유성" name="favorite" value="유성">
-                <label for="유성">유성favorite</label>
-            </div>
-        
-            <div>
-                <input type="checkbox" id="준연" name="favorite" value="준연">
-                <label for="준연">준연favorite</label>
-            </div>
-        
-            <div>
-                <input type="checkbox" id="우석" name="favorite" value="우석">
-                <label for="우석">우석favorite</label>
-            </div>
-        
-            <div>
-                <input type="checkbox" id="래정" name="favorite" value="래정">
-                <label for="래정">래정favorite</label>
-            </div>
             <div class="button-container">
-                <button type="button">리스트에 추가하기</button>
+                <button type="button" id="myBtn">리스트에 추가하기</button>
             </div>
         </div>
             
@@ -515,9 +403,108 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>  <a>�
     <!-- Active js -->
     <script src="./assets/js/active.js"></script>
     <script src="./assets/js/facemusic.js"></script>
+   <script type="text/javascript">
    
+   var sec9 = document.querySelector('#root');
+var inputFile = sec9.querySelector('input[type="file"]');
+var uploadBox = sec9.querySelector('.drag-file');
 
+uploadBox.addEventListener('dragenter', function(e) {
+  console.log('dragenter');
+});
 
+uploadBox.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  console.log('dragover');
+  this.style.backgroundColor = 'skyblue';
+});
+
+uploadBox.addEventListener('dragleave', function(e) {
+  console.log('dragleave');
+  this.style.backgroundColor = 'white';
+});
+uploadBox.addEventListener('drop', function(e) {
+	  e.preventDefault();
+	  this.style.backgroundColor = 'white';
+	  var files = e.dataTransfer.files;
+
+	  if (files.length > 0) {
+	    var file = files[0];
+	    var reader = new FileReader();
+	    reader.onloadend = function() {
+	      var previewDiv = document.querySelector('.preview');
+	      previewDiv.src = reader.result;
+	      inputFile.files = files; // 이 부분이 추가되어야 합니다.
+	    };
+	    reader.readAsDataURL(file);
+	  }
+	});
+
+uploadBox.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  var valid = e.dataTransfer.types.indexOf('Files') >= 0;
+  if (!valid) {
+    this.style.backgroundColor = 'red';
+  } else {
+    this.style.backgroundColor = 'skyblue';
+  }
+});
+
+inputFile.addEventListener('change', function(e) {
+  var file = e.target.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    var previewDiv = document.querySelector('.preview');
+    previewDiv.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+$("#openModal1").click(function(e) {
+    e.preventDefault();
+    var formData = new FormData($('form')[0]);
+    $.ajax({
+      url: $('form').attr('action'),
+      type: 'POST',
+      data: formData,
+      processData: false,  
+      contentType: false,
+      success: function(result){
+  
+    	  $('h3').text("이런 음악은 어때요?");
+    	  $('h5').text(result.message);
+    	  // 음악 리스트를 가져옵니다.
+    	  var musicList = JSON.parse(result.goodMusicList);
+    	  
+    	// 모달에 음악 정보를 추가합니다.
+    	    var container = $('#musicList2');
+    	    for (var i = 0; i < musicList.length; i++) {
+    	        var music = musicList[i];
+    	        var musicItem = "<li class='musicItem2'>";
+    	        musicItem += "<div class='musicItemWrapper2'>";
+    	        musicItem += "<img src='" + music.rmuAlbumImg + "' alt='음악 이미지'>";
+    	        musicItem += "<h6>" + music.rmuSinger + "</h6>";
+    	        musicItem += "</div></li>";
+
+    	        container.append(musicItem);
+    	    }
+        //window.location.href = "goImgEndToPlayList";
+      },
+      error: function(xhr, status, error){
+        console.log("===========오류============")
+        console.error(xhr.responseText);
+        console.log("==========================")
+      }
+    });
+});
+   // 음악 추천받고 버튼 클릭시 재생목록으로 이동하는 코드
+document.getElementById('myBtn').addEventListener('click', function () {
+    window.location.href = 'goImgEndToPlayList';
+});
+   
+   
+   
+</script>
    
 </body>
 

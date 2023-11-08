@@ -69,7 +69,7 @@
             <div class="classynav">
               <ul>
                 <li><a href="goIndex">Home</a></li>
-                <li><a href="#">Albums</a></li>
+                <li><a href="goMyAlbums">Albums</a></li>
                 <li><a href="goFacemusic">Face Music</a></li>
                 <!--<li><a href="contact.html">Contact</a></li>-->
               </ul>
@@ -162,6 +162,28 @@
   let isSearchButtonClicked = false; // 검색 버튼 클릭 여부를 저장하는 변수
   
   
+  
+  $(document).ready(function() {
+	    let searchText = '${query}';  // EL을 사용하여 query 값을 가져옵니다.
+	    console.log(searchText);
+	    console.log(searchText);
+	    console.log(searchText);
+	    console.log(searchText);
+	    console.log(searchText);
+	    if (searchText) {
+	      console.log(searchText); // JavaScript의 console.log를 사용하여 검색어 출력
+
+	      // 검색 입력 필드에 query 값을 설정합니다.
+	      $('#search-input').val(searchText);
+			
+	      // 검색 버튼 클릭 이벤트를 트리거합니다.
+	      $('#search-button').trigger('click');
+	    }
+	  });
+  
+  
+  
+  
 //스크롤 이벤트 핸들러를 함수로 정의합니다.
   function onScroll() {
     if (isSearchButtonClicked && $(window).scrollTop() == $(document).height() - $(window).height()) {
@@ -234,6 +256,8 @@
 
   // 스크롤 이벤트 감지
   $(window).scroll(onScroll);
+
+  
 </script>
 </body>
 

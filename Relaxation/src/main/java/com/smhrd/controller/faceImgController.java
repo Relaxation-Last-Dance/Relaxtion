@@ -1,6 +1,7 @@
 package com.smhrd.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smhrd.entity.R_Faceimg;
 import com.smhrd.entity.R_Member;
+import com.smhrd.entity.R_Music;
 import com.smhrd.entity.R_Nowlist;
 import com.smhrd.repository.R_FaceimgRepository;
+import com.smhrd.repository.R_MusicRepository;
 import com.smhrd.repository.R_NowlistRepository;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
@@ -40,6 +43,9 @@ public class faceImgController {
 	
 	@Autowired
 	private R_FaceimgRepository faceImg_repo;
+	
+	@Autowired
+	private R_MusicRepository music_repo;
 	
 
 	@RequestMapping(value="/imgUpload", method=RequestMethod.POST)
@@ -127,11 +133,12 @@ public class faceImgController {
 	        e.printStackTrace();
 	    }
 		String emo = "";
+		List<Integer> seq = null;
 	    Map<String, Object> resultMap = (Map<String, Object>) responseMap.get("result");
 	    if(resultMap != null) {
 	    	// 2 받은결과 키값을 이용해서 리스트에 담기
 	    	String rfImg = (String) resultMap.get("image_name");
-	    	List<Integer> seq = (List<Integer>) resultMap.get("seq");
+	    	seq = (List<Integer>) resultMap.get("seq");
 	        
 	        System.out.println(rfImg);
 	        System.out.println(seq);
@@ -158,8 +165,24 @@ public class faceImgController {
 	        System.out.println("result key does not exist in the response");
 	    }
 	    
+	    // 추천받은 시퀀스 리스트 -> 시퀀스 사용해서 음악정보 가져오기 15곡 시퀀스
+	    List<R_Music> goodMusic = new ArrayList<>(); // 추천 음악 정보를 담을 리스트를 생성
+	    // 포문써서 빈 리스트 하나만들어서 거기다가 값 다 집어넣으면 15개 정보만 잇는 리스트로 진화 
+	    for (int i = 0; i < seq.size(); i++) {
+	        Long rmuSeq = Long.valueOf(seq.get(i));
+	        R_Music music = music_repo.findByRmuSeqOrderByRmuSeqDesc(rmuSeq); // 각 rmuSeq에 해당하는 음악 정보를 가져옵니다.
+	        goodMusic.add(music);  // 가져온 음악 정보를 리스트에 추가합니다.
+	       
+	    }
 	    
-		Map<String, String> result = new HashMap<>();
+	    Map<String, String> result = new HashMap<>();
+	    try {
+			String goodMusicList = new ObjectMapper().writeValueAsString(goodMusic);
+			result.put("goodMusicList", goodMusicList);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} 
+		
 		result.put("message", emo);
 		result.put("imageName", imgname);
 		
