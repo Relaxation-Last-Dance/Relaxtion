@@ -28,6 +28,7 @@
 		rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 		crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 		<style>
 		a {
@@ -35,15 +36,6 @@
     text-decoration: none;
 }
 
-.classynav ul li.has-down > a:after {
-	font-family: 'classyfonts';
-    content: "\e900";
-    font-size: 12px;
-    color: #000000;
-    padding-left: 5px;
-    -webkit-transition-duration: 500ms;
-    transition-duration: 500ms;
-}
 
 		</style>
 
@@ -324,9 +316,9 @@
 
 
 			</div>
+
 	</section>
 	<!-- ##### Buy Now Area End ##### -->
-
 
 	<!-- ##### Footer Area Start ##### -->
 	<footer class="footer-area">
@@ -356,6 +348,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="back-to-top-wrapper">
+  <img id="back-to-top" src="./assets/img/bg-img/귀염이.png" alt="Back to top">
+</div>
 	</footer>
 	<!-- ##### Footer Area Start ##### -->
 
@@ -370,7 +365,7 @@
 	<script src="./assets/js/plugins/plugins.js"></script>
 	<!-- Active js -->
 	<script src="./assets/js/active.js"></script>
-
+	
 	<script scr="./assets/js/main.js"></script>
 
 	<script type="text/javascript">
@@ -393,6 +388,29 @@
     } 
     </script>
 
+<script>
+$(document).ready(function(){
+	  // 이미지를 기본적으로 숨김
+	  $('#back-to-top').hide();
+
+	  // 사용자가 스크롤할 때마다 실행
+	  $(window).scroll(function(){
+	    // 스크롤 위치가 100px 이상이면 이미지를 보임, 그렇지 않으면 이미지를 숨김
+	    if ($(this).scrollTop() > 100) {
+	      $('#back-to-top').fadeIn();
+	    } else {
+	      $('#back-to-top').fadeOut();
+	    }
+	  });
+
+	  // 이미지를 클릭하면 페이지 맨 위로 천천히 이동
+	  $('#back-to-top').click(function(){
+	    $('html, body').animate({scrollTop: 0}, 'slow');
+	    return false;
+	  });
+	});
+
+</script>
 	
 </body>
 <script type="text/javascript">
