@@ -191,7 +191,12 @@
 						<div class="section-heading text-left mb-50 wow fadeInUp"
 							data-wow-delay="50ms">
 							<p>See what’s new</p>
-							<h2>인기 있는 음악</h2>
+							<c:if test="${empty user}">
+							<h2>Relaxation 추천</h2>
+							</c:if>
+							<c:if test="${!empty user}">
+							<h2>${user.rmNick} 님께 추천해요</h2>
+							</c:if>
 						</div>
 						<%--맨왼쪽 테이블--%>
 						<c:forEach var="artist" items="${findRandom7}" varStatus="status">
@@ -220,12 +225,9 @@
 						<div class="section-heading text-left mb-50 wow fadeInUp"
 							data-wow-delay="50ms">
 							<p>See what’s new</p>
-							<c:if test="${!empty user}">
-							<h5>${user.rmNick} 님이 좋아하는 아티스트</h5>
-							</c:if>
-							<c:if test="${empty user}">
+					
 							<h2>Favorite Artist</h2>
-							</c:if>
+							
 						</div>
 
 						<c:forEach var="item" items="${findRandom7BySinger}"
@@ -239,7 +241,7 @@
 											onclick="PopupCenter('?img=${item.rmuAlbumImg}');">
 									</div>
 									<div class="content-">
-										<h6>${item.rmuAlbum}</h6>
+										<h5>${item.rmuAlbum}</h5>
 										<p>${item.rmuTitle}</p>
 									</div>
 								</div>

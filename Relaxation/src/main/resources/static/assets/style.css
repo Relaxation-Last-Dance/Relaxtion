@@ -160,9 +160,18 @@ img {
     letter-spacing: 10px;
     margin-bottom: 0;
     font-weight: bold; /* 글씨를 진하게 만듭니다 */
-    font-family: 'Arial'; /* 글꼴을 Arial로 변경합니다 */
 
      }
+  .section-heading h5 {
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    margin-bottom: 0;
+    font-weight: bold; /* 글씨를 진하게 만듭니다 */
+
+     }
+     
+     
     @media only screen and (max-width: 767px) {
       .section-heading h2 {
         letter-spacing: 5px; } }
