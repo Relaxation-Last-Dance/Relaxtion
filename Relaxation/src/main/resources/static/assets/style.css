@@ -297,21 +297,7 @@ img {
   background-attachment: fixed !important; }
 
 /* :: 3.7.0 ScrollUp */
-#scrollUp {
-  background-color: #000000;
-  border-radius: 0;
-  bottom: 50px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-  color: #ffffff;
-  font-size: 24px;
-  height: 40px;
-  line-height: 40px;
-  right: 50px;
-  text-align: center;
-  width: 40px;
-  -webkit-transition-duration: 500ms;
-  transition-duration: 500ms;
-  box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.15); }
+
   @media only screen and (max-width: 767px) {
     #scrollUp {
       right: 30px;
@@ -2676,7 +2662,6 @@ audio {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   display: none;
 }
 
@@ -2791,6 +2776,10 @@ audio {
 .listContainer .text{
   font-size: 16px;
   position: relative;
+  color: black;
+  text-decoration: underline;
+  
+  
 }
 .listContainer .right{
   margin-left: auto;
@@ -3158,6 +3147,53 @@ input[type="numbertext"] {
 	word-wrap: break-word;
 }
 
+.back-to-top-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
 
 
+.container {
+  width: 100%;
+  max-width: 1200px; /* 컨테이너 최대 너비 설정, 필요에 따라 조정 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 15px; /* 좌우 패딩 */
+}
 
+/* 그리드 레이아웃 설정 */
+.oneMusic-albums {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -15px; /* 아이템간 간격 보정 */
+}
+
+/* 각각의 앨범 아이템에 대한 스타일링 */
+.single-album-item {
+  flex: 0 0 calc(33.3333% - 30px); /* 3열 그리드, 30px은 아이템간 간격 */
+  box-sizing: border-box;
+  padding: 15px; /* 아이템간 간격 */
+}
+
+/* 앨범 이미지 */
+.single-album img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 앨범 정보 스타일링 */
+.album-info {
+  padding: 15px 0 0; /* 이미지와의 간격 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.album-info h5,
+.album-info p {
+  margin: 0; /* 마진 제거 */
+}
+
+
+.single-album-item {
+  height: 300px; /* 앨범 아이템 높이 고정, 필요에 따라 조정 */
+}
