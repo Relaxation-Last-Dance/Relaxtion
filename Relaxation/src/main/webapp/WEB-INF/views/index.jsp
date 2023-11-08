@@ -220,7 +220,12 @@
 						<div class="section-heading text-left mb-50 wow fadeInUp"
 							data-wow-delay="50ms">
 							<p>See what’s new</p>
-							<h2>최신앨범</h2>
+							<c:if test="${!empty user}">
+							<h5>${user.rmNick} 님이 좋아하는 아티스트</h5>
+							</c:if>
+							<c:if test="${empty user}">
+							<h2>Favorite Artist</h2>
+							</c:if>
 						</div>
 
 						<c:forEach var="item" items="${findRandom7BySinger}"

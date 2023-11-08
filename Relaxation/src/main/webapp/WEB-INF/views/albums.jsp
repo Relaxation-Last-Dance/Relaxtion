@@ -116,7 +116,7 @@
       <c:forEach var="album" items="${findRandom48}">
         <div class="col-12 col-sm-4 col-md-3 col-lg-2 single-album-item category-ballad">
           <div class="single-album">
-            <a href="#">
+            <a href="musicAlbumsInfo?rmuSeq=${album.rmuSeq}">
               <img src="${album.rmuAlbumImg}">
             </a>
             <div class="album-info">
