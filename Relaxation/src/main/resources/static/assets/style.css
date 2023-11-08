@@ -158,7 +158,11 @@ img {
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 10px;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    font-weight: bold; /* 글씨를 진하게 만듭니다 */
+    font-family: 'Arial'; /* 글꼴을 Arial로 변경합니다 */
+
+     }
     @media only screen and (max-width: 767px) {
       .section-heading h2 {
         letter-spacing: 5px; } }
@@ -1050,7 +1054,7 @@ img {
 .popular-artists-area {
   position: relative;
   z-index: 1;
-  padding: 100px 30px;
+  padding: 61px 30px;
   -webkit-transition-duration: 500ms;
   transition-duration: 500ms;
   border: 1px solid #d8d8d8;
